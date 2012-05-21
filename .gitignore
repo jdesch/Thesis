@@ -1,0 +1,16 @@
+*.aux
+*.bbl
+*.log
+*.lot
+*.synctex.gz
+*.tex.bak
+*.toc
+
+.DS_Store
+unblogo.eps
+*.pdf
+unblogo.png
+unbthesis.cls
+UNBThesis2.blg
+UNBThesis2.lof
+figures/

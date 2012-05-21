@@ -1,0 +1,60 @@
+\documentclass[12pt]{unbthesis}
+%\usepackage[left=4cm, right=2.5cm, top=2.5cm, bottom=2.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage{subfig}
+\usepackage[subfigure]{tocloft} % no number for Vita in ToC
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{footmisc}
+\usepackage{algorithmic}
+\usepackage{listings}
+\usepackage{fancyvrb}
+\title{The incorporation of human memory models into artificial intelligence techniques}
+\author{Justin W. Deschenes}
+\predegree{Bachelor of Computer Science, University of New Brunswick, 2009}
+\degree{Master of Computer Science}
+\gau{Computer Science}
+\supervisor{Michael Fleming, Ph.D., Computer Science}
+\examboard{name1, degree, department/field,
+Chair\\  & name2, degree, department}
+\externalexam{name, degree,
+department/field, institution}
+\date{Month, Year of submission to Graduate School}
+\copyrightyear{2011}
+\setlength\parindent{0pt}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{definition}{Definition}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{notation}{Notation}[section]
+\begin{document}
+\unbtitlepage
+\setcounter{secnumdepth}{3} \setcounter{tocdepth}{3}
+\pagenumbering{roman} \setcounter{page}{1}
+\include{0.Front_Matter/dedication}
+\include{0.Front_Matter/abstract}
+\include{0.Front_Matter/acknowledgments}
+%-----------Table of Contents------------------
+\renewcommand{\contentsname}{Table of Contents}
+\tableofcontents{}
+\addcontentsline{toc}{chapter}{Table of Contents}
+%------------List of Tables----------------------
+\listoftables{}
+\addcontentsline{toc}{chapter}{List of Tables}
+%------------List of Figures----------------------
+\listoffigures{}
+\addcontentsline{toc}{chapter}{List of Figures}
+\include{0.Front_Matter/abbreviations}
+%-------------change single space to double space--------
+\doublespacing \pagenumbering{arabic} \setcounter{page}{1}
+\include{1.Introduction/introduction}
+\include{2.Background/background}
+\include{3.Proposed_Method/method}
+\include{4.Implementation/implementation}
+\include{5.Results/results}
+\include{6.Conclusion/conclusion}
+\bibliographystyle{amsplain}
+\bibliography{7.Bibliography/mybibliography}
+\addcontentsline{toc}{chapter}{Bibliography}
+\include{8.Back_Matter/appendices2}
+\include{8.Back_Matter/glossary}
+\end{document}
