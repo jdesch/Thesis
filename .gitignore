@@ -5,7 +5,6 @@
 *.synctex.gz
 *.tex.bak
 *.toc
-
 .DS_Store
 unblogo.eps
 *.pdf
@@ -14,3 +13,4 @@ unbthesis.cls
 UNBThesis2.blg
 UNBThesis2.lof
 figures/
+!UNBThesis2.pdf
