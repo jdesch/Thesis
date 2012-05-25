@@ -1,16 +1,102 @@
-%%-----------Intro -------------%%
+%%-----------Intro -------------%% 
 \chapter{Introduction}
 
-The pursuit of better artificial intelligence has brought an analytical eye to numerous fields and disciplines.  While the idea of computers or automata emulating human intelligence is as old as the greek myth of Hephaestus and his bronze man Talos\cite{TALOS}, the difficulty of the problem has prevented the true ``Artificial Man''.  Research into math, statistics, logic, and general computer science has improved the overall effectiveness of the field. Matching various techniques to sub-fields within artificial intelligence has further improved specific areas and cases (eg. formal grammars and Natural Language Processing, symbolic logic and Constraint problems, statistics and inference techniques). While current improvements have been related to better statistical algorithms, more descriptive mathematical models and more powerful computer hardware, the necessity to try other techniques or reinvent old techniques is required as the field matures.  Although very little is known about human sentience or our basic problem solving abilities, humans offer a great model for an intelligent framework.
+The pursuit of better artificial intelligence has brought an analytical eye to
+numerous fields and disciplines.  While the idea of computers or automata
+emulating human intelligence is as old as the greek myth of Hephaestus and his
+bronze man Talos\cite{TALOS}, the difficulty of the problem has prevented the
+true ``Artificial Man''.  Research into math, statistics, logic, and general
+computer science has improved the overall effectiveness of the field. Matching
+various techniques to sub-fields within artificial intelligence has further
+improved specific areas and cases (eg. formal grammars and Natural Language
+Processing, symbolic logic and Constraint problems, statistics and inference
+techniques). While current improvements have been related to better statistical
+algorithms, more descriptive mathematical models and more powerful computer
+hardware, the necessity to try other techniques or reinvent old techniques is
+required as the field matures.  Although very little is known about human
+sentience or our basic problem solving abilities, humans offer a great model for
+an intelligent framework.
 
-When searching for a problem domain for this thesis, it was necessary to find a problem that we (humans) are exceedingly well suited for.  While there are numerous areas where a human outmatches a computer, the area had to have a well defined problem and be easily testable against non-human artificial intelligence systems.  We are supreme fuzzy pattern matchers.  Even today, no computer is as capable at matching a name to a face as quickly as us.  Pattern matching relates to our language, humour, recent events, metaphors, expressions, context, and double meanings. The human brain handles and works with ambiguous situations and statements extremely well.  With this last point in mind, I looked into natural language processing became a good candidate and word sense disambiguation seemed to have a well defined problem space.  As the title of the problem suggests, word sense disambiguation relates to the action of understanding which meaning an ambiguous word has in the context of a particular sentence. Current artificial intelligence systems perform well below the required effectiveness to make adding this to existing technologies useful.  
+When searching for a problem domain for this thesis, it was necessary to find a
+problem that we (humans) are exceedingly well suited for.  While there are
+numerous areas where a human outmatches a computer, the area had to have a well
+defined problem and be easily testable against non-human artificial intelligence
+systems.  We are supreme fuzzy pattern matchers.  Even today, no computer is as
+capable at matching a name to a face as quickly as us.  Pattern matching relates
+to our language, humour, recent events, metaphors, expressions, context, and
+double meanings. The human brain handles and works with ambiguous situations and
+statements extremely well.  With this last point in mind, I looked into natural
+language processing became a good candidate and word sense disambiguation seemed
+to have a well defined problem space.  As the title of the problem suggests,
+word sense disambiguation relates to the action of understanding which meaning
+an ambiguous word has in the context of a particular sentence. Current
+artificial intelligence systems perform well below the required effectiveness to
+make adding this to existing technologies useful.
 
-The motivation for this thesis is two-fold.  The main focus is to adapt human intelligence and the human learning process, specifically human memory models, to an artificial intelligence system.  The second focus is to show that this adapted system can be useful in solving hard artificial intelligence problems, specifically word sense disambiguation.  Recently, discussion in some of the academic journals put forth using the latest ideas in biology, social science, psychology, and cognitive science to improve aspects of artificial intelligence.  Looking into the background of the word sense disambiguation problem, there was no indication of work that used even a basic biological model. With this gap, and the prospective good match of the human intelligence framework or the human memory model to the word sense disambiguation problem, it seemed like a worthy topic for a thesis.  Work done in this area can open up a few interesting avenues. First, if it proves interesting or useful in the general case, it promotes another method for improving current artificial intelligence systems. Second, if it proves useful specific to the word sense disambiguation problem it could help improve the field and help other areas within natural language processing.  Not only that, with a partial success it would be useful to identify where in the field of artificial intelligence the human models could make an impact, and to apply it.  Finally if little use comes out of it, or the implementation of the human memory model is flawed, a researcher may gain inspiration from the ideas presented.
+The motivation for this thesis is two-fold.  The main focus is to adapt human
+intelligence and the human learning process, specifically human memory models,
+to an artificial intelligence system.  The second focus is to show that this
+adapted system can be useful in solving hard artificial intelligence problems,
+specifically word sense disambiguation.  Recently, discussion in some of the
+academic journals put forth using the latest ideas in biology, social science,
+psychology, and cognitive science to improve aspects of artificial intelligence.
+Looking into the background of the word sense disambiguation problem, there was
+no indication of work that used even a basic biological model. With this gap,
+and the prospective good match of the human intelligence framework or the human
+memory model to the word sense disambiguation problem, it seemed like a worthy
+topic for a thesis.  Work done in this area can open up a few interesting
+avenues. First, if it proves interesting or useful in the general case, it
+promotes another method for improving current artificial intelligence systems.
+Second, if it proves useful specific to the word sense disambiguation problem it
+could help improve the field and help other areas within natural language
+processing.  Not only that, with a partial success it would be useful to
+identify where in the field of artificial intelligence the human models could
+make an impact, and to apply it.  Finally if little use comes out of it, or the
+implementation of the human memory model is flawed, a researcher may gain
+inspiration from the ideas presented.
 
-Artificial intelligence research has shown that statistical methods perform well in general; however, as the data sets grow and as the problem becomes larger, statistical methods perform poorly.  A number of techniques have been developed to combat this problem; when these techniques are combined, small incremental gains in accuracy are achieved \cite{ENSEMBLE2}.  Modelling human memory may provide insight into improving accuracy when working with both large data sets and loosely coupled data areas.  Humans using general intelligence, past memories and other conscious and non-conscious mental abilities are able to instinctually discover minute patterns in large sets of data, quickly \cite{BLINK}.  Computer algorithms attempt to statistically determine patterns; however, the ability to repress certain patterns, while weighing other patterns more heavily, is more effectively done by a human.  This ability allows for humans to cut out a vast majority of the data set through the use of logic, experiences and understanding.  These qualities certainly require more than just memory; however, without memories, none of these abilities could occur.
+Artificial intelligence research has shown that statistical methods perform well
+in general; however, as the data sets grow and as the problem becomes larger,
+statistical methods perform poorly.  A number of techniques have been developed
+to combat this problem; when these techniques are combined, small incremental
+gains in accuracy are achieved \cite{ENSEMBLE2}.  Modelling human memory may
+provide insight into improving accuracy when working with both large data sets
+and loosely coupled data areas.  Humans using general intelligence, past
+memories and other conscious and non-conscious mental abilities are able to
+instinctually discover minute patterns in large sets of data, quickly
+\cite{BLINK}.  Computer algorithms attempt to statistically determine patterns;
+however, the ability to repress certain patterns, while weighing other patterns
+more heavily, is more effectively done by a human.  This ability allows for
+humans to cut out a vast majority of the data set through the use of logic,
+experiences and understanding.  These qualities certainly require more than just
+memory; however, without memories, none of these abilities could occur.
 
-It is hypothesized that the incorporation of human-like memory should provide improvements in the area of word-sense disambiguation. The problem requires general knowledge and the ability to recall information with a bias dependent on the context of each paragraph, sentence and word.  Developing human-like memory in concert with current statistical techniques should provide more accuracy in word sensing and provide insight into the impact of imperfect memory on difficult, general problems.
+It is hypothesized that the incorporation of human-like memory should provide
+improvements in the area of word-sense disambiguation. The problem requires
+general knowledge and the ability to recall information with a bias dependent on
+the context of each paragraph, sentence and word.  Developing human-like memory
+in concert with current statistical techniques should provide more accuracy in
+word sensing and provide insight into the impact of imperfect memory on
+difficult, general problems.
 
-The question then is: can human-like memory improve accuracy in a specific area of artificial intelligence, specifically word sense disambiguation?
+The question then is: can human-like memory improve accuracy in a specific area
+of artificial intelligence, specifically word sense disambiguation?
 
-Chapter 2 will present some background information on artificial intelligence, natural language processing (specifically the word sense disambiguation problem), and early artificial intelligence work done in biological systems. It will also give an overview of some of the modern research in human memory models that will be adapted and used throughout the thesis.  Chapter 3 discusses the methodology of the theoretical models chosen. This chapter illustrates the ``why'' of the models, it highlights what could be potentially useful in its implementation and gives insight into design considerations.  Also presented are what areas are lacking or missing and what has been done to fulfill the requirement, while outlining what is out of scope or too difficult to implement.  Chapter 4 presents the implementation details, or the ``how''.  This chapter shows the details of the test implementation, the tools used, the data set, and the algorithms used to implement the chosen theoretical models.  Chapter 5 presents and discusses the quantitative and qualitative results. Finally, Chapter 6, the conclusion discusses the overall success of work presented and how it relates to the two-fold motivation and goals mentioned earlier in this chapter. It also puts forth interesting avenues for future areas of research on the topic.
+Chapter 2 will present some background information on artificial intelligence,
+natural language processing (specifically the word sense disambiguation
+problem), and early artificial intelligence work done in biological systems. It
+will also give an overview of some of the modern research in human memory models
+that will be adapted and used throughout the thesis.  Chapter 3 discusses the
+methodology of the theoretical models chosen. This chapter illustrates the
+``why'' of the models, it highlights what could be potentially useful in its
+implementation and gives insight into design considerations.  Also presented are
+what areas are lacking or missing and what has been done to fulfill the
+requirement, while outlining what is out of scope or too difficult to implement.
+Chapter 4 presents the implementation details, or the ``how''.  This chapter
+shows the details of the test implementation, the tools used, the data set, and
+the algorithms used to implement the chosen theoretical models.  Chapter 5
+presents and discusses the quantitative and qualitative results. Finally,
+Chapter 6, the conclusion discusses the overall success of work presented and
+how it relates to the two-fold motivation and goals mentioned earlier in this
+chapter. It also puts forth interesting avenues for future areas of research on
+the topic.

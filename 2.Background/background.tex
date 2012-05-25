@@ -1,57 +1,195 @@
-\chapter{Background}
-Theorists have posited that true intelligence would allow computers to carry on insightful conversations. The conversations would be of such high quality that the human would be unable to determine that they were in fact communicating with a computer\cite{TURING_TEST}.  Natural language processing(NLP) is theorized to be AI-Complete \cite{AICOMPLETE}, meaning that to solve this problem would give computer scientists the insight required to create computer programs as intelligent as humans.  Initial work in this area showed remarkable success: in automatic translations between languages \cite{EN_RUS}, the application to restricted worlds and languages\cite{AI_MODERN} all provided good results.  However, application to the general problem of linguistics was much slower.  Toy programs were developed that simulated conversation; these chatterbots could be programmed to resemble intelligent beings.  However, the programs lacked the knowledge depth and application required to be considered truly intelligent, instead relying on canned responses.  
-\\
-NLP requires numerous approaches and techniques to evaluate human texts. Humans often require multiple types and levels of processing to correctly comprehend language \cite{NLPENCY}. Most of these levels are used together to differentiate between the various meanings, as each of the levels adds a method of disambiguation to the context of the linguistic structure.  NLP programs often use multiple levels and combinations of linguistic analysis; it is in this that most programs differ \cite{NLPENCY}.  The various approaches to analyzing NLP include the following.
-\begin{itemize}
-	\item The symbolic approach; this often involves the use of a symbolic rule system developed by humans with an emphasis on known representation and language processing algorithms
-	\item The statistical approach; this uses observable information modelled from the linguistic world based on probabilities commonly using Hidden Markov Models
-	\item The connectionist approach; which combines statistical approaches with various components of representation allowing manipulation of the underlying models and sub-problems within NLP, while continually improving confidence in answers
-\end{itemize}
-Although the high level overview helps to add understanding to the problem, the insight into the difficulty of natural language processing required many of the sub-problems to be researched first.  
-\\
-One of the sub-problems of natural language processing is word sense disambiguation (WSD).  WSD is the act of identifying the meaning of a word in a sentence when the word has multiple meanings.  An example is in the following two sentences: ``I heard a loud pop.", ``I enjoy an occasional pop.".  In the first sentence, the word ``pop" refers to a noise; in the second sentence, ``pop" refers to a drink.  Humans, with the use of a large volume of collected information and the skill set developed by working in the ambiguities of language, are remarkably effective at sorting out the meaning of the words.  Because of the general intelligence required to solve these problems, this problem is also classified as AI-Complete \cite{BARHILL}.   The problem was encountered initially in automated machine translation; in fact, it was one of the first ``hard" road blocks \cite{WSDAS}.  Initial approaches considered using computers to automate the understanding of languages; however, at the time, there was an insufficient collection of data \cite{WSDAS}.  In the 1990's with the prevalence of the internet came a large collection of electronic documents.  With computational power also increasing greatly over the previous twenty years, statistical and computationally expensive techniques were implemented and allowed for improved accuracy.  From the Senseval/Semeval contests \cite{SEMEVAL}, we are able to see how various researchers performed.  The Semeval contests outlined a number of challenges over the years; these challenges included different dictionaries and different goals as related to word sense disambiguation.  The trends from the competitions are quite difficult to determine; however, on the whole, performance has slowly increased from contest to contest.  Successful techniques in WSD include memory-based learning \cite{GAMBL, PARAM_OPT, MEM-BASED}, instance based learning \cite{INSTANCE_LEARN}, decision lists \cite{YarrowskyDL}, ensemble methods \cite{ENSEMBLE}, kernelization \cite{KERNEL}, as well as various knowledge hybrid methods \cite{HAWKWSD}. 
-\\
-The last forty years in artificial intelligence have seen the rise of statistical techniques, which proved to be useful tools for a number of hard problems. Over these years, both technology and theories in related fields have come a long way.  It is these new theories and tools that will be used to challenge ideas and techniques that have held true in artificial intelligence for years.  Biological theories about the inner workings of the brain show promise for a number of areas of computer science, from parallel architectures to general intelligence \cite{TOBICA, ERSATZ}.  The investigation into biologically inspired cognitive architectures opens up a number of areas \cite{BICA}.  Just as early computer scientists looked to the brain in creating computational and artificial intelligence models again are a number of AI researchers looking towards the theoretical aspects of the brain and mind.  New theories into cognitive awareness, thought processes, learning, memory, understanding, self-examination, along with improvements in neuroscience, brain chemistry understanding and psychology, allow for a number of possible research avenues.
-\\
-One area that has a rather small volume of work in computer science, but has a remarkable importance in biology, psychology, neuroscience and learning science, is that of human memory.  Three interesting human memory models come from the psychology and cognitive science fields.  The theories are briefly described in the following sections:
-\section{Baddeley and Hitch}
-\begin{figure}[htp]
-	\begin{center}
-		\includegraphics[width=0.85\linewidth]{figures/models/BH-Model}
-		\caption{Baddeley and Hitch Model}
-	\end{center}
-	\label{fig:BH_MODEL}
-\end{figure}
-In Baddeley and Hitch's model \cite{Work_Mem, Episodic_Buff}, three systems (the phonological loop, the visuo-spatial sketchpad and the episodic buffer) are responsible for short-term maintenance of their respective information, whereas the fourth system, the central executive, is responsible for information integration and system coordination.  The central executive system is responsible for directing attention to relevant information, suppressing irrelevant information and unnecessary actions, and providing the ability to multitask. Furthermore, the central executive also provides a supervisory system which can guide the other components of working memory back into a stable working environment. The phonological loop takes auditory verbal information and written language and encodes them into an auditory code. This information is then repeatedly cycled in the temporal order to refresh contextual information, and prevent decay. The visuo-spatial sketchpad consists of the ``visual cache" and the ``inner scribe''.  The visual cache stores information relating to form and colour, where the inner scribe stores information relating to movement, speed and distances. The working memory allows manipulation of this environment to enable planning and spatial understanding.  The episodic buffer provides a temporary memory component, which integrates the loop systems and other acquired information, producing a ``unitary episodic representation''\cite{Episodic_Buff}.  Through the chronological sequencing the applications of both loops are more easily transported to long-term memory.  Furthermore, in uniting the visual and sound loops with chronological ordering, previously unknowable semantic information may present itself.
+\chapter{Background} Theorists have posited that true intelligence would allow
+computers to carry on insightful conversations. The conversations would be of
+such high quality that the human would be unable to determine that they were in
+fact communicating with a computer\cite{TURING_TEST}.  Natural language
+processing(NLP) is theorized to be AI-Complete \cite{AICOMPLETE}, meaning that
+to solve this problem would give computer scientists the insight required to
+create computer programs as intelligent as humans.  Initial work in this area
+showed remarkable success: in automatic translations between languages
+\cite{EN_RUS}, the application to restricted worlds and
+languages\cite{AI_MODERN} all provided good results.  However, application to
+the general problem of linguistics was much slower.  Toy programs were developed
+that simulated conversation; these chatterbots could be programmed to resemble
+intelligent beings.  However, the programs lacked the knowledge depth and
+application required to be considered truly intelligent, instead relying on
+canned responses.   \\ NLP requires numerous approaches and techniques to
+evaluate human texts. Humans often require multiple types and levels of
+processing to correctly comprehend language \cite{NLPENCY}. Most of these levels
+are used together to differentiate between the various meanings, as each of the
+levels adds a method of disambiguation to the context of the linguistic
+structure.  NLP programs often use multiple levels and combinations of
+linguistic analysis; it is in this that most programs differ \cite{NLPENCY}.
+The various approaches to analyzing NLP include the following. \begin{itemize}
+\item The symbolic approach; this often involves the use of a symbolic rule
+system developed by humans with an emphasis on known representation and language
+processing algorithms     \item The statistical approach; this uses observable
+information modelled from the linguistic world based on probabilities commonly
+using Hidden Markov Models     \item The connectionist approach; which combines
+statistical approaches with various components of representation allowing
+manipulation of the underlying models and sub-problems within NLP, while
+continually improving confidence in answers \end{itemize} Although the high
+level overview helps to add understanding to the problem, the insight into the
+difficulty of natural language processing required many of the sub-problems to
+be researched first.   \\ One of the sub-problems of natural language processing
+is word sense disambiguation (WSD).  WSD is the act of identifying the meaning
+of a word in a sentence when the word has multiple meanings.  An example is in
+the following two sentences: ``I heard a loud pop.", ``I enjoy an occasional
+pop.".  In the first sentence, the word ``pop" refers to a noise; in the second
+sentence, ``pop" refers to a drink.  Humans, with the use of a large volume of
+collected information and the skill set developed by working in the ambiguities
+of language, are remarkably effective at sorting out the meaning of the words.
+Because of the general intelligence required to solve these problems, this
+problem is also classified as AI-Complete \cite{BARHILL}.   The problem was
+encountered initially in automated machine translation; in fact, it was one of
+the first ``hard" road blocks \cite{WSDAS}.  Initial approaches considered using
+computers to automate the understanding of languages; however, at the time,
+there was an insufficient collection of data \cite{WSDAS}.  In the 1990's with
+the prevalence of the internet came a large collection of electronic documents.
+With computational power also increasing greatly over the previous twenty years,
+statistical and computationally expensive techniques were implemented and
+allowed for improved accuracy.  From the Senseval/Semeval contests
+\cite{SEMEVAL}, we are able to see how various researchers performed.  The
+Semeval contests outlined a number of challenges over the years; these
+challenges included different dictionaries and different goals as related to
+word sense disambiguation.  The trends from the competitions are quite difficult
+to determine; however, on the whole, performance has slowly increased from
+contest to contest.  Successful techniques in WSD include memory-based learning
+\cite{GAMBL, PARAM_OPT, MEM-BASED}, instance based learning
+\cite{INSTANCE_LEARN}, decision lists \cite{YarrowskyDL}, ensemble methods
+\cite{ENSEMBLE}, kernelization \cite{KERNEL}, as well as various knowledge
+hybrid methods \cite{HAWKWSD}.  \\ The last forty years in artificial
+intelligence have seen the rise of statistical techniques, which proved to be
+useful tools for a number of hard problems. Over these years, both technology
+and theories in related fields have come a long way.  It is these new theories
+and tools that will be used to challenge ideas and techniques that have held
+true in artificial intelligence for years.  Biological theories about the inner
+workings of the brain show promise for a number of areas of computer science,
+from parallel architectures to general intelligence \cite{TOBICA, ERSATZ}.  The
+investigation into biologically inspired cognitive architectures opens up a
+number of areas \cite{BICA}.  Just as early computer scientists looked to the
+brain in creating computational and artificial intelligence models again are a
+number of AI researchers looking towards the theoretical aspects of the brain
+and mind.  New theories into cognitive awareness, thought processes, learning,
+memory, understanding, self-examination, along with improvements in
+neuroscience, brain chemistry understanding and psychology, allow for a number
+of possible research avenues. \\ One area that has a rather small volume of work
+in computer science, but has a remarkable importance in biology, psychology,
+neuroscience and learning science, is that of human memory.  Three interesting
+human memory models come from the psychology and cognitive science fields.  The
+theories are briefly described in the following sections: \section{Baddeley and
+Hitch} \begin{figure}[htp]     \begin{center}
+\includegraphics[width=0.85\linewidth]{figures/models/BH-Model}
+\caption{Baddeley and Hitch Model}     \end{center}     \label{fig:BH_MODEL}
+\end{figure} In Baddeley and Hitch's model \cite{Work_Mem, Episodic_Buff}, three
+systems (the phonological loop, the visuo-spatial sketchpad and the episodic
+buffer) are responsible for short-term maintenance of their respective
+information, whereas the fourth system, the central executive, is responsible
+for information integration and system coordination.  The central executive
+system is responsible for directing attention to relevant information,
+suppressing irrelevant information and unnecessary actions, and providing the
+ability to multitask. Furthermore, the central executive also provides a
+supervisory system which can guide the other components of working memory back
+into a stable working environment. The phonological loop takes auditory verbal
+information and written language and encodes them into an auditory code. This
+information is then repeatedly cycled in the temporal order to refresh
+contextual information, and prevent decay. The visuo-spatial sketchpad consists
+of the ``visual cache" and the ``inner scribe''.  The visual cache stores
+information relating to form and colour, where the inner scribe stores
+information relating to movement, speed and distances. The working memory allows
+manipulation of this environment to enable planning and spatial understanding.
+The episodic buffer provides a temporary memory component, which integrates the
+loop systems and other acquired information, producing a ``unitary episodic
+representation''\cite{Episodic_Buff}.  Through the chronological sequencing the
+applications of both loops are more easily transported to long-term memory.
+Furthermore, in uniting the visual and sound loops with chronological ordering,
+previously unknowable semantic information may present itself.
 
-\section{Cowan}
-\begin{figure}[htp]
-	\begin{center}
-		\includegraphics[width=0.85\linewidth]{figures/models/Cowan-Model}
-		\caption{Cowan Model}
-	\end{center}
-	\label{fig:COWAN_MODEL}
-\end{figure}
+\section{Cowan} \begin{figure}[htp]     \begin{center}
+\includegraphics[width=0.85\linewidth]{figures/models/Cowan-Model}
+\caption{Cowan Model}     \end{center}     \label{fig:COWAN_MODEL} \end{figure}
 
-In Cowan's theory \cite{ACTIVATION, ATTN_MEM}, working memory is part of long-term memory.  The representation used by working memory is a subset of memory elements stored in long-term memory.  Working memory has two levels. The first consists of activated long-term memory elements of which there can be an endless number, as long-term memory is limitless.  The second level is the focus of attention; this focus has a limited capacity and holds a more detailed component on which work can be done; this level is able to contain about 4 ``chunks'' of information.  Other cognitive scientists have added a new level to Cowan's original theory, which has increased focus and is only able to contain a single element. The focus aspect of Cowan's theory has a few properties. These include: 
-\begin{itemize}
-	\item Focus is controlled by both voluntary (conscious) and involuntary (unconscious) methods. 
-	\item Focus is required to perform many day to day tasks such as: planning, understanding, and cause and effect.
-	\item The level of control of focus and capacity of focus differ on an individual basis. 
-\end{itemize}
-   This model readily lends itself to solving problems in both a high-level idea-oriented situation and a low-level detail-oriented situation, with the ability to change between the two.  Working on and modifying long-term memory ``chunks'' in working memory allows for a useful instance-based memory component that can be used to focus on solving problems and understanding.  Each application of problem solving then modifies the long-term memory instance it had used.
+In Cowan's theory \cite{ACTIVATION, ATTN_MEM}, working memory is part of long-
+term memory.  The representation used by working memory is a subset of memory
+elements stored in long-term memory.  Working memory has two levels. The first
+consists of activated long-term memory elements of which there can be an endless
+number, as long-term memory is limitless.  The second level is the focus of
+attention; this focus has a limited capacity and holds a more detailed component
+on which work can be done; this level is able to contain about 4 ``chunks'' of
+information.  Other cognitive scientists have added a new level to Cowan's
+original theory, which has increased focus and is only able to contain a single
+element. The focus aspect of Cowan's theory has a few properties. These include:
+\begin{itemize}     \item Focus is controlled by both voluntary (conscious) and
+involuntary (unconscious) methods.      \item Focus is required to perform many
+day to day tasks such as: planning, understanding, and cause and effect.
+\item The level of control of focus and capacity of focus differ on an
+individual basis.  \end{itemize}    This model readily lends itself to solving
+problems in both a high-level idea-oriented situation and a low-level detail-
+oriented situation, with the ability to change between the two.  Working on and
+modifying long-term memory ``chunks'' in working memory allows for a useful
+instance-based memory component that can be used to focus on solving problems
+and understanding.  Each application of problem solving then modifies the long-
+term memory instance it had used.
 
-\section{Ericsson and Kintsch}
-\begin{figure}[htp]
-	\begin{center}
-		\includegraphics[width=0.85\linewidth]{figures/models/Ericsson-Kintsch}
-		\caption{Ericsson and Kintsch Model}
-	\end{center}
-	\label{fig:EK_MODEL}
-\end{figure}
-In this theory, Ericsson and Kintsch \cite{LTM} hypothesized that humans use specialized memory for most tasks.  They also suggest we store most of what we read in long-term memory, linking it through retrieval structures.  Concepts can be held in working memory and can act as cues that link to the retrieval structures and return the memories associated.  Different types of retrieval structures include generic, domain knowledge, and episodic text.  Generic retrieval occurs deliberately, domain knowledge is retrieved through patterns and schemas, and episodic text is retrieved through text comprehension. Specialized memory is based on using specific knowledge of the area of memory and applying it to the storage and encoding of information in long-term memory. The cues act essentially as a ``hash" of the long-term memory connected to it; this allows great memory performance by allowing rapid and flexible long-term memory access \cite{LTM}.  Although the exact mechanism for cue creation is unknown, the retrieval cue must be encoded to handle temporal information.  Newer information must have more of a precedent than older information, allowing memories and their structure to change as new information is presented.  Encoded information is not only linked by a retrieval cue, but also has semantic links connecting the larger pieces of information to one another.
+\section{Ericsson and Kintsch} \begin{figure}[htp]     \begin{center}
+\includegraphics[width=0.85\linewidth]{figures/models/Ericsson-Kintsch}
+\caption{Ericsson and Kintsch Model}     \end{center}     \label{fig:EK_MODEL}
+\end{figure} In this theory, Ericsson and Kintsch \cite{LTM} hypothesized that
+humans use specialized memory for most tasks.  They also suggest we store most
+of what we read in long-term memory, linking it through retrieval structures.
+Concepts can be held in working memory and can act as cues that link to the
+retrieval structures and return the memories associated.  Different types of
+retrieval structures include generic, domain knowledge, and episodic text.
+Generic retrieval occurs deliberately, domain knowledge is retrieved through
+patterns and schemas, and episodic text is retrieved through text comprehension.
+Specialized memory is based on using specific knowledge of the area of memory
+and applying it to the storage and encoding of information in long-term memory.
+The cues act essentially as a ``hash" of the long-term memory connected to it;
+this allows great memory performance by allowing rapid and flexible long-term
+memory access \cite{LTM}.  Although the exact mechanism for cue creation is
+unknown, the retrieval cue must be encoded to handle temporal information.
+Newer information must have more of a precedent than older information, allowing
+memories and their structure to change as new information is presented.  Encoded
+information is not only linked by a retrieval cue, but also has semantic links
+connecting the larger pieces of information to one another.
 
-\section{Additional Models}
-In addition to the three well known theories mentioned above, one area of cognitive science that may benefit memory research, but is notoriously difficult to model and understand, is that of the unconscious mind. The importance of the unconscious mind can be summed up by a question asked by Greenwald, Klinger and Schuh \cite{SUBQUESTION}: ``How good is the mind at extracting meaning from stimuli of which one is not consciously aware?'' with answers ranging from: it is simplistic and dumb \cite{DUMBUNCONSCIOUS}, to, it is prevalent and strongly influences nearly all higher mental processes \cite{SMARTUNCONSCIOUS}. The effects of the unconscious has in its majority created the complex and intelligent design necessary for living things through adaption and natural selection \cite{UnconsciousMind}.  While the extent to which we rely on the unconscious region of our mind is debatable, the desire to understand how this part of our mind works, and its limits, can be found in everything from business management journals to the New York Times best-seller list. In an experiment, Bechara et al.\cite{Bechara2} were able to show that participants in a rigged game were able to decide upon the advantageous strategy well before they could consciously understand why the strategy was successful. This unconscious understanding, or implicit memory, is a relatively new area of research with almost all studies completed within the last twenty-five years. Current research suggests that this memory relies on an implicit, unconscious piece of knowledge previously learned and that the process and structure are not completely related to explicit memory \cite{ImplicitMem}.
-\\
-While little work has been done in applying these models to any aspects of computer science or artificial intelligence, it seems like a natural fit.  The Baddeley and Hitch theory takes the importance of bio-feedback loops and applies them to long term and working memory, adding a unit that controls overall interaction.  This theory briefly mentions the importance of attention; however, the Cowan model expands on what attention and focus is and the importance of it to our memory.  The Cowan model also attempts to explain how our conscious mind and memory interact, whereby greater focus on an element provides more information to the preclusion of other memories. The Ericsson and Kintsch model adapts the memory component itself and its association with other memories. This allows for efficient storage and retrieval of memories, as the memories can be saved in different ways according to the way they were retrieved and extracted.  Ericsson and Kintsch also helps explain how the mind and memories perform some tasks so quickly, with the retrieval structures between working memory and long-term memory and semantic links between memory components in long-term memory. Finally, the unconscious mind handles non-directed learning and its interaction with memory, decision making and understanding. While there is much debate in how the unconscious mind works, decision making and problem solving do improve when unconscious direction are considered.
+\section{Additional Models} In addition to the three well known theories
+mentioned above, one area of cognitive science that may benefit memory research,
+but is notoriously difficult to model and understand, is that of the unconscious
+mind. The importance of the unconscious mind can be summed up by a question
+asked by Greenwald, Klinger and Schuh \cite{SUBQUESTION}: ``How good is the mind
+at extracting meaning from stimuli of which one is not consciously aware?'' with
+answers ranging from: it is simplistic and dumb \cite{DUMBUNCONSCIOUS}, to, it
+is prevalent and strongly influences nearly all higher mental processes
+\cite{SMARTUNCONSCIOUS}. The effects of the unconscious has in its majority
+created the complex and intelligent design necessary for living things through
+adaption and natural selection \cite{UnconsciousMind}.  While the extent to
+which we rely on the unconscious region of our mind is debatable, the desire to
+understand how this part of our mind works, and its limits, can be found in
+everything from business management journals to the New York Times best-seller
+list. In an experiment, Bechara et al.\cite{Bechara2} were able to show that
+participants in a rigged game were able to decide upon the advantageous strategy
+well before they could consciously understand why the strategy was successful.
+This unconscious understanding, or implicit memory, is a relatively new area of
+research with almost all studies completed within the last twenty-five years.
+Current research suggests that this memory relies on an implicit, unconscious
+piece of knowledge previously learned and that the process and structure are not
+completely related to explicit memory \cite{ImplicitMem}. \\ While little work
+has been done in applying these models to any aspects of computer science or
+artificial intelligence, it seems like a natural fit.  The Baddeley and Hitch
+theory takes the importance of bio-feedback loops and applies them to long term
+and working memory, adding a unit that controls overall interaction.  This
+theory briefly mentions the importance of attention; however, the Cowan model
+expands on what attention and focus is and the importance of it to our memory.
+The Cowan model also attempts to explain how our conscious mind and memory
+interact, whereby greater focus on an element provides more information to the
+preclusion of other memories. The Ericsson and Kintsch model adapts the memory
+component itself and its association with other memories. This allows for
+efficient storage and retrieval of memories, as the memories can be saved in
+different ways according to the way they were retrieved and extracted.  Ericsson
+and Kintsch also helps explain how the mind and memories perform some tasks so
+quickly, with the retrieval structures between working memory and long-term
+memory and semantic links between memory components in long-term memory.
+Finally, the unconscious mind handles non-directed learning and its interaction
+with memory, decision making and understanding. While there is much debate in
+how the unconscious mind works, decision making and problem solving do improve
+when unconscious direction are considered.

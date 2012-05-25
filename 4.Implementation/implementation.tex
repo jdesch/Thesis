@@ -1,82 +1,251 @@
-%%-----------------Chapter 4---------------------------
+%%-----------------Chapter 4--------------------------- 
 \chapter{Implementation}
 
-This chapter deals with the implementation details of the system and the algorithms that make it up. This includes specifics on the structure of the input data, the training setup and procedures, the learning and adaptation specifics, and how the testing was performed. Where as the last chapter brought up the design decisions and the reasons behind them, this section deals with how the system implemented the ideas. This section also discusses the outcomes of the various implementation choices and attempts to further justify the design decisions.
+This chapter deals with the implementation details of the system and the
+algorithms that make it up. This includes specifics on the structure of the
+input data, the training setup and procedures, the learning and adaptation
+specifics, and how the testing was performed. Where as the last chapter brought
+up the design decisions and the reasons behind them, this section deals with how
+the system implemented the ideas. This section also discusses the outcomes of
+the various implementation choices and attempts to further justify the design
+decisions.
 
-Before jumping into the specifics of the test implementation, a quick reminder of the problem domain is in order.  Given a sentence, a target ambiguous word in the sentence, can a system properly disambiguate the word, providing the correct word sense?  Therefore, we are trying to disambiguate a word with multiple word senses in a given sentence, where disambiguation is the action of determining which word sense is correct in the given situation.
+Before jumping into the specifics of the test implementation, a quick reminder
+of the problem domain is in order.  Given a sentence, a target ambiguous word in
+the sentence, can a system properly disambiguate the word, providing the correct
+word sense?  Therefore, we are trying to disambiguate a word with multiple word
+senses in a given sentence, where disambiguation is the action of determining
+which word sense is correct in the given situation.
 
-\section{Input Data}
-The input data to the test was taken from the Natural Language Tool Kit (NLTK), an open source python project for use in linguistics and natural language processing research and development.  The NLTK is used specifically for its symbolic and statistical natural language processing; which is a good fit for the topic of this thesis.  The main use of the NLTK was to provide the Senseval-2 contest dataset. The dataset is made up of manually tagged sentences made publicly available through the Senseval/Semeval workshops, a workshop put on by the Association for Computational Linguistics which promotes the semantic analysis of text. These sentences are tagged in a reproducible manner, each sentence was added with the rule that human taggers must agree on the sense of each word at least 90\% of the time; requiring at least two taggers to determine the validity of each word.  The Senseval-2 dataset consists of 15225 sentences containing an average of 27 components.  The sentences were organized in a strict XML format, with each record containing the following elements:
+\section{Input Data} The input data to the test was taken from the Natural
+Language Tool Kit (NLTK), an open source python project for use in linguistics
+and natural language processing research and development.  The NLTK is used
+specifically for its symbolic and statistical natural language processing; which
+is a good fit for the topic of this thesis.  The main use of the NLTK was to
+provide the Senseval-2 contest dataset. The dataset is made up of manually
+tagged sentences made publicly available through the Senseval/Semeval workshops,
+a workshop put on by the Association for Computational Linguistics which
+promotes the semantic analysis of text. These sentences are tagged in a
+reproducible manner, each sentence was added with the rule that human taggers
+must agree on the sense of each word at least 90\% of the time; requiring at
+least two taggers to determine the validity of each word.  The Senseval-2
+dataset consists of 15225 sentences containing an average of 27 components.  The
+sentences were organized in a strict XML format, with each record containing the
+following elements:
 
-\begin{itemize}
-	\item word- the targeted word and its abbreviated part of speech. In the senseval-2 data set there are 4 words to be disambiguated: ``hard'', ``interest'', ``line'' and ``serve''. An example of this category is simply: ``Hard-a'' with the ``-a'' being representative of its part of speech (in this case an adverb)
-	\item context- the sentence the targeted word is found in. This consists of a set of tuples comprising each component of the sentence; each tuple contains a stemmed word or component, and its part of speech tag. For instance: \begin{verbatim}[('someone', 'NN'), ('has', 'VBZ'), ('to', 'TO'), ('stop', 'VB'), ('him', 'PRP'), ('.', '.')] \end{verbatim}
-	\item senses- The word senses of the targeted word, taken from the WordNet 1.7 sense inventory . An example: ``HARD1'' which can be cross-referenced for its definition
+\begin{itemize}     
+	\item word- the targeted word and its abbreviated part of
+speech. In the senseval-2 data set there are 4 words to be disambiguated:
+``hard'', ``interest'', ``line'' and ``serve''. An example of this category is
+simply: ``Hard-a'' with the ``-a'' being representative of its part of speech
+(in this case an adverb)
+	\item context- the sentence the targeted word is
+found in. This consists of a set of tuples comprising each component of the
+sentence; each tuple contains a stemmed word or component, and its part of
+speech tag. For instance: \begin{verbatim}[('someone', 'NN'), ('has', 'VBZ'),
+('to', 'TO'), ('stop', 'VB'), ('him', 'PRP'), ('.', '.')] \end{verbatim}
+	\item senses- The word senses of the targeted word, taken from the WordNet 1.7
+sense inventory . An example: ``HARD1'' which can be cross-referenced for its
+definition 
 \end{itemize}
 
-In addition to the dataset, the NLTK also provided a mechanism for stemming and lemmatizing each word, as well as providing a list of commonly used stop words. This allows each sentence to be more compact, and concise, which greatly reduced the overall complexity of the graph-based memory component.
+In addition to the dataset, the NLTK also provided a mechanism for stemming and
+lemmatizing each word, as well as providing a list of commonly used stop words.
+This allows each sentence to be more compact, and concise, which greatly reduced
+the overall complexity of the graph-based memory component.
 
 \section{Setup}
 
-The data was setup using five-fold cross validation in which four partitions of the dataset were used for training, and the fifth was used for testing. Which was then repeated five times, allowing each of the data sets to be the test data, and having every combination of use for the training data.  This method differed from the method used at the Senseval-2 competition, but allows for an acceptable comparison.  The Senseval-2 competition gave the researchers a full training set, but held back on releasing to them the data they would be testing.  
+The data was setup using five-fold cross validation in which four partitions of
+the dataset were used for training, and the fifth was used for testing. Which
+was then repeated five times, allowing each of the data sets to be the test
+data, and having every combination of use for the training data.  This method
+differed from the method used at the Senseval-2 competition, but allows for an
+acceptable comparison.  The Senseval-2 competition gave the researchers a full
+training set, but held back on releasing to them the data they would be testing.
 
 \section{Training}
 
-The training component of the system provided a non-trivial challenge.  To create and synthesize the learning process in humans a two phase approach to training was required.  The first phase consisted of the initial setup of both the statistical component and the connective component. The connective component required its ``memory connections'' to be added.  This was the process of adding weighted edges between words that were found in the same sentence, where the edge weight was directly proportional to the frequency of occurrences between the two words.  The statistical component collected predefined information which was to be used later for decision making.  This first phase ran over the entire training data. 
+The training component of the system provided a non-trivial challenge.  To
+create and synthesize the learning process in humans a two phase approach to
+training was required.  The first phase consisted of the initial setup of both
+the statistical component and the connective component. The connective component
+required its ``memory connections'' to be added.  This was the process of adding
+weighted edges between words that were found in the same sentence, where the
+edge weight was directly proportional to the frequency of occurrences between
+the two words.  The statistical component collected predefined information which
+was to be used later for decision making.  This first phase ran over the entire
+training data.
 
-Once this initial processing was done, a second pass of the training material was required.  This pass emphasized the learning process.  In this phase the graph component setup in the previous phase was further adapted and trained to the dataset.  The statistical component was tested for accuracy and the meta-learning component began its initial setup and data collection on information from the accuracy of the two other components. This included having the meta-learning component query the statistical component to learn which words in the sentences were the best to disambiguate on. This process attempted to eliminate noisy, or unimportant words and select only those words with the best chance to properly disambiguate the target word.  Selecting the best words was done by using an algorithm which made use of the following three factors:
+Once this initial processing was done, a second pass of the training material
+was required.  This pass emphasized the learning process.  In this phase the
+graph component setup in the previous phase was further adapted and trained to
+the dataset.  The statistical component was tested for accuracy and the meta-
+learning component began its initial setup and data collection on information
+from the accuracy of the two other components. This included having the meta-
+learning component query the statistical component to learn which words in the
+sentences were the best to disambiguate on. This process attempted to eliminate
+noisy, or unimportant words and select only those words with the best chance to
+properly disambiguate the target word.  Selecting the best words was done by
+using an algorithm which made use of the following three factors:
 
 \begin{itemize}
-	\item Completion rate: this was determined by how likely the word was to complete successfully. Which could also be considered the relationship between the word and the successful selection of some word sense in both the statistical and connective algorithms. 
-	\item Accuracy: the probability the word would be accurately disambiguated.
-	\item Rarity: the occurrence of a word
+	\item Completion rate: this was determined by how likely the
+word was to complete successfully. Which could also be considered the
+relationship between the word and the successful selection of some word sense in
+both the statistical and connective algorithms.      
+	\item Accuracy: the probability the word would be accurately disambiguated.     
+	\item Rarity: the occurrence of a word 
 \end{itemize}
 
-Finally, once the best words were known, the number of words to choose per sentence was then determined by the meta-learning system. 
+Finally, once the best words were known, the number of words to choose per
+sentence was then determined by the meta-learning system.
 
-Another important aspect of the training phase is the reporting method.  This is done through the use of a Learning Environment Data Structure (LEDS).  This data structure carries the information used to solve the problem, collects the statistics and computes the meta-data. This data structure is passed into both the statistical and connective guessing process, it collects their choices and other data required to be updated after the learning instance is completed.  It is then passed into the meta-learning phase, in this phase it is used to help compute the final answer. Finally, after the algorithm has made its guess, it captures the correct disambiguation, and is used to update the long-term memory data structure with the changes noted in the learning instance phase.
+Another important aspect of the training phase is the reporting method.  This is
+done through the use of a Learning Environment Data Structure (LEDS).  This data
+structure carries the information used to solve the problem, collects the
+statistics and computes the meta-data. This data structure is passed into both
+the statistical and connective guessing process, it collects their choices and
+other data required to be updated after the learning instance is completed.  It
+is then passed into the meta-learning phase, in this phase it is used to help
+compute the final answer. Finally, after the algorithm has made its guess, it
+captures the correct disambiguation, and is used to update the long-term memory
+data structure with the changes noted in the learning instance phase.
 
 \subsection{graph-based adaptation}
 
-The method in which graph-based adaptation took place was through the use of collected meta-data, and instance based feed-back.  With the initial graph setup, each word in each sentence were interconnected. Over the training data this formed a very dense graph, with the value for each edge allowing for the most likely location for a given word sense to be found.  The idea behind the algorithm was each word selected as important in a sentence would vote on which disambiguation was most likely, the word sense with the greatest number of votes would be determined as correct.  This technique not only determined the ``best'' possibility, but gave an approximate confidence value in the chosen word. The search performed went through each of the selected starting words, and would look through its neighbours for the given word senses in decreasing edge weight order. If an occurrence was found, it was selected as its vote, otherwise it would pick the highest rated edge and perform the same search on its neighbours.  If after a meta-defined number of neighbours were checked, and no disambiguations were found, the selected word would not vote.  If in returning from the search there was a tie, the vote would be decided arbitrarily.  Throughout this search the path each word took and the disambiguation it voted for was tracked and kept to be used to adapt the graph data structure.
+The method in which graph-based adaptation took place was through the use of
+collected meta-data, and instance based feed-back.  With the initial graph
+setup, each word in each sentence were interconnected. Over the training data
+this formed a very dense graph, with the value for each edge allowing for the
+most likely location for a given word sense to be found.  The idea behind the
+algorithm was each word selected as important in a sentence would vote on which
+disambiguation was most likely, the word sense with the greatest number of votes
+would be determined as correct.  This technique not only determined the ``best''
+possibility, but gave an approximate confidence value in the chosen word. The
+search performed went through each of the selected starting words, and would
+look through its neighbours for the given word senses in decreasing edge weight
+order. If an occurrence was found, it was selected as its vote, otherwise it
+would pick the highest rated edge and perform the same search on its neighbours.
+If after a meta-defined number of neighbours were checked, and no
+disambiguations were found, the selected word would not vote.  If in returning
+from the search there was a tie, the vote would be decided arbitrarily.
+Throughout this search the path each word took and the disambiguation it voted
+for was tracked and kept to be used to adapt the graph data structure.
 
-The graph adaptation algorithm was performed after the instance problem was completed and the answer was known.  During this phase a few outcomes were possible:
-\begin{itemize}
-	 \item the graph component correctly determined the word and each word completed its search.  In this case each edge along the path each selected word took had its weight increased by a meta-determined amount.
-	 \item the graph component incorrectly determined the word and each word completed its search. In this case each edge along the path that led to the wrong outcome would have its edge weight value decreased by a meta-determined amount. This amount was often significantly larger then the increase value, in an attempt to offset initial training imbalances. The remaining words, if any, would not have their values adjusted.
-	\item the graph component correctly guessed the word, but the majority did not finish their search. In the case where confidence is low, the graph component would not submit a vote, but would keep its best guessed value to help determine feedback. In this case each edge that completed with the correct value had the value of the edge weights along its path increased (usually by quite a bit more then a normal correct case). and the edges that did not finish would have the edge weights along their edge decreased by a significant meta-determined amount.
-	\item the graph component guessed incorrectly and the majority did not finish their search. In this case each of the values of the edge weights along all of the paths would be decreased by a meta-determined amount, which in most cases was usually the largest reduction.
-\end{itemize}
+The graph adaptation algorithm was performed after the instance problem was
+completed and the answer was known.  During this phase a few outcomes were
+possible: \begin{itemize}      \item the graph component correctly determined
+the word and each word completed its search.  In this case each edge along the
+path each selected word took had its weight increased by a meta-determined
+amount.      \item the graph component incorrectly determined the word and each
+word completed its search. In this case each edge along the path that led to the
+wrong outcome would have its edge weight value decreased by a meta-determined
+amount. This amount was often significantly larger then the increase value, in
+an attempt to offset initial training imbalances. The remaining words, if any,
+would not have their values adjusted.     \item the graph component correctly
+guessed the word, but the majority did not finish their search. In the case
+where confidence is low, the graph component would not submit a vote, but would
+keep its best guessed value to help determine feedback. In this case each edge
+that completed with the correct value had the value of the edge weights along
+its path increased (usually by quite a bit more then a normal correct case). and
+the edges that did not finish would have the edge weights along their edge
+decreased by a significant meta-determined amount.     \item the graph component
+guessed incorrectly and the majority did not finish their search. In this case
+each of the values of the edge weights along all of the paths would be decreased
+by a meta-determined amount, which in most cases was usually the largest
+reduction. \end{itemize}
 
-After completing the second run of the training dataset the words were known and the edge-weights of the graph had been trained enough for use.  Although it has not been confirmed if additional runs of the graph adaptation phase would be beneficially, the length of time this phase takes, and the increased likelihood of overtraining were the deciding factors in using one run.
+After completing the second run of the training dataset the words were known and
+the edge-weights of the graph had been trained enough for use.  Although it has
+not been confirmed if additional runs of the graph adaptation phase would be
+beneficially, the length of time this phase takes, and the increased likelihood
+of overtraining were the deciding factors in using one run.
 
 \subsection{statistical adaptation}
 
-In keeping with the unconscious mind, the statistical method was designed specifically to be a quick, relatively simple calculation with decent results.  The best method for this, and one that seemed directly related to the actual process was Bayesian statistics.  After each learning instance the statistical information contained there in was added to the previously collected information.  This information was immediately available for use in calculating probabilities for the next learning instance.  The first part of the learning phase, the statistical component collected the number of times words were seen together, enumerating each sentence and each word in the sentence to its proper disambiguation, and the disambiguation to the various words seen.  The second phase, the optimization component, the statistical component attempted to select the correct disambiguation based on prior knowledge, and would again add the information to its statistical collection.  The selection algorithm initially used a wider range of variables to determine which word sense was most likely, this however proved to be a poor choice, as the standard selection algorithm (most frequently selected) worked much better.  This led to the second iteration, the use of the most frequently selected algorithm.  This algorithm uses a frequency table to keep track of all of the different word senses of a single word, when asked to disambiguate a given word, the algorithm returned the disambiguation which has the highest occurrences.  As mentioned above, the statistical component is also used to select which words are the best words to use in a sentence to determine the disambiguation. This information is collected in both phases, but only used in the second phase.
+In keeping with the unconscious mind, the statistical method was designed
+specifically to be a quick, relatively simple calculation with decent results.
+The best method for this, and one that seemed directly related to the actual
+process was Bayesian statistics.  After each learning instance the statistical
+information contained there in was added to the previously collected
+information.  This information was immediately available for use in calculating
+probabilities for the next learning instance.  The first part of the learning
+phase, the statistical component collected the number of times words were seen
+together, enumerating each sentence and each word in the sentence to its proper
+disambiguation, and the disambiguation to the various words seen.  The second
+phase, the optimization component, the statistical component attempted to select
+the correct disambiguation based on prior knowledge, and would again add the
+information to its statistical collection.  The selection algorithm initially
+used a wider range of variables to determine which word sense was most likely,
+this however proved to be a poor choice, as the standard selection algorithm
+(most frequently selected) worked much better.  This led to the second
+iteration, the use of the most frequently selected algorithm.  This algorithm
+uses a frequency table to keep track of all of the different word senses of a
+single word, when asked to disambiguate a given word, the algorithm returned the
+disambiguation which has the highest occurrences.  As mentioned above, the
+statistical component is also used to select which words are the best words to
+use in a sentence to determine the disambiguation. This information is collected
+in both phases, but only used in the second phase.
 
 \subsection{meta-data collection and adaptation}
 
-During the optimization component of the learning phase, the meta-data collection and adaptation is completed.  This phase consists of two important parts:
-\begin{itemize}
-	\item answer biasing- This phase adds a bias to using the answer provided by a component in accordance with how accurate the component is.  This uses information collected through the meta-data analysis of all previously answered learning instances to give weights to each of the answering components equivalent to their accuracy.
-	\item adaptive processing- This component monitors and tests the pre-defined meta-values.  At each phase, a meta-value is randomly selected from the list of all meta-values, it is incremented based on a pre-defined ``step'' value and then is run for a number of instances.  If after the test run the changed value being tested performs better than average, it uses this new value as a baseline, if it performs exceptionally it attempts to retest the value with an even larger value.  If the changed value performs worse it reverts the value, if it performs exceptionally worse, it attempts to retest the value with a negative ``step'', a smaller value.
+During the optimization component of the learning phase, the meta-data
+collection and adaptation is completed.  This phase consists of two important
+parts: \begin{itemize}     \item answer biasing- This phase adds a bias to using
+the answer provided by a component in accordance with how accurate the component
+is.  This uses information collected through the meta-data analysis of all
+previously answered learning instances to give weights to each of the answering
+components equivalent to their accuracy.     \item adaptive processing- This
+component monitors and tests the pre-defined meta-values.  At each phase, a
+meta-value is randomly selected from the list of all meta-values, it is
+incremented based on a pre-defined ``step'' value and then is run for a number
+of instances.  If after the test run the changed value being tested performs
+better than average, it uses this new value as a baseline, if it performs
+exceptionally it attempts to retest the value with an even larger value.  If the
+changed value performs worse it reverts the value, if it performs exceptionally
+worse, it attempts to retest the value with a negative ``step'', a smaller
+value. \end{itemize}
+
+The meta-variables these tests were performed on consists of two groups. The
+first group being the ``desirably controlled quality'' group.  This group
+consists of values not directly related to accuracy, but likely have an effect
+on the results.  The main reason these were added was to have the system
+optimize itself throughout the learning phase and into the more efficient phase.
+
+desirably controlled quality \begin{itemize}     \item important words - the
+number of words selected from a sentence used to determine the word sense. This
+one was selected in hopes that as the algorithm became more efficient, or during
+the initial learning phase, the number of words required could shrink or grow.
+This would allow the algorithm to determine when it should use more words and
+run slower, while maintaining or increasing accuracy; Or when it should use less
+words and run faster without effecting accuracy.     \item iterations between
+considerations - This represents the number of test instances between the meta-
+data phases. It was expected that this value would be the last value selected
+once the other values found an equilibrium, as any results other then this would
+lower accuracy. Once the equilibrium was found this value would increase,
+optimizing the speed of the test.     \item graph depth - the maximum depth the
+graph algorithm would go before guessing.  As with important words, it was
+thought that it would find the best compromise for accuracy initially, and as
+the graph became more accurate, it would be increased to allow for faster
+runtimes. \end{itemize}
+
+The second group is the ``inflation limiting'' group.  This group consists of
+values that can directly affect accuracy, and were added to the meta-variables
+specifically to counter inflation of edge weight values over time.  The hopes
+were this would combat dataset biases.
+
+inflation limiting \begin{itemize}     \item Positive Outcome - This was the
+value gained for each edge used in determining a correct word sense
+disambiguation.      \item Negative Outcome - This was the value removed for
+each edge used in determining an incorrect word sense disambiguation.
 \end{itemize}
 
-The meta-variables these tests were performed on consists of two groups. The first group being the ``desirably controlled quality'' group.  This group consists of values not directly related to accuracy, but likely have an effect on the results.  The main reason these were added was to have the system optimize itself throughout the learning phase and into the more efficient phase.
-
-desirably controlled quality
-\begin{itemize}
-	\item important words - the number of words selected from a sentence used to determine the word sense. This one was selected in hopes that as the algorithm became more efficient, or during the initial learning phase, the number of words required could shrink or grow.  This would allow the algorithm to determine when it should use more words and run slower, while maintaining or increasing accuracy; Or when it should use less words and run faster without effecting accuracy.
-	\item iterations between considerations - This represents the number of test instances between the meta-data phases. It was expected that this value would be the last value selected once the other values found an equilibrium, as any results other then this would lower accuracy. Once the equilibrium was found this value would increase, optimizing the speed of the test.
-	\item graph depth - the maximum depth the graph algorithm would go before guessing.  As with important words, it was thought that it would find the best compromise for accuracy initially, and as the graph became more accurate, it would be increased to allow for faster runtimes.
-\end{itemize}
-
-The second group is the ``inflation limiting'' group.  This group consists of values that can directly affect accuracy, and were added to the meta-variables specifically to counter inflation of edge weight values over time.  The hopes were this would combat dataset biases. 
-
-inflation limiting
-\begin{itemize}
-	\item Positive Outcome - This was the value gained for each edge used in determining a correct word sense disambiguation. 
-	\item Negative Outcome - This was the value removed for each edge used in determining an incorrect word sense disambiguation.
-\end{itemize}
-
-These groups, and the meta-learning component allowed for a great chance to add accuracy in modelling the biological/cognitive aspect of memory and learning, with a great chance of increasing overall accuracy and efficiency. Along with this there was also a number of possible benefits such as a scaling reward and punishment system, and an algorithm that was slower and more deliberate in its searching when its accuracy was suspect, and faster when the learning component was in the ``zone''.  It also had the added effect of eliminating the guess work in initial assignment of these values.
+These groups, and the meta-learning component allowed for a great chance to add
+accuracy in modelling the biological/cognitive aspect of memory and learning,
+with a great chance of increasing overall accuracy and efficiency. Along with
+this there was also a number of possible benefits such as a scaling reward and
+punishment system, and an algorithm that was slower and more deliberate in its
+searching when its accuracy was suspect, and faster when the learning component
+was in the ``zone''.  It also had the added effect of eliminating the guess work
+in initial assignment of these values.
