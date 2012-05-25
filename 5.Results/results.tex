@@ -17,14 +17,22 @@ reasons why, and adding insight into potential issues.
 
 \section{Quantitative results}
 
-\begin{table}[htp]     \begin{center}         \begin{tabular}{|l|l|l|}
-\hline                 \multicolumn{3}{|c|}{\bf 5-fold cross validation results
-} \\                 \hline                 {\bf test instances} & {\bf
-accuracy} & {\bf std. dev.} \\ \hline                  3045 & 0.5997 & 0.0284
-\\ \hline                  3044 & 0.5957 & 0.0279 \\ \hline
-3045 & 0.5934 & 0.0287 \\ \hline                  3045 & 0.6020 & 0.0286 \\
-\hline                  3045 & 0.5915 & 0.0284 \\ \hline         \end{tabular}
-\caption{Results Table \label{table:RESULTS}}     \end{center} \end{table}
+\begin{table}[htp]
+	\begin{center}
+		\begin{tabular}{|l|l|l|}
+			\hline
+				\multicolumn{3}{|c|}{\bf 5-fold cross validation results } \\
+				\hline
+				{\bf test instances} & {\bf accuracy} & {\bf std. dev.} \\ \hline 
+				3045 & 0.5997 & 0.0284    \\ \hline 
+				3044 & 0.5957 & 0.0279 \\ \hline 
+				3045 & 0.5934 & 0.0287 \\ \hline 
+				3045 & 0.6020 & 0.0286 \\ \hline 
+				3045 & 0.5915 & 0.0284 \\ \hline
+		\end{tabular}
+		\caption{Results Table \label{table:RESULTS}}
+	\end{center}
+\end{table}
 
 In table\ref{table:RESULTS} we see The results of each of the 5-fold cross
 validation test instances run on the current system.  With an overall average of
@@ -38,41 +46,44 @@ The self-created implementation of the baseline test falls within 0.4\% of the
 competitions baseline test, validating both the datasets, and the testing
 approach used.
 
-\begin{table}[htp]     \begin{tabular}{|l|l|l|l|}         \hline
-\multicolumn{4}{|c|}{\bf English all words - fine-grained scoring } \\
-\hline         {\bf precision } & {\bf recall} & {\bf attempted} & {\bf system}
-\\ \hline          0.690   &   0.690   &   100\%   &       SMUaw \\ \hline
-0.636   &   0.636   &   100\%   &       CNTS-Antwerp \\ \hline         0.618   &
-0.618   &   100\%   &       Sinequa-LIA - HMM \\ \hline
+\begin{table}[htp]
+	\begin{tabular}{|l|l|l|l|}
+		\hline
+		  \multicolumn{4}{|c|}{\bf English all words - fine-grained scoring } \\
+		\hline
+		{\bf precision } & {\bf recall} & {\bf attempted} & {\bf system} \\ \hline 
+		0.690	&	0.690	&	100\%	&		SMUaw \\ \hline
+		0.636	&	0.636	&	100\%	&		CNTS-Antwerp \\ \hline
+		0.618	&	0.618	&	100\%	&		Sinequa-LIA - HMM \\ \hline
 		
-		{\bf 0.597} & {\bf 0.597} & {\bf 100\% } &    {\bf Current technique} \\
-		{\\hline
+		{\bf 0.597} & {\bf 0.597} & {\bf 100\% } &	{\bf Current technique} \\ \hline	
 		
-		0.575   &   0.569   &   98.91\% &UNED - AW-U2 \\ \hline
+		0.575	&	0.569	&	98.91\% &		UNED - AW-U2 \\ \hline
 		
-		{\bf 0.573} & {\bf 0.573\% } & {\bf 100\%} &  {\bf self-created baseline
-		{\implementation } \\ \hline
+		{\bf 0.573} & {\bf 0.573\% } & {\bf 100\%} &	{\bf self-created baseline implementation } \\ \hline
 		
-        0.569   &   0.569   &   100\%       &   Baseline \\ \hline         0.556
-&   0.550   &   98.908\%    &   UNED - AW-U  \\ \hline         0.475   &   0.454
-&   95.552\%    &   UCLA - gchao2 \\ \hline         0.474   &   0.453   &
-95.552\%    &   UCLA - gchao3 \\ \hline         0.416   &   0.451   &   98.5\%
-&   CL Research - DIMAP  \\ \hline         0.451   &   0.451   &   100\%       &
-CL Research - DIMAP (R)  \\ \hline         0.500   &   0.449   &   89.729\%    &
-UCLA - gchao \\ \hline         0.360   &   0.360   &   99.96\%     &
-Universiti Sains Malaysia 2  \\ \hline         0.748   &   0.357   &   47.756\%
-&   IRST \\ \hline         0.345   &   0.338   &   97.897\%    &   Universiti
-Sains Malaysia 1 \\ \hline         0.336   &   0.336   &   99.96\%     &
-Universiti Sains Malaysia 3 \\ \hline         0.572   &   0.291   &   50.789\%
-&   BCU - ehu-dlist-all \\ \hline         0.440   &   0.200   &   45.37\%     &
-Sheffield \\ \hline         0.566   &   0.169   &   29.883\%    &   Sussex -
-sel-ospd \\ \hline         0.545   &   0.169   &   31.055\%    &   Sussex - sel-
-ospd-ana \\ \hline         0.598   &   0.140   &   23.332\%    &   Sussex - sel
-\\ \hline         0.328   &   0.038   &   11.646\%    &   IIT 2 \\ \hline
-0.294   &   0.034   &   11.646\%    &   IIT 3 \\ \hline         0.287   &
-0.033   &   11.646\%    &   IIT 1 \\ \hline     \end{tabular}
-\caption{Senseval 2 Results, current technique and self-baseline implementation
-added \label{table:SENSEVAL2RESULTS}} \end{table}
+		0.569	&	0.569	&	100\%		&	Baseline \\ \hline
+		0.556	&	0.550	&	98.908\%	&	UNED - AW-U	 \\ \hline
+		0.475	&	0.454	&	95.552\%	&	UCLA - gchao2 \\ \hline
+		0.474	&	0.453	&	95.552\%	&	UCLA - gchao3 \\ \hline
+		0.416	&	0.451	&	98.5\%		&	CL Research - DIMAP	 \\ \hline
+		0.451	&	0.451	&	100\%		&	CL Research - DIMAP (R)	 \\ \hline
+		0.500	&	0.449	&	89.729\%	&	UCLA - gchao \\ \hline
+		0.360	&	0.360	&	99.96\%		&	Universiti Sains Malaysia 2	 \\ \hline
+		0.748	&	0.357	&	47.756\%	&	IRST \\ \hline
+		0.345	&	0.338	&	97.897\%	&	Universiti Sains Malaysia 1 \\ \hline
+		0.336	&	0.336	&	99.96\%		&	Universiti Sains Malaysia 3 \\ \hline
+		0.572	&	0.291	&	50.789\%	&	BCU - ehu-dlist-all \\ \hline
+		0.440	&	0.200	&	45.37\%		&	Sheffield \\ \hline
+		0.566	&	0.169	&	29.883\%	&	Sussex - sel-ospd \\ \hline
+		0.545	&	0.169	&	31.055\%	&	Sussex - sel-ospd-ana \\ \hline
+		0.598	&	0.140	&	23.332\%	&	Sussex - sel \\ \hline
+		0.328	&	0.038	&	11.646\%	&	IIT 2 \\ \hline
+		0.294	&	0.034	&	11.646\%	&	IIT 3 \\ \hline
+		0.287	&	0.033	&	11.646\%	&	IIT 1 \\ \hline
+	\end{tabular}
+	\caption{Senseval 2 Results, current technique and self-baseline implementation added \label{table:SENSEVAL2RESULTS}}
+\end{table}
 
 The information in the regression analysis of training
 accuracy\ref{fig:OVERALLTRAININGACCURACY} holds the results of all instances
@@ -104,42 +115,46 @@ meta-learning component adapts to the changes the meta-learning component
 creates.  In both trends we can say statistically that the accuracy and number
 of instances are positively correlated.
 
-\begin{figure}[htp]     \begin{center}         \includegraphics[width=0.90\linew
-idth]{figures/charts/results_regression_analysis.pdf}
-\caption{regression analysis of training accuracy (x Instances x1000, y
-Accuracy) \label{fig:OVERALLTRAININGACCURACY}}     \end{center} \end{figure}
+\begin{figure}[htp]
+	\begin{center}
+		\includegraphics[width=0.90\linewidth]{figures/charts/results_regression_analysis.pdf}
+		\caption{regression analysis of training accuracy (x Instances x1000, y Accuracy) \label{fig:OVERALLTRAININGACCURACY}}
+	\end{center}
+\end{figure}
 
-\begin{table}[htp]     \begin{tabular}{|l|l|l|l|l|}         \hline
-\multicolumn{5}{|c|}{\bf regression analysis statistics (entire training) } \\
-\hline             {\bf model} & \multicolumn{4}{|c|}{$y = \alpha + \beta x +
-\epsilon$ where y is accuracy and x is instances} \\ \hline
-& {\bf estimate} & {\bf confidence} & {\bf t-statistic} & {\bf p-value } \\
-\hline         {\bf $\alpha$}    & $0.6058\pm0.0047$   & $>99\%$            &
-128         & $7.3*10^{-4}$ \\ \hline         {\bf $\beta$}     &
-$(3.757\pm1.614)*10^{-4}$ & $>95\%$        & 2.3         & 0.024 \\ \hline
-{\bf $r^2$}   &   {\bf adjusted $r^2$}     &    {\bf F-value }    &   {\bf MSE}
-& {\bf AIC} \\ \hline         0.0882      &      0.072        &   5.42 (p =
-0.0235)      &    $4.57*10^{-4}$ & -278 \\ \hline         \end{tabular}
-\caption{statistical values of regression analysis on entire training data}
-\label{table:STATENTIRE}        \end{table}
+\begin{table}[htp]
+	\begin{tabular}{|l|l|l|l|l|}
+		\hline \multicolumn{5}{|c|}{\bf regression analysis statistics (entire training) } \\ \hline
+			{\bf model} & \multicolumn{4}{|c|}{$y = \alpha + \beta x + \epsilon$ where y is accuracy and x is instances} \\ \hline
+		            & {\bf estimate} & {\bf confidence} & {\bf t-statistic} & {\bf p-value } \\ \hline
+		{\bf $\alpha$}    & $0.6058\pm0.0047$   & $>99\%$            & 128         & $7.3*10^{-4}$ \\ \hline
+		{\bf $\beta$}     & $(3.757\pm1.614)*10^{-4}$ & $>95\%$        & 2.3         & 0.024 \\ \hline
+		{\bf $r^2$}   &   {\bf adjusted $r^2$}     &    {\bf F-value }    &   {\bf MSE} & {\bf AIC} \\ \hline
+		0.0882      &      0.072        &   5.42 (p = 0.0235)      &    $4.57*10^{-4}$ & -278 \\ \hline
+		\end{tabular}
+		\caption{statistical values of regression analysis on entire training data}
+		\label{table:STATENTIRE}       
+\end{table}
 
-\begin{figure}[htp]     \begin{center}
-\includegraphics[width=0.90\linewidth]{figures/charts/one_fold_regression.pdf}
-\caption{regression analysis of training accuracy over one fold (x Instances, y
-Accuracy) \label{fig:ONEFOLDACCURACY}}     \end{center} \end{figure}
+\begin{figure}[htp]
+	\begin{center}
+		\includegraphics[width=0.90\linewidth]{figures/charts/one_fold_regression.pdf}
+		\caption{regression analysis of training accuracy over one fold (x Instances, y Accuracy) \label{fig:ONEFOLDACCURACY}}
+	\end{center}
+\end{figure}
 
-\begin{table}[htp]     \begin{tabular}{|l|l|l|l|l|}         \hline
-\multicolumn{5}{|c|}{\bf regression analysis statistics (one training fold) } \\
-\hline             {\bf model} & \multicolumn{4}{|c|}{$y = \alpha + \beta x +
-\epsilon$  where y is accuracy and x is instances} \\ \hline
-& {\bf estimate} & {\bf confidence} & {\bf t-statistic} & {\bf p-value } \\
-\hline         {\bf $\alpha$}    & $0.5895\pm0.0091$   & $>99\%$            & 65
-& $9.8*10^{-24}$ \\ \hline         {\bf $\beta$}     & $(3.498\pm1.428)*10^{-6}$
-& $>95\%$        & 2.4         & 0.024 \\ \hline         {\bf $r^2$}   &   {\bf
-adjusted $r^2$}     &    {\bf F-value }    &   {\bf MSE} & {\bf AIC} \\ \hline
-0.24      &      0.2        &   6 (p = 0.0242)      &    $5.33*10^{-4}$ & -95 \\
-\hline         \end{tabular}         \caption{statistical values of regression
-analysis over one fold \label{table:STATFOLD}} \end{table}
+\begin{table}[htp]
+	\begin{tabular}{|l|l|l|l|l|}
+		\hline \multicolumn{5}{|c|}{\bf regression analysis statistics (one training fold) } \\ \hline
+			{\bf model} & \multicolumn{4}{|c|}{$y = \alpha + \beta x + \epsilon$  where y is accuracy and x is instances} \\ \hline
+		            & {\bf estimate} & {\bf confidence} & {\bf t-statistic} & {\bf p-value } \\ \hline
+		{\bf $\alpha$}    & $0.5895\pm0.0091$   & $>99\%$            & 65         & $9.8*10^{-24}$ \\ \hline
+		{\bf $\beta$}     & $(3.498\pm1.428)*10^{-6}$ & $>95\%$        & 2.4         & 0.024 \\ \hline
+		{\bf $r^2$}   &   {\bf adjusted $r^2$}     &    {\bf F-value }    &   {\bf MSE} & {\bf AIC} \\ \hline
+		0.24      &      0.2        &   6 (p = 0.0242)      &    $5.33*10^{-4}$ & -95 \\ \hline
+		\end{tabular}
+		\caption{statistical values of regression analysis over one fold \label{table:STATFOLD}}
+\end{table}
 
 To validate how well the memory model setup worked, we will again look to the
 training data leading up to the above test results.  In the training results
@@ -155,12 +170,15 @@ there is a large overlap between the accuracy of the two components, however
 even from table\ref{table:TRAININGRESULTS} we can make out that the statistical
 component does not dominate the graph component.
 
-\begin{table}[htp]     \begin{tabular}{|l|l|l|l|l|}         \hline
-\multicolumn{5}{|c|}{\bf training results } \\         \hline         {\bf total
-instances} & {\bf correct } & {\bf percentage} & {\bf connective correct } &
-{\bf stats correct } \\ \hline          60700                 & 37587          &
-61.92\%          & 22618                 & 36166    \\ \hline      \end{tabular}
-\caption{overview of training results. \label{table:TRAININGRESULTS}}
+\begin{table}[htp]
+	\begin{tabular}{|l|l|l|l|l|}
+		\hline
+			\multicolumn{5}{|c|}{\bf training results } \\
+		\hline
+		{\bf total instances} & {\bf correct } & {\bf percentage} & {\bf connective correct } & {\bf stats correct } \\ \hline 
+		60700				  & 37587		   & 61.92\%		  & 22618				  & 36166    \\ \hline 
+	\end{tabular}
+	\caption{overview of training results. \label{table:TRAININGRESULTS}}
 \end{table}
 
 In table\ref{table:ALLACCURACY} the accuracy section is the outcome of the
@@ -171,13 +189,15 @@ components are correct while the other component was incorrect.  Finally, the
 optimal accuracy is the outcome that could be attained provided the meta-
 learning component performed optimally and chose the correct value from the
 components every time a correct value was presented. This table and the
-information presented earlier clearly show three things: \begin{itemize}
-\item Both the statistical and connective components can add value to the
-outcome. That is to say, the two components can come to a higher accuracy
-together then they could by themselves.     \item The meta-learning component is
-unfairly biased towards the statistical component.     \item There is something
-drastically increasing the accuracy of the connective component in the training
-results. \end{itemize}
+information presented earlier clearly show three things: 
+\begin{itemize}
+	\item Both the statistical and connective components can add value to the 
+	outcome. That is to say, the two components can come to a higher accuracy 
+	together then they could by themselves.     
+	\item The meta-learning component is unfairly biased towards the statistical
+	component.     
+	\item There is something drastically increasing the accuracy of the connective component in the training results. 
+\end{itemize}
 
 Clearly in the training data, and somewhat in the test data we see a benefit to
 the two input systems. Although the results are slightly higher then that of the
@@ -200,42 +220,46 @@ the rules of the Senseval 2 test, this mechanism was not used during the testing
 data.  This trait appears to positively effect the connective component's
 accuracy, but has very little effect on the meta-learning component.
 
-\begin{table}[htp]     \begin{tabular}{|l|l|l|l|l|l|}         \hline
-\multicolumn{6}{|c|}{\bf training results } \\ \hline         {\bf acc.} & {\bf
-statistic acc.} & {\bf excl. stat.}& {\bf connective acc. } & {\bf excl. acc. }
-& {\bf optimal acc.} \\ \hline         60.84\%    &  59.54\%    & 26.20\%   &
-55.02\%  & 21.67\%   & 81.22\% \\ \hline         60.30\%    &  59.62\%    &
-26.11\%   &  57.45\%  & 23.94\%   & 83.56\% \\ \hline         60.90\%    &
-59.68\%    & 24.54\%   &  59.51\%  & 24.37\%   & 84.05\% \\ \hline
-60.60\%    &  59.45\%    & 25.06\%   &  60.23\%  & 25.88\%   & 85.33\% \\ \hline
-60.75\%    &  59.72\%    & 21.33\%   &  65.02\%  & 26.63\%   & 86.34\% \\ \hline
-\multicolumn{6}{|c|}{\bf testing results } \\ \hline         {\bf acc.} & {\bf
-statistic acc.} & {\bf excl. stat.} & {\bf connective acc. } & {\bf excl. acc. }
-& {\bf optimal acc.} \\ \hline         59.90\%    &  59.77\%   & 31.43\%   &
-39.34\%   & 11.00\%   & 70.77\% \\ \hline         59.58\%    &  59.55\%   &
-34.83\%   &  36.05\%   & 11.34\%   & 70.88\% \\ \hline         59.30\%    &
-59.30\%   & 32.26\%   &  38.70\%   & 11.66\%   & 70.96\% \\ \hline
-60.20\%    &  60.23\%   & 32.91\%   &  39.44\%   & 12.12\%   & 72.35\% \\ \hline
-59.15\%    &  59.15\%   & 27.75\%   &  43.58\%   & 12.18\%   & 71.33\% \\ \hline
-\end{tabular}     \caption{various accuracy comparisons between components
-\label{table:ALLACCURACY}} \end{table}
+\begin{table}[htp]
+	\begin{tabular}{|l|l|l|l|l|l|}
+		\hline
+		\multicolumn{6}{|c|}{\bf training results } \\ \hline
+		{\bf acc.} & {\bf statistic acc.} & {\bf excl. stat.}& {\bf connective acc. } & {\bf excl. acc. } & {\bf optimal acc.} \\ \hline
+		60.84\%	   &  59.54\%    & 26.20\%   &  55.02\%  & 21.67\%   & 81.22\% \\ \hline
+		60.30\%    &  59.62\%    & 26.11\%   &  57.45\%  & 23.94\%   & 83.56\% \\ \hline
+		60.90\%    &  59.68\%    & 24.54\%   &  59.51\%  & 24.37\%   & 84.05\% \\ \hline
+		60.60\%    &  59.45\%    & 25.06\%   &  60.23\%  & 25.88\%   & 85.33\% \\ \hline
+		60.75\%    &  59.72\%    & 21.33\%   &  65.02\%  & 26.63\%   & 86.34\% \\ \hline
+		\multicolumn{6}{|c|}{\bf testing results } \\ \hline
+		{\bf acc.} & {\bf statistic acc.} & {\bf excl. stat.} & {\bf connective acc. } & {\bf excl. acc. } & {\bf optimal acc.} \\ \hline
+		59.90\%    &  59.77\%   & 31.43\%   &  39.34\%   & 11.00\%   & 70.77\% \\ \hline
+		59.58\%    &  59.55\%   & 34.83\%   &  36.05\%   & 11.34\%   & 70.88\% \\ \hline
+		59.30\%    &  59.30\%   & 32.26\%   &  38.70\%   & 11.66\%   & 70.96\% \\ \hline
+		60.20\%    &  60.23\%   & 32.91\%   &  39.44\%   & 12.12\%   & 72.35\% \\ \hline
+		59.15\%    &  59.15\%   & 27.75\%   &  43.58\%   & 12.18\%   & 71.33\% \\ \hline
+	\end{tabular}
+	\caption{various accuracy comparisons between components \label{table:ALLACCURACY}}
+\end{table}
 
-\begin{table}[htp]     \begin{tabular}{|l|l|l|l|}         \hline
-\multicolumn{4}{|c|}{\bf training results } \\ \hline         {\bf stat. chosen
-} & {\bf conn. chosen } & {\bf stat acc.} & {\bf conn. acc.}\\ \hline
-94.23\%             & 5.77\%              &  59.54\%        & 55.02\% \\ \hline
-93.53\%             & 6.47\%              &  59.62\%        & 57.45\% \\ \hline
-94.26\%             & 5.74\%              &  59.68\%        & 59.51\% \\ \hline
-94.43\%             & 5.57\%              &  59.45\%        & 60.23\% \\ \hline
-93.01\%             & 6.99\%              &  59.72\%        & 65.02\% \\ \hline
-\multicolumn{4}{|c|}{\bf training results } \\ \hline         {\bf stat. chosen
-} & {\bf conn. chosen } & {\bf stat acc.} & {\bf conn. acc.}\\ \hline
-97.67\%             & 2.33\%              &  59.77\%        & 39.34\% \\ \hline
-98.78\%             & 1.22\%              &  59.55\%        & 36.05\% \\ \hline
-98.49\%             & 1.51\%              &  59.30\%        & 38.70\% \\ \hline
-99.01\%             & 0.99\%              &  60.23\%        & 39.44\% \\ \hline
-98.85\%             & 1.14\%              &  59.15\%        & 43.58\% \\ \hline
-\end{tabular}     \caption{component biasness \label{table:BIASNESS}}
+\begin{table}[htp]
+	\begin{tabular}{|l|l|l|l|}
+		\hline
+		\multicolumn{4}{|c|}{\bf training results } \\ \hline
+		{\bf stat. chosen } & {\bf conn. chosen } & {\bf stat acc.} & {\bf conn. acc.}\\ \hline
+		94.23\%             & 5.77\%              &  59.54\%        & 55.02\% \\ \hline
+		93.53\%             & 6.47\%              &  59.62\%        & 57.45\% \\ \hline
+		94.26\%             & 5.74\%              &  59.68\%        & 59.51\% \\ \hline
+		94.43\%             & 5.57\%              &  59.45\%        & 60.23\% \\ \hline
+		93.01\%             & 6.99\%              &  59.72\%        & 65.02\% \\ \hline
+	    \multicolumn{4}{|c|}{\bf training results } \\ \hline
+		{\bf stat. chosen } & {\bf conn. chosen } & {\bf stat acc.} & {\bf conn. acc.}\\ \hline
+		97.67\%             & 2.33\%              &  59.77\%        & 39.34\% \\ \hline
+		98.78\%             & 1.22\%              &  59.55\%        & 36.05\% \\ \hline
+		98.49\%             & 1.51\%              &  59.30\%        & 38.70\% \\ \hline
+		99.01\%             & 0.99\%              &  60.23\%        & 39.44\% \\ \hline
+		98.85\%             & 1.14\%              &  59.15\%        & 43.58\% \\ \hline
+	\end{tabular}
+	\caption{component biasness \label{table:BIASNESS}}
 \end{table}
 
 \section{Discussion}

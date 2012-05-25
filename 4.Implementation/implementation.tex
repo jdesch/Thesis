@@ -17,7 +17,9 @@ word sense?  Therefore, we are trying to disambiguate a word with multiple word
 senses in a given sentence, where disambiguation is the action of determining
 which word sense is correct in the given situation.
 
-\section{Input Data} The input data to the test was taken from the Natural
+\section{Input Data} 
+
+The input data to the test was taken from the Natural
 Language Tool Kit (NLTK), an open source python project for use in linguistics
 and natural language processing research and development.  The NLTK is used
 specifically for its symbolic and statistical natural language processing; which
@@ -34,19 +36,23 @@ sentences were organized in a strict XML format, with each record containing the
 following elements:
 
 \begin{itemize}     
-	\item word- the targeted word and its abbreviated part of
-speech. In the senseval-2 data set there are 4 words to be disambiguated:
-``hard'', ``interest'', ``line'' and ``serve''. An example of this category is
-simply: ``Hard-a'' with the ``-a'' being representative of its part of speech
-(in this case an adverb)
-	\item context- the sentence the targeted word is
-found in. This consists of a set of tuples comprising each component of the
-sentence; each tuple contains a stemmed word or component, and its part of
-speech tag. For instance: \begin{verbatim}[('someone', 'NN'), ('has', 'VBZ'),
-('to', 'TO'), ('stop', 'VB'), ('him', 'PRP'), ('.', '.')] \end{verbatim}
-	\item senses- The word senses of the targeted word, taken from the WordNet 1.7
-sense inventory . An example: ``HARD1'' which can be cross-referenced for its
-definition 
+	\item word- the targeted word and its abbreviated part of speech. In the 
+	senseval-2 data set there are 4 words to be disambiguated: ``hard'', 
+	``interest'', ``line'' and ``serve''. An example of this category is simply:
+	``Hard-a'' with the ``-a'' being representative of its part of speech (in 
+	this case an adverb)
+	\item context- the sentence the targeted word is found in. This consists of 
+	a set of tuples comprising each component of the sentence; each tuple 
+	contains a stemmed word or component, and its part of speech tag. For 
+	instance: 
+	\begin{verbatim}
+		[('someone', 'NN'), ('has', 'VBZ'), ('to', 'TO'), 
+		('stop', 'VB'), ('him', 'PRP'), ('.', '.')] 
+	\end{verbatim}
+
+	\item senses- The word senses of the targeted word, taken from the WordNet 
+	1.7 sense inventory . An example: ``HARD1'' which can be cross-referenced 
+	for its definition 
 \end{itemize}
 
 In addition to the dataset, the NLTK also provided a mechanism for stemming and
@@ -135,26 +141,31 @@ for was tracked and kept to be used to adapt the graph data structure.
 
 The graph adaptation algorithm was performed after the instance problem was
 completed and the answer was known.  During this phase a few outcomes were
-possible: \begin{itemize}      \item the graph component correctly determined
-the word and each word completed its search.  In this case each edge along the
-path each selected word took had its weight increased by a meta-determined
-amount.      \item the graph component incorrectly determined the word and each
-word completed its search. In this case each edge along the path that led to the
-wrong outcome would have its edge weight value decreased by a meta-determined
-amount. This amount was often significantly larger then the increase value, in
-an attempt to offset initial training imbalances. The remaining words, if any,
-would not have their values adjusted.     \item the graph component correctly
-guessed the word, but the majority did not finish their search. In the case
-where confidence is low, the graph component would not submit a vote, but would
-keep its best guessed value to help determine feedback. In this case each edge
-that completed with the correct value had the value of the edge weights along
-its path increased (usually by quite a bit more then a normal correct case). and
-the edges that did not finish would have the edge weights along their edge
-decreased by a significant meta-determined amount.     \item the graph component
-guessed incorrectly and the majority did not finish their search. In this case
-each of the values of the edge weights along all of the paths would be decreased
-by a meta-determined amount, which in most cases was usually the largest
-reduction. \end{itemize}
+possible: 
+
+\begin{itemize}      
+	\item the graph component correctly determined the word and each word 
+	completed its search.  In this case each edge along the path each selected 
+	word took had its weight increased by a meta-determined amount.
+	\item the graph component incorrectly determined the word and each word 
+	completed its search. In this case each edge along the path that led to the 
+	wrong outcome would have its edge weight value decreased by a 
+	meta-determined amount. This amount was often significantly larger then the 
+	increase value, in an attempt to offset initial training imbalances. The 
+	remaining words, if any, would not have their values adjusted.     
+	\item the graph component correctly guessed the word, but the majority did 
+	not finish their search. In the case where confidence is low, the graph 
+	component would not submit a vote, but would keep its best guessed value to 
+	help determine feedback. In this case each edge that completed with the 
+	correct value had the value of the edge weights along its path increased 
+	(usually by quite a bit more then a normal correct case). The edges that did 
+	not finish would have the edge weights along their edge decreased by a 
+	significant meta-determined amount.     
+	\item the graph component guessed incorrectly and the majority did not 
+	finish their search. In this case each of the values of the edge weights 
+	along all of the paths would be decreased by a meta-determined amount, which 
+	in most cases was usually the largest reduction. 
+\end{itemize}
 
 After completing the second run of the training dataset the words were known and
 the edge-weights of the graph had been trained enough for use.  Although it has
@@ -192,20 +203,24 @@ in both phases, but only used in the second phase.
 
 During the optimization component of the learning phase, the meta-data
 collection and adaptation is completed.  This phase consists of two important
-parts: \begin{itemize}     \item answer biasing- This phase adds a bias to using
-the answer provided by a component in accordance with how accurate the component
-is.  This uses information collected through the meta-data analysis of all
-previously answered learning instances to give weights to each of the answering
-components equivalent to their accuracy.     \item adaptive processing- This
-component monitors and tests the pre-defined meta-values.  At each phase, a
-meta-value is randomly selected from the list of all meta-values, it is
-incremented based on a pre-defined ``step'' value and then is run for a number
-of instances.  If after the test run the changed value being tested performs
-better than average, it uses this new value as a baseline, if it performs
-exceptionally it attempts to retest the value with an even larger value.  If the
-changed value performs worse it reverts the value, if it performs exceptionally
-worse, it attempts to retest the value with a negative ``step'', a smaller
-value. \end{itemize}
+parts: 
+
+\begin{itemize}
+\item answer biasing- This phase adds a bias to using the answer provided by a 
+component in accordance with how accurate the component is.  This uses 
+information collected through the meta-data analysis of all previously answered 
+learning instances to give weights to each of the answering components 
+equivalent to their accuracy.     
+\item adaptive processing- This component monitors and tests the pre-defined 
+meta-values.  At each phase, a meta-value is randomly selected from the list of 
+all meta-values, it is incremented based on a pre-defined ``step'' value and 
+then is run for a number of instances. If after the test run the changed value 
+being tested performs better than average, it uses this new value as a baseline, 
+if it performs exceptionally it attempts to retest the value with an even larger 
+value.  If the changed value performs worse it reverts the value, if it performs 
+exceptionally worse, it attempts to retest the value with a negative ``step'', a 
+smaller value. 
+\end{itemize}
 
 The meta-variables these tests were performed on consists of two groups. The
 first group being the ``desirably controlled quality'' group.  This group
@@ -213,32 +228,41 @@ consists of values not directly related to accuracy, but likely have an effect
 on the results.  The main reason these were added was to have the system
 optimize itself throughout the learning phase and into the more efficient phase.
 
-desirably controlled quality \begin{itemize}     \item important words - the
-number of words selected from a sentence used to determine the word sense. This
-one was selected in hopes that as the algorithm became more efficient, or during
-the initial learning phase, the number of words required could shrink or grow.
-This would allow the algorithm to determine when it should use more words and
-run slower, while maintaining or increasing accuracy; Or when it should use less
-words and run faster without effecting accuracy.     \item iterations between
-considerations - This represents the number of test instances between the meta-
-data phases. It was expected that this value would be the last value selected
-once the other values found an equilibrium, as any results other then this would
-lower accuracy. Once the equilibrium was found this value would increase,
-optimizing the speed of the test.     \item graph depth - the maximum depth the
-graph algorithm would go before guessing.  As with important words, it was
-thought that it would find the best compromise for accuracy initially, and as
-the graph became more accurate, it would be increased to allow for faster
-runtimes. \end{itemize}
+desirably controlled quality 
+
+\begin{itemize}
+\item important words - the number of words selected from a sentence used to 
+determine the word sense. This one was selected in hopes that as the algorithm 
+became more efficient, or during the initial learning phase, the number of words 
+required could shrink or grow. This would allow the algorithm to determine when 
+it should use more words and run slower, while maintaining or increasing 
+accuracy; Or when it should use less words and run faster without effecting 
+accuracy.     
+
+\item iterations between considerations - This represents the number of test 
+instances between the meta-data phases. It was expected that this value would be
+ the last value selected once the other values found an equilibrium, as any 
+ results other then this would lower accuracy. Once the equilibrium was found 
+ this value would increase, optimizing the speed of the test.     
+\item graph depth - the maximum depth the graph algorithm would go before 
+guessing.  As with important words, it was thought that it would find the best 
+compromise for accuracy initially, and as the graph became more accurate, it 
+would be increased to allow for faster
+runtimes.
+
+\end{itemize}
 
 The second group is the ``inflation limiting'' group.  This group consists of
 values that can directly affect accuracy, and were added to the meta-variables
 specifically to counter inflation of edge weight values over time.  The hopes
 were this would combat dataset biases.
 
-inflation limiting \begin{itemize}     \item Positive Outcome - This was the
-value gained for each edge used in determining a correct word sense
-disambiguation.      \item Negative Outcome - This was the value removed for
-each edge used in determining an incorrect word sense disambiguation.
+inflation limiting 
+\begin{itemize}     
+\item Positive Outcome - This was the value gained for each edge used in 
+determining a correct word sense disambiguation.      
+\item Negative Outcome - This was the value removed for each edge used in 
+determining an incorrect word sense disambiguation.
 \end{itemize}
 
 These groups, and the meta-learning component allowed for a great chance to add

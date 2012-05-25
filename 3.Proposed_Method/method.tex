@@ -38,9 +38,12 @@ designed and implemented.
 
 \section{High-level solution}
 
-\begin{figure}[htp]     \begin{center}
-\includegraphics[width=0.98\linewidth]{figures/models/System}
-\caption{Proposed Design \label{fig:high_level_solution}}     \end{center}
+\begin{figure}[htp]     
+	\begin{center}
+		\includegraphics[width=0.98\linewidth]{figures/models/System}
+		\caption{Proposed Design 
+		\label{fig:high_level_solution}}
+	\end{center}
 \end{figure}
 
 Figure\ref{fig:high_level_solution} gives a high level overview of the learning
@@ -71,9 +74,12 @@ The high level solution mentioned above gives an executive view of the system.
 This section goes into detail of what the components are, what design decisions
 were made, and how it differs from the ideal solution.
 
-\begin{figure}[htp]     \begin{center}
-\includegraphics[width=0.97\linewidth]{figures/models/Component}
-\caption{Component Overview}     \end{center}     \label{fig:Component}
+\begin{figure}[htp]     
+	\begin{center}
+		\includegraphics[width=0.97\linewidth]{figures/models/Component}
+		\caption{Component Overview}     
+	\end{center}     
+	\label{fig:Component}
 \end{figure}
 
 The current model consists of three functional components, a higher level
@@ -81,17 +87,22 @@ container object and a ``short-term'' memory data structure.  The Statistical,
 Connective, and Meta-learning components are used by the Memory component to
 provide access to the various ``executive'' building blocks.
 
-\subsection{Memory object} The memory object could be considered the interface
+\subsection{Memory object} 
+
+The memory object could be considered the interface
 to learning, it contains methods which provide the following functionality:
 
-\begin{enumerate}     \item a way to load and save the state of the mind. This
-way the learning environment, specifically the meta-learning information, but
-the other two components as well, can be stored for further refinement against
-additional datasets. This more closely mimics the environment in which humans
-learn.     \item a training method, which given a set of data will add the
-information to the mind, and attempt to optimize the learning of the data.
-\item a answer method which queries the functional components to find the best
-answer given the initial information. \end{enumerate}
+\begin{enumerate}     
+	\item a way to load and save the state of the mind. This way the learning
+	environment, specifically the meta-learning information, but the other 
+	two components as well, can be stored for further refinement against 
+	additional datasets. This more closely mimics the environment in which 
+	humans learn.
+	\item a training method, which given a set of data will add the
+	information to the mind, and attempt to optimize the learning of the data.
+	\item a answer method which queries the functional components to find the 
+	best answer given the initial information. 
+\end{enumerate}
 
 While nothing overly complex is going on, ideally this object would dynamically
 and based on prior problem solving information, design the requirements for the
@@ -103,7 +114,9 @@ insight, or new information coming into focus to change the solution path,
 allowing a more elastic problem solving capability.  These enhancements would
 also bring the memory object more inline with the Baddeley's Central Executive.
 
-\subsection{Statistical component} The statistical component is an attempt to
+\subsection{Statistical component} 
+
+The statistical component is an attempt to
 mimic the subconscious mind, a quick pattern matcher which is the first
 component of memory to have a possible solution to a problem.  Tests have shown
 \cite{BLINK} the subconscious mind is quick to realize patterns, but slow to
@@ -115,17 +128,21 @@ expertise in the area, is often correct.
 
 The statistical component is responsible for the following functionality:
 
-\begin{enumerate}     \item a method to capture and train the words.  This
-method counts and indexes the words in their relation to the target
-disambiguation. It also captures statistics on each of the targeted word-
-disambiguation combinations.     \item a voting mechanism, in which given a list
-of words and a target uses frequency and accuracy statistics of each word
-against each of the disambiguations of the target word     \item a method to
-determine which words in a sentence are most likely to lead to a successful
-completion.  This determines the importance of each word currently based on the
-percentage of times a word has been seen with the targeted word.     \item a
-method which determines best guess, or given nothing but the target word, what
-is the best disambiguation \end{enumerate}
+\begin{enumerate}     
+	\item a method to capture and train the words.  This method counts and 
+	indexes the words in their relation to the target disambiguation. It also 
+	captures statistics on each of the targeted word-disambiguation 
+	combinations.     
+	\item a voting mechanism, in which given a listof words and a target uses 
+	frequency and accuracy statistics of each word against each of the 
+	disambiguations of the target word
+	\item a method to determine which words in a sentence are most likely to 
+	lead to a successful completion.  This determines the importance of each 
+	word currently based on the percentage of times a word has been seen with 
+	the targeted word.     
+	\item a method which determines best guess, or given nothing but the target 
+	word, what is the best disambiguation 
+\end{enumerate}
 
 Currently simplistic, it is a necessity with the constraints of current computer
 hardware as it relates to the massive parallelism of the human brain and general
@@ -135,7 +152,9 @@ and using all non-crucial resources continually refine and apply new information
 to existing problems.  This would allow the mind to give it enough information
 for it to make a ``gut check''.
 
-\subsection{Connective component} The connective component models long-term
+\subsection{Connective component} 
+
+The connective component models long-term
 memory, a logically organized data structure which attempts to allow a deductive
 problem solving process.  The connective component in combination with the
 working-memory component allows for ``memory'' connections to gain strength, or
@@ -143,13 +162,15 @@ decay, increasing the success rate of determining the deductive path.
 
 The connective component is responsible for the following functionality:
 
-\begin{enumerate}     \item a method to capture/learn the words.  This method
-simply loads the problem instance's words as a complete network into the memory
-graph, augmenting existing nodes/edges as is required.     \item a voting
-mechanism, in this method each of the chosen words gets to vote on which
-disambiguation it believes is correct.  The voting currently occurs through
-first target word found while traveling the memory structure using Djikstra's
-algorithm. \end{enumerate}
+\begin{enumerate}
+	\item a method to capture/learn the words.  This method simply loads the 
+	problem instance's words as a complete network into the memory graph, 
+	augmenting existing nodes/edges as is required.     
+	\item a voting mechanism, in this method each of the chosen words gets to 
+	vote on which disambiguation it believes is correct.  The voting currently 
+	occurs through first target word found while traveling the memory structure 
+	using a modified Djikstra's algorithm. 
+\end{enumerate}
 
 In addition to the above functionality, the data structure itself allows for
 feedback from the working memory object.  This feedback currently allows nodes
@@ -165,22 +186,24 @@ problem solving, and how it works with working memory is fairly ambiguous in any
 of the models; a number of improvements could be made to bring the memory more
 inline with the models:
 
-\begin{enumerate}     \item dimensionality - currently all items are mapped to
-one dimension, the node's edge weights are valid for the entirety of the problem
-set.  It is my understanding that the edge weights should be biased on meta
-information used in defining the problem.  This information would segment
-certain components of the edge weight, allowing the graph to be modified based
-on the context of the problem.  Currently this was set aside as the graph is
-already slow enough, and the meta-learning component is not able to learn/tag
-individual problems as related to other problems (note: although it would be a
-good place to implement an unsupervised learning algorithm (unsupervised
-decision trees comes to my mind first)).     \item Subconscious access - as
-mentioned above, in a parallel environment similar to the brain's, ideally the
-subconscious working away would effect the memory graph (slowly), applying
-information learned in pattern matching to the overall structure of the graph.
+\begin{enumerate}     
+	\item dimensionality - currently all items are mapped to one dimension, the 
+	node's edge weights are valid for the entirety of the problem set.  It is my
+	understanding that the edge weights should be biased on meta information 
+	used in defining the problem.  This information would segment certain 
+	components of the edge weight, allowing the graph to be modified based on 
+	the context of the problem.  Currently this was set aside as the graph is 
+	already slow enough, and the meta-learning component is not able to 
+	learn/tag individual problems as related to other problems    
+	\item Subconscious access - as mentioned above, in a parallel environment 
+	similar to the brain's, ideally the subconscious working away would effect 
+	the memory graph (slowly), applying information learned in pattern matching 
+	to the overall structure of the graph.
 \end{enumerate}
 
-\subsection{Meta-learning component} The meta-learning component is an attempt
+\subsection{Meta-learning component} 
+
+The meta-learning component is an attempt
 to bring some of the functionality of the central executive, and methodology of
 problems solving to the current model. It is responsible for various meta-values
 which are added into the algorithms of the other components. Currently there is
@@ -190,14 +213,18 @@ modelled.
 
 Currently tracked values include:
 
-\begin{enumerate}     \item important words - the number of words to keep when
-evaluating a given sentence for importance     \item graph depth - the maximum
-depth the voting algorithm should go when attempting to vote using a word
-\item graph correctness - the edge weight value to increment the edge between
-given node and target node when it is correct     \item graph incorrectness -
-the edge weight value to decrement the edge between given node and target node
-when it is correct     \item update frequency - how many solutions should pass
-between meta algorithm updates \end{enumerate}
+\begin{enumerate}     
+	\item important words - the number of words to keep when evaluating a given 
+	sentence for importance     
+	\item graph depth - the maximum depth the voting algorithm should go when 
+	attempting to vote using a word 
+	\item graph correctness - the edge weight value to increment the edge 
+	between given node and target node when it is correct     
+	\item graph incorrectness - the edge weight value to decrement the edge 
+	between given node and target node when it is correct     
+	\item update frequency - how many solutions should pass between meta 
+	algorithm updates 
+\end{enumerate}
 
 each value contains the current numerical value, the complete history of changes
 and the maximum step amount between changes.  The algorithm for meta-learning
@@ -226,7 +253,9 @@ Initially genetic algorithms just to get off the ground, but tackling the
 executive function problems, and then the specific component algorithm creation
 requires something outside of my current thinking.
 
-\subsection{Learning Environment Data Structure}  This object simply tracks
+\subsection{Learning Environment Data Structure}  
+
+This object simply tracks
 required information to solve a problem.  It is in a sense a simplistic short
 term memory object.  It is required to be passed into all of the components as
 each component requires tracking information.  It is then used to modify the
@@ -450,10 +479,16 @@ testing and redefining multiple hypothesis, without affecting the conscious work
 loop.
 
 The statistical engine in its current state tracks a number of useful properties
-including: \begin{itemize}     \item the number of times a word has been seen
-\item the number of times the word has been in a successfully disambiguated
-sentence     \item the number of times the word has been used successfully in
-the statistical and connective algorithms     \item a list of each word that has
-been seen by a disambiguation, and the number of times it has been seen.
-\item a list of each disambiguation that a word has seen, and the number of
-times it has been seen. \end{itemize}
+including: 
+
+\begin{itemize}
+	\item the number of times a word has been seen
+	\item the number of times the word has been in a successfully disambiguated
+	sentence
+	\item the number of times the word has been used successfully in the 
+	statistical and connective algorithms
+	\item a list of each word that has been seen by a disambiguation, and the 
+	number of times it has been seen. 
+	\item a list of each disambiguation that a word has seen, and the number of 
+	times it has been seen. 
+\end{itemize}
