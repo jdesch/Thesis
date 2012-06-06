@@ -1,17 +1,17 @@
 %%---------------Chapter 5------------------------------ 
 \chapter{Results}
 
-In this section the results of the human memory model will be presented.
+In this section, the results of the human memory model will be presented.
 Interpretation of the results and commentary on both what worked and what did
-not work will be discussed. An overview of the approach, and the novelty of its
-implementation will be looked at. Finally, The relative success of the work will
+not work will be discussed. An overview of the approach and the novelty of its
+implementation will be looked at. Finally, the relative success of the work will
 be outlined.
 
 The comparisons made in the chapter are broken down into quantitative results
 and discussion sections. The quantitative results section compares the current
-systems performance to other systems that had competed in the Senseval-2
+system's performance to systems that had competed in the Senseval-2
 contest, including the baseline algorithm.  The discussion section generalizes
-the trends the data from the quantitive section puts forth. This section
+the trends discovered in the data from the quantitative section. This section
 analyses pieces of data that seem interesting or inconsistent, hypothesising the
 reasons why, and adding insight into potential issues.
 
@@ -34,16 +34,16 @@ reasons why, and adding insight into potential issues.
 	\end{center}
 \end{table}
 
-In table \ref{table:RESULTS} we see The results of each of the 5-fold cross
+In Table~\ref{table:RESULTS}, we see the results of each of the 5-fold cross
 validation test instances run on the current system.  With an overall average of
 59.7\% this test fell just within a standard deviation of the baseline result of
 56.9\%. The baseline algorithm for the Senseval-2 contest performs surprisingly
-well given it chooses the word sense with the highest seen likelihood at each
-step.  As seen in table \ref{table:SENSEVAL2RESULTS}, it also outperformed a
+well given that it simply chooses the word sense that occurs the most frequently.
+As seen in Table~\ref{table:SENSEVAL2RESULTS}, it also outperformed a
 majority of other systems. Added to the table (in bold) are the results from the
-current learning method, and a self-created implementation of the baseline test.
+current learning method and a self-created implementation of the baseline test.
 The self-created implementation of the baseline test falls within 0.4\% of the
-competitions baseline test, validating both the datasets, and the testing
+competition's baseline test, validating both the datasets and the testing
 approach used.
 
 \begin{table}[htp]
@@ -61,7 +61,7 @@ approach used.
 		
 		0.575	&	0.569	&	98.91\% &		UNED - AW-U2 \\ \hline
 		
-		{\bf 0.573} & {\bf 0.573\% } & {\bf 100\%} &	{\bf self-created baseline implementation } \\ \hline
+		{\bf 0.573} & {\bf 0.573} & {\bf 100\%} &	{\bf self-created baseline implementation } \\ \hline
 		
 		0.569	&	0.569	&	100\%		&	Baseline \\ \hline
 		0.556	&	0.550	&	98.908\%	&	UNED - AW-U	 \\ \hline
@@ -83,158 +83,157 @@ approach used.
 		0.294	&	0.034	&	11.646\%	&	IIT 3 \\ \hline
 		0.287	&	0.033	&	11.646\%	&	IIT 1 \\ \hline
 	\end{tabular}
-	\caption{Senseval 2 Results, current technique and self-baseline implementation added \label{table:SENSEVAL2RESULTS}}
+	\caption{Senseval 2 Results, with the current technique and self-baseline implementation added \label{table:SENSEVAL2RESULTS}}
 \end{table}
 
 The information in the regression analysis of training
-accuracy (figure \ref{fig:OVERALLTRAININGACCURACY}) holds the results of all instances
-over the entire 5-fold cross validation process, each dot represents an accuracy
+accuracy (Figure \ref{fig:OVERALLTRAININGACCURACY}) holds the results of all instances
+over the entire 5-fold cross validation process, with each dot representing an accuracy
 calculation during each of the training runs. The x-axis represents the 
 number of training instances processed up to that point (x1000), and the y-axis 
 represents the accuracy. Each fold consists of approximately 12000 training 
 instances, and after each fold, all previous learning data structures are reset, 
 the only hold over being the changes to the meta-variables. The first trend is shown 
-with the red line, this shows a steady improvement over the entire test. 
-The 2.5\% gain on the average accuracy over the 5-folds can be contributed to the 
-meta-learning component, and the preserved meta-variables mentioned earlier. The 
+with the red line, showing a steady improvement over the entire test. 
+The 2.5\% gain on the average accuracy over the 5 folds can be attributed to the 
+meta-learning component and the preserved meta-variables mentioned earlier. The 
 other important trend is found in looking at the general
-improvement of values over one test fold, to make it more clear the regression
-analysis of one fold has can be seen in figure \ref{fig:ONEFOLDACCURACY}.  The important
+improvement of values over one test fold. To make this clearer, the regression
+analysis of one fold has can be seen in Figure \ref{fig:ONEFOLDACCURACY}.  The important
 thing to note when looking at the training data set is that the statistical component was
-pre-optimized during the training bootstrap phase.  Therefore since the
+pre-optimized during the training bootstrap phase.  Therefore, since the
 statistical component did not change over the life of the test, the improvement
 can be attributed to the connective component, as it is still being optimized. 
 While the meta-learning changes are cumulative over the whole graph, the nearly 
-5\% increase in accuracy over the course of a single folds graph can be credited 
+5\% increase in accuracy over the course of a single fold's graph can be credited 
 to the training of the connective component. Furthermore, as the accuracy 
 increase over the entire test at a steady rate related to the meta-learning changes, and the rate of
 improvement during a test fold is more accelerated, it can be seen that both
-components independently improve accuracy.  From these assumptions we can then 
-posit, accuracy improvements in one fold is improved in the majority by 
+components independently improve accuracy.  From these assumptions, we can then 
+posit that accuracy within one fold is improved in the majority by 
 optimization in the connective component.  Overall accuracy improvement, or 
-perhaps refinement over the course of retraining the learning components can be 
-attributed to the meta-variables, and the training done by the meta-learning 
+perhaps refinement over the course of retraining the learning components, can be 
+attributed to the meta-variables and the training done by the meta-learning 
 component. Furthermore, the results show conclusively that the accuracy and 
-number of instances are positively correlated, therefore adding the meta-learning 
+number of instances are positively correlated; therefore, adding the meta-learning 
 components and the connective components have added value.
 
 %% http://nd.edu/~rwilliam/stats2/l26.pdf for serially correlation understanding
 
-Table \ref{table:STATENTIRE} and \ref{table:STATFOLD} show statistics about the 
-regression analysis tests on figure \ref{fig:OVERALLTRAININGACCURACY} and 
+Tables \ref{table:STATENTIRE} and \ref{table:STATFOLD} show statistics about the 
+regression analysis tests on Figures \ref{fig:OVERALLTRAININGACCURACY} and 
 \ref{fig:ONEFOLDACCURACY}. The tables attempt to determine a formula for the 
-accuracy given the number of instances. That formula is $y = \alpha + \beta x + \epsilon$,
-in the case of figure \ref{fig:OVERALLTRAININGACCURACY}, we see that starting at 
+accuracy given the number of instances. That formula is $y = \alpha + \beta x + \epsilon$;
+in the case of Figure \ref{fig:OVERALLTRAININGACCURACY}, we see that starting at 
 a baseline of 60.5\%, each instance increases the accuracy by $(3.757\pm1.614)*10^{-4}$.
 The confidence value of $\alpha$ shows that the confidence interval will 
-incorporate 99\% of all instances results, where as $\beta$ confidence interval
-incorporate 95\% of all instances results.  The t-statistic measures how 
-reasonable the estimation is, the closer to zero, the more reasonable. The 
-extremely large value in both figures $\alpha$ variable shows the values are 
+incorporate 99\% of all instances' results, whereas $\beta$'s confidence interval
+incorporate 95\% of all instances' results.  The t-statistic measures how 
+reasonable the estimation is; the closer to zero, the more reasonable. The 
+extremely large value in both tables' $\alpha$ variable shows that the values are 
 serially correlated.  This makes sense as this value is highly dependent on its 
-previous values, in this case estimation errors in earlier instance runs tend to 
+previous values; in this case, estimation errors in earlier instance runs tend to 
 be correlated with estimation errors in newer runs. This is expected when 
-collecting data repeatedly across time, and will not affect the unbiasedness or 
+collecting data repeatedly across time and will not affect the unbiasedness or 
 consistency of estimates, it does usually give a more precise confidence interval 
-than it actually is.  The $\beta$ variable t-statistic being greater then 2 means 
+than it actually is.  The $\beta$ variable t-statistic being greater than 2 means 
 it is significant and has a high impact on the accuracy.  This is also expected, 
 as the increase in instances being trained against should increase accuracy. The 
 p-values of all the variables are less then the remainder confidence percentage, 
-This indicates the results shown are non-random, and the variables have an 
+which indicates that the results shown are non-random and that the variables have an 
 effect on the dataset.
 
 \begin{figure}[htp]
 	\begin{center}
 		\includegraphics[width=0.90\linewidth]{figures/charts/results_regression_analysis.pdf}
-		\caption{regression analysis of training accuracy (x Instances x1000, y Accuracy) \label{fig:OVERALLTRAININGACCURACY}}
+		\caption{Regression analysis of training accuracy (x Instances x1000, y Accuracy) \label{fig:OVERALLTRAININGACCURACY}}
 	\end{center}
 \end{figure}
 
 \begin{table}[htp]
 	\begin{tabular}{|l|l|l|l|l|}
-		\hline \multicolumn{5}{|c|}{\bf regression analysis statistics (entire training) } \\ \hline
+		\hline \multicolumn{5}{|c|}{\bf Regression analysis statistics (entire training) } \\ \hline
 			{\bf model} & \multicolumn{4}{|c|}{$y = \alpha + \beta x + \epsilon$ where y is accuracy and x is instances} \\ \hline
 		            & {\bf estimate} & {\bf confidence} & {\bf t-statistic} & {\bf p-value } \\ \hline
 		{\bf $\alpha$}    & $0.6058\pm0.0047$   & $>99\%$            & 128         & $7.3*10^{-4}$ \\ \hline
 		{\bf $\beta$}     & $(3.757\pm1.614)*10^{-4}$ & $>95\%$        & 2.3         & 0.024 \\ \hline
 		\end{tabular}
-		\caption{statistical values of regression analysis on entire training data}
+		\caption{Statistical values of regression analysis on entire training data}
 		\label{table:STATENTIRE}       
 \end{table}
 
 \begin{figure}[htp]
 	\begin{center}
 		\includegraphics[width=0.90\linewidth]{figures/charts/one_fold_regression.pdf}
-		\caption{regression analysis of training accuracy over one fold (x Instances, y Accuracy) \label{fig:ONEFOLDACCURACY}}
+		\caption{Regression analysis of training accuracy over one fold (x Instances, y Accuracy) \label{fig:ONEFOLDACCURACY}}
 	\end{center}
 \end{figure}
 
 \begin{table}[htp]
 	\centering 
 	\begin{tabular}{|l|l|l|l|l|}
-		\hline \multicolumn{5}{|c|}{\bf regression analysis statistics (one training fold) } \\ \hline
+		\hline \multicolumn{5}{|c|}{\bf Regression analysis statistics (one training fold) } \\ \hline
 			{\bf model} & \multicolumn{4}{|c|}{$y = \alpha + \beta x + \epsilon$  where y is accuracy and x is instances} \\ \hline
 		            & {\bf estimate} & {\bf confidence} & {\bf t-statistic} & {\bf p-value } \\ \hline
 		{\bf $\alpha$}    & $0.5895\pm0.0091$   & $>99\%$            & 65         & $9.8*10^{-24}$ \\ \hline
 		{\bf $\beta$}     & $(3.498\pm1.428)*10^{-6}$ & $>95\%$        & 2.4         & 0.024 \\ \hline
 		\end{tabular}
-		\caption{statistical values of regression analysis over one fold \label{table:STATFOLD}}
+		\caption{Statistical values of regression analysis over one fold \label{table:STATFOLD}}
 \end{table}
 
 To validate how well the memory model setup worked, we will again look to the
 training data leading up to the above test results.  In the training results
-table \ref{table:TRAININGRESULTS} we see the total results for all of the
+table (Table \ref{table:TRAININGRESULTS}), we see the total results for all of the
 training of the cross-validation runs.  In total 60700 training instances were
-run, of which 37587 were successful.  The statistical component, which represents 
-the snap judgement of unconscious mind was correct
+run, of which 37587 (61.9\%) were successful.  The statistical component, which represents 
+the snap judgement of the unconscious mind was correct
 59.6\% of the time, which made up 96.2\% of the correct results.  The
-connective component, which represented the deductive mind was correct 37.3\% 
-of the time, and made up 62.5\% of the
-correct results.  Although not a completely fair comparison, as the statistical
+connective component, which represented the deductive mind, was correct 37.3\% 
+of the time and made up 62.5\% of the
+correct results.  This is not a completely fair comparison, as the statistical
 component was pre-trained during the test bootstrap phase, and the connective
 component was being trained throughout the training run.  It is obvious that
-there is a large overlap between the accuracy of the two components, however
-even from table \ref{table:TRAININGRESULTS} we can make out that the statistical
+there is a large overlap between the accuracy of the two components; however,
+even from Table \ref{table:TRAININGRESULTS}, we can make out that the statistical
 component does not dominate the graph component.
 
 \begin{table}[htp]
 	\centering 
 	\begin{tabular}{|l|l|l|l|l|}
 		\hline
-			\multicolumn{5}{|c|}{\bf training results } \\
+			\multicolumn{5}{|c|}{\bf Training results } \\
 		\hline
 		{\bf total inst.} & {\bf correct } & {\bf percentage} & {\bf connect. correct } & {\bf stats correct } \\ \hline 
-		60700				  & 37587		   & 61.92\%		  & 22618				  & 36166    \\ \hline 
+		60700				  & 37587		   & 61.9\%		  & 22618 (37.3\%)				  & 36166 (59.6\%)   \\ \hline 
 	\end{tabular}
-	\caption{overview of training results. \label{table:TRAININGRESULTS}}
+	\caption{Overview of training results. \label{table:TRAININGRESULTS}}
 \end{table}
 
-In table \ref{table:ALLACCURACY} the accuracy section is the outcome of the
+In Table \ref{table:ALLACCURACY}, the accuracy section is the outcome of the
 algorithm used to determine disambiguation. The statistical and connective
 accuracy is how often the individual components chose the correct
 disambiguation.  The exclusive statistic and connective is how often the
 components are correct while the other component was incorrect.  Finally, the
-optimal accuracy is the outcome that could be attained provided the meta-
-learning component performed optimally and chose the correct value from the
+optimal accuracy is the outcome that could be attained provided the meta-learning component performed optimally and chose the correct value from the
 components every time a correct value was presented. This table and the
 information presented earlier clearly show three things: 
 \begin{itemize}
 	\item Both the statistical and connective components can add value to the 
 	outcome. That is to say, the two components can come to a higher accuracy 
-	together then they could by themselves.     
+	together than they could by themselves.     
 	\item The meta-learning component is unfairly biased towards the statistical
 	component.     
 	\item There is something drastically increasing the accuracy of the connective component in the training results. 
 \end{itemize}
 
-Clearly in the training data, and somewhat in the test data we see a benefit to
-the two input systems. Although the results are slightly higher then that of the
+Clearly in the training data, and somewhat in the test data, we see a benefit to
+the two input systems. Although the results are slightly higher than that of the
 baseline test, there is potential for significant improvement.  The training
 results point to a deficiency in the way the meta-learning component weighs and
 chooses the target disambiguation.  With the connective component improving its
 accuracy beyond the statistical component, the training accuracy should have a
-higher rate of selection. We see in table \ref{table:BIASNESS} that this is not
-the case. This leads to the second point, the meta-learning component may have a
+higher rate of selection. We see in Table \ref{table:BIASNESS} that this is not
+the case. This leads to the second point, that the meta-learning component may have a
 more than human bias.  In the most extreme case, it chose to go with the
 statistical component 99.01\% of the time despite the connective component
 exclusively selecting the correct value 12.12\% of the time, and having an
@@ -243,23 +242,23 @@ between the training and testing results is due to the differences in learning
 behaviour.  The training results allow the connective data and the meta-learning
 component to modify its learning behaviour per instance, where as the testing
 results have both of these locked in.  Quicker feedback results in better
-accuracy, and was done to simulate human testing feedback. Where as to follow
+accuracy, and was done to simulate human testing feedback. However, to follow
 the rules of the Senseval 2 test, this mechanism was not used during the testing
-data.  This trait appears to positively effect the connective component's
+data.  This trait appears to positively affect the connective component's
 accuracy, but has very little effect on the meta-learning component.
 
 \begin{table}[htp]
     \centering 
 	\begin{tabular}{|l|l|l|l|l|l|}
 		\hline
-		\multicolumn{6}{|c|}{\bf training results } \\ \hline
+		\multicolumn{6}{|c|}{\bf Training results } \\ \hline
 		{\bf acc.} & {\bf stat. acc.} & {\bf excl. stat.}& {\bf connect. acc. } & {\bf excl. acc. } & {\bf opt. acc.} \\ \hline
 		60.84\%	   &  59.54\%    & 26.20\%   &  55.02\%  & 21.67\%   & 81.22\% \\ \hline
 		60.30\%    &  59.62\%    & 26.11\%   &  57.45\%  & 23.94\%   & 83.56\% \\ \hline
 		60.90\%    &  59.68\%    & 24.54\%   &  59.51\%  & 24.37\%   & 84.05\% \\ \hline
 		60.60\%    &  59.45\%    & 25.06\%   &  60.23\%  & 25.88\%   & 85.33\% \\ \hline
 		60.75\%    &  59.72\%    & 21.33\%   &  65.02\%  & 26.63\%   & 86.34\% \\ \hline
-		\multicolumn{6}{|c|}{\bf testing results } \\ \hline
+		\multicolumn{6}{|c|}{\bf Testing results } \\ \hline
 		{\bf acc.} & {\bf stat. acc.} & {\bf excl. stat.} & {\bf connect. acc. } & {\bf excl. acc. } & {\bf opt. acc.} \\ \hline
 		59.90\%    &  59.77\%   & 31.43\%   &  39.34\%   & 11.00\%   & 70.77\% \\ \hline
 		59.58\%    &  59.55\%   & 34.83\%   &  36.05\%   & 11.34\%   & 70.88\% \\ \hline
@@ -267,21 +266,21 @@ accuracy, but has very little effect on the meta-learning component.
 		60.20\%    &  60.23\%   & 32.91\%   &  39.44\%   & 12.12\%   & 72.35\% \\ \hline
 		59.15\%    &  59.15\%   & 27.75\%   &  43.58\%   & 12.18\%   & 71.33\% \\ \hline
 	\end{tabular}
-	\caption{various accuracy comparisons between components \label{table:ALLACCURACY}}
+	\caption{Various accuracy comparisons between components \label{table:ALLACCURACY}}
 \end{table}
 
 \begin{table}[htp]
 	\centering 
 	\begin{tabular}{|l|l|l|l|}
 		\hline
-		\multicolumn{4}{|c|}{\bf training results } \\ \hline
+		\multicolumn{4}{|c|}{\bf Training results } \\ \hline
 		{\bf stat. chosen } & {\bf conn. chosen } & {\bf stat acc.} & {\bf conn. acc.}\\ \hline
 		94.23\%             & 5.77\%              &  59.54\%        & 55.02\% \\ \hline
 		93.53\%             & 6.47\%              &  59.62\%        & 57.45\% \\ \hline
 		94.26\%             & 5.74\%              &  59.68\%        & 59.51\% \\ \hline
 		94.43\%             & 5.57\%              &  59.45\%        & 60.23\% \\ \hline
 		93.01\%             & 6.99\%              &  59.72\%        & 65.02\% \\ \hline
-	    \multicolumn{4}{|c|}{\bf training results } \\ \hline
+	    \multicolumn{4}{|c|}{\bf Testing results } \\ \hline
 		{\bf stat. chosen } & {\bf conn. chosen } & {\bf stat acc.} & {\bf conn. acc.}\\ \hline
 		97.67\%             & 2.33\%              &  59.77\%        & 39.34\% \\ \hline
 		98.78\%             & 1.22\%              &  59.55\%        & 36.05\% \\ \hline
@@ -289,56 +288,54 @@ accuracy, but has very little effect on the meta-learning component.
 		99.01\%             & 0.99\%              &  60.23\%        & 39.44\% \\ \hline
 		98.85\%             & 1.14\%              &  59.15\%        & 43.58\% \\ \hline
 	\end{tabular}
-	\caption{component biasness \label{table:BIASNESS}}
+	\caption{Component biasedness \label{table:BIASNESS}}
 \end{table}
 
 \section{Discussion}
 
-The results are competitive with other systems from the Senseval 2 test, it
+The results are competitive with systems from the Senseval 2 test; the system
 performs respectfully if a little low given the 10 years that have passed.
-However the novel approach of applying a human-like memory model to this test
+However, the novel approach of applying a human-like memory model to this test
 has given some insight into its potential as a learning algorithm, the
 challenges this method faces, and some of the understanding required to improve
 its likeness to human memory and overall accuracy.
 
 The outcome and results show a successful interpretation of the human memory
-models discussed in earlier chapters. In table \ref{table:ALLACCURACY} we see in
+models discussed in earlier chapters. In Table \ref{table:ALLACCURACY}, we see in
 the training results the connective component grow from 55\% to 65\% accuracy
 over the course of the five training runs. The test results are not as extreme
 but a steady increase in accuracy is seen.  The ability to use a guess or gut
 feeling (the statistical component) to have a decent chance at being correct,
 while learning some more of the deeper connections over time between words used
-and disambiguations is very human like.  When required to give an answer, the
-system used the most seen candidate, while the more complex cases, and patterns
-were being learned by the ``long term'' memory component.  Although the meta-
-learning component did not allow the two components to be completely successful,
+and disambiguations, is very human-like.  When required to give an answer, the
+system used the most seen candidate, while the more complex cases and patterns
+were being learned by the ``long term'' memory component.  Although the meta-learning component did not allow the two components to be completely successful,
 as it was overly biased and flawed in its decision making, it did do some things
-well. It improved or better optimized the systems ability to learn, by meta-
-optimizing the learning parameters. Like a human, repeated problem solving
+well. It improved or better optimized the system's ability to learn, by meta-optimizing the learning parameters. Like a human, repeated problem solving
 approaches will not only improve the area being solved, it will also sharpen the
 problem solving toolset. This optimization system had the meta-learning
-component make hypothesis on what would work well, test its hypothesis over a
+component make a hypothesis on what would work well, test its hypothesis over a
 training run, and validate whether the change it proposed had a positive effect
 on the system. This allowed for small incremental gains to carry over to
 successive runs, allowing each initial state to spend less time bootstrapping
 and more time increasing accuracy. On the other hand, the meta-learning
 components algorithm used to evaluate which of the two components to use had
 faults.  In looking at the designed algorithm, and the outcome of its training
-and testing, it is likely the perfect memory of the algorithm caused issues.
+and testing, it is likely that the perfect memory of the algorithm caused issues.
 The initial state of the statistical component having a decent accuracy and the
 necessity for the connective component to bootstrap itself before having a
 comparative accuracy allowed the algorithm to put too much weight on the
 statistic accuracy.  This bias is useful initially, as it keeps the accuracy
 high, but fails to adjust over the thousands of iterations.
 
-In this work the memory system uses three components in an attempt to simulate
+In this work, the memory system uses three components in an attempt to simulate
 not only the different components of the brain, but the multiple senses humans
 use to better store information. While the five human senses were abstracted
 down to two components with different views on the same data, these components
-had a dual-purpose of also simulating the different types of memory.  The
-increased accuracy in using differing views on the data provided greater overall
+had a dual purpose of also simulating the different types of memory. 
+Using differing views on the data provided greater overall
 accuracy. Although simulating additional senses from the data provided by the
 Senseval 2 datasets would be difficult, the benefits of the additional
-information would likely both increase accuracy, and better simulate human
+information would likely both increase accuracy and better simulate human
 memory.
 
