@@ -131,7 +131,7 @@ search performed went through each of the selected starting words, and would
 look through its neighbours for the given word senses in decreasing edge weight
 order. If an occurrence was found, it was selected as its vote; otherwise it
 would pick the highest rated edge and perform the same search on its neighbours.
-If, after a meta-defined number of neighbours were checked, no
+If, after a certain number of neighbours were checked and no
 disambiguations were found, the selected word would not vote.  If in returning
 from the search there was a tie, the vote would be decided arbitrarily.
 Throughout this search, the path each word took and the disambiguation it voted
@@ -144,11 +144,11 @@ possible:
 \begin{itemize}      
 	\item The graph component correctly determined the word and each word 
 	completed its search.  In this case, each edge along the path each selected 
-	word took had its weight increased by a meta-determined amount.
+	word took had its weight increased by a pre-determined amount.
 	\item The graph component incorrectly determined the word and each word 
 	completed its search. In this case, each edge along the path that led to the 
 	wrong outcome would have its edge weight value decreased by a 
-	meta-determined amount. This amount was often significantly larger than the 
+	pre-determined  amount. This amount was often significantly larger than the 
 	increase value, in an attempt to offset initial training imbalances. The 
 	remaining words, if any, would not have their values adjusted.     
 	\item The graph component correctly guessed the word, but the majority did 
@@ -158,10 +158,10 @@ possible:
 	correct value had the value of the edge weights along its path increased 
 	(usually by quite a bit more than a normal correct case). The edges that did 
 	not finish would have the edge weights along their edge decreased by a 
-	significant meta-determined amount.     
+	more significant amount.     
 	\item The graph component guessed incorrectly and the majority did not 
 	finish their search. In this case each of the values of the edge weights 
-	along all of the paths would be decreased by a meta-determined amount, which 
+	along all of the paths would be decreased, which 
 	in most cases was usually the largest reduction. 
 \end{itemize}
 
@@ -181,9 +181,9 @@ information contained therein was added to the previously collected
 information.  This information was immediately available for use in calculating
 probabilities for the next learning instance.  The first part of the learning
 phase, the statistical component, collected the number of times words were seen
-together, enumerating each sentence and each word in the sentence to its proper
-word sense, and the word sense to the various words seen.  The second
-phase, the optimization component, the statistical component attempted to select
+together, attributing each sentence and each word in the sentence to its proper
+word sense.  The second
+phase, the optimization component, attempted to select
 the correct disambiguation based on prior knowledge, and would again add the
 information to its statistical collection.  In the initial system design, the selection algorithm 
 used a wider range of variables to determine which word sense was most likely;
