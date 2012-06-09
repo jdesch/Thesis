@@ -109,7 +109,7 @@ and based on prior problem solving information, design the requirements for the
 solution. It would then pass the various components enough information to have
 them intelligently look for the answer.  Another ideal characteristic would be
 for the memory object to handle the parallel processes and synchronize
-information as it was found.  This would allow biases based on subconscious
+information as it was found.  This would allow biases based on unconscious
 insight, or new information coming into focus to change the solution path,
 allowing a more elastic problem solving capability.  These enhancements would
 also bring the memory object more inline with Baddeley and Hitch's Central Executive.
@@ -117,9 +117,9 @@ also bring the memory object more inline with Baddeley and Hitch's Central Execu
 \subsection{Statistical component} 
 
 The statistical component is an attempt to
-mimic the subconscious mind, a quick pattern matcher that is the first
+mimic the unconscious mind, a quick pattern matcher that is the first
 component of memory to have a possible solution to a problem.  Tests have shown
-\cite{BLINK} that the subconscious mind is quick to realize patterns, but slow to
+\cite{BLINK} that the unconscious mind is quick to realize patterns, but slow to
 affect conscious decisions. Ideally it would be continually collecting
 statistics, running over problems, and attempting to make sense of how
 disconnected information possibly fits together.  While solutions can come in
@@ -146,7 +146,7 @@ The statistical component is responsible for the following functionality:
 
 While the model is currently simplistic, this is a necessity with the constraints of current computer
 hardware as it relates to the massive parallelism of the human brain and general
-solution complexity.  Ideally, the statistical component or subconscious mind
+solution complexity.  Ideally, the statistical component or unconscious mind
 would collect and index every piece of statistical information it could find 
 and, using all non-crucial resources, continually refine and apply new information
 to existing problems.  This would allow the mind to give it enough information
@@ -195,8 +195,8 @@ inline with the models:
 	the context of the problem.  Currently this was set aside as the graph is 
 	already slow enough, and the meta-learning component is not able to 
 	learn/tag individual problems as related to other problems.    
-	\item subconscious access - As mentioned above, in a parallel environment 
-	similar to the brain's, ideally the subconscious working away would affect 
+	\item unconscious access - As mentioned above, in a parallel environment 
+	similar to the brain's, ideally the unconscious working away would affect 
 	the memory graph (slowly), applying information learned in pattern matching 
 	to the overall structure of the graph.
 \end{enumerate}
@@ -282,7 +282,7 @@ reduced constraints due to the serialization of tasks and workflow, the
 scheduling component was removed, as the need for dynamic execution was no
 longer required.
 
-The looping components of the model were reduced from the three or four
+The looping components of the model were reduced from the four
 components outlined in Section 2.1 into one main looping structure.  This looping structure
 consisted of the train, optimize and guess loop.  The training part initializes
 and loads the long-term memory component and the unconscious mind's statistics
@@ -436,24 +436,24 @@ requires more research.
 The unconscious mind component was initially not a planned component.  It came
 from the necessity of having an algorithm that did not require the connective
 memory component to determine which words in a sentence were important. In
-researching the subconscious mind, and how humans use their ``gut'' in problem
+researching the unconscious mind, and how humans use their ``gut'' in problem
 solving, it was evident that a component that tracked simple statistics was
 required. The unconscious mind became the basis for determining the best words
 in a sentence, the statistical memory component of the overall solution
 algorithm, and assisted in the meta-learning algorithm.  While no definitive
-models exist for what exactly the conscious mind does, the Iowa gambling task
+models exist for what exactly the unconscious mind does, the Iowa gambling task
 \cite{Bechara1, Bechara2} mentioned in Blink \cite{BLINK} adds credibility to an
 unconscious component of the brain forming a reaction well before it enters
 conscious thought. It is assumed that some form of statistical analysis is
 performed and it is of great use in decision making.  The idea of the
-subconscious as a statistical solution engine guided the design.  The studies on
+unconscious as a statistical solution engine guided the design.  The studies on
 the use of unconscious mind emphasized the difference between declarative
 knowledge, which allows one to articulate reasons for choices, and procedural
 knowledge, which allows repeated complex actions to be understood on an
 unconscious level.  Where declarative memory takes longer to recall, the mental
 processes that act on it allow more useful relative information to be made
 available.  On the other hand, procedural knowledge can, over time, move from a
-subconscious understanding to a long-term reflexive understanding.  The person
+unconscious understanding to a long-term reflexive understanding.  The person
 is able to know something or properly mimic an action but it is done at a level
 that requires little, if any, conscious thought.  Procedural knowledge is more
 disconnected from neighbouring memories, and even an attempt at describing the
