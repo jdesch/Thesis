@@ -95,7 +95,7 @@ calculation during each of the training runs. The x-axis represents the
 number of training instances processed up to that point (x1000), and the y-axis 
 represents the accuracy. Each fold consists of approximately 12000 training 
 instances, and after each fold, all previous learning data structures are reset, 
-the only hold over being the changes to the meta-variables. The first trend is shown 
+the only hold-over being the changes to the meta-variables. The first trend is shown 
 with the solid line, showing a steady improvement over the entire test. 
 The 2.5\% gain on the average accuracy over the 5 folds can be attributed to the 
 meta-learning component and the preserved meta-variables mentioned earlier. The 
@@ -130,14 +130,14 @@ in the case of Figure \ref{fig:OVERALLTRAININGACCURACY}, we see that starting at
 a baseline of 60.5\%, each instance increases the accuracy by $(3.757\pm1.614)*10^{-4}$.
 The confidence value of $\alpha$ shows that the confidence interval will 
 incorporate 99\% of all instances' results, whereas $\beta$'s confidence interval
-incorporate 95\% of all instances' results.  The t-statistic measures how 
+incorporates 95\% of all instances' results.  The t-statistic measures how 
 reasonable the estimation is; the closer to zero, the more reasonable. The 
 extremely large value in both tables' $\alpha$ variable shows that the values are 
 serially correlated.  This makes sense as this value is highly dependent on its 
 previous values; in this case, estimation errors in earlier instance runs tend to 
 be correlated with estimation errors in newer runs. This is expected when 
-collecting data repeatedly across time and will not affect the unbiased or 
-consistency of estimates, it does usually give a more precise confidence interval 
+collecting data repeatedly across time and will not affect the consistency or 
+lack of bias in estimates; it does usually give a more precise confidence interval 
 than it actually is.  The $\beta$ variable t-statistic being greater than 2 means 
 it is significant and has a high impact on the accuracy.  This is also expected, 
 as the increase in instances being trained against should increase accuracy. The 
@@ -242,7 +242,7 @@ exclusively selecting the correct value 12.12\% of the time, and having an
 accuracy of 39.44\%. Finally, the large difference in the connective accuracy
 between the training and testing results is due to the differences in learning
 behaviour.  The training results allow the connective data and the meta-learning
-component to modify its learning behaviour per instance, where as the testing
+component to modify its learning behaviour per instance, whereas the testing
 results have both of these locked in.  Quicker feedback results in better
 accuracy, and was done to simulate human testing feedback. However, to follow
 the rules of the Senseval 2 test, this mechanism was not used during the testing
@@ -312,7 +312,7 @@ while learning some more of the deeper connections over time between words used
 and disambiguations, is very human-like.  When required to give an answer, the
 system used the most seen candidate, while the more complex cases and patterns
 were being learned by the ``long term'' memory component.  Although the meta-learning component did not allow the two components to be completely successful,
-as it was overly bias and flawed in its decision making, it did do some things
+as it was overly biased and flawed in its decision making, it did do some things
 well. It improved or better optimized the system's ability to learn, by meta-optimizing the learning parameters. Like a human, repeated problem solving
 approaches will not only improve the area being solved, it will also sharpen the
 problem solving toolset. This optimization system had the meta-learning
