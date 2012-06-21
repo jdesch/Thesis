@@ -1,5 +1,7 @@
 \chapter{Background} 
 
+\section{Natural Language Processing}
+
 Theorists have posited that true intelligence would allow computers to carry 
 on insightful conversations. The conversations would be of
 such high quality that the human would be unable to determine that they were in
@@ -29,12 +31,14 @@ system developed by humans with an emphasis on known representation and language
 processing algorithms.     \item The statistical approach: This uses observable
 information modelled from the linguistic world based on probabilities, commonly
 using Hidden Markov Models.     \item The connectionist approach: This combines
-statistical approaches with various components of representation allowing
+statistical approaches with various components of representation, allowing
 manipulation of the underlying models and sub-problems within NLP, while
 continually improving confidence in answers. \end{itemize} Although the high
 level overview helps to add understanding to the problem, the insight into the
 difficulty of natural language processing required many of the sub-problems to
 be researched first.
+
+\subsection{Word Sense Disambiguation}
 
 One of the sub-problems of natural language processing
 is word sense disambiguation (WSD).  WSD is the act of identifying the meaning
@@ -88,7 +92,9 @@ neuroscience and learning science, is that of human memory.  Three interesting
 human memory models come from the psychology and cognitive science fields.  The
 theories are briefly described in the following sections. 
 
-\section{Baddeley and Hitch} 
+\section{Human Memory Models}
+
+\subsection{Baddeley and Hitch} 
 \begin{figure}[htp]
 	\begin{center}
 		\includegraphics[width=0.85\linewidth]{figures/models/BH-Model}
@@ -109,7 +115,7 @@ supervisory system, which can guide the other components of working memory back
 into a stable working environment. The phonological loop takes auditory verbal
 information and written language and encodes them into an auditory code. This
 information is then repeatedly cycled in the temporal order to refresh
-contextual information, and prevent decay. The visuo-spatial sketchpad consists
+contextual information and prevent decay. The visuo-spatial sketchpad consists
 of the ``visual cache" and the ``inner scribe''.  The visual cache stores
 information relating to form and colour, where the inner scribe stores
 information relating to movement, speed and distances. The working memory allows
@@ -121,7 +127,7 @@ applications of both loops are more easily transported to long-term memory.
 Furthermore, in uniting the visual and sound loops with chronological ordering,
 previously unknowable semantic information may present itself.
 
-\section{Cowan} 
+\subsection{Cowan} 
 \begin{figure}[htp]     
 	\begin{center}
 		\includegraphics[width=0.85\linewidth]{figures/models/Cowan-Model}
@@ -130,8 +136,7 @@ previously unknowable semantic information may present itself.
 	\label{fig:COWAN_MODEL} 
 \end{figure}
 
-In Cowan's theory \cite{ACTIVATION, ATTN_MEM}, working memory is part of long-
-term memory.  The representation used by working memory is a subset of memory
+In Cowan's theory \cite{ACTIVATION, ATTN_MEM}, working memory is part of long-term memory.  The representation used by working memory is a subset of memory
 elements stored in long-term memory.  Working memory has two levels. The first
 consists of activated long-term memory elements of which there can be an endless
 number, as long-term memory is limitless.  The second level is the focus of
@@ -150,14 +155,12 @@ element. The focus aspect of Cowan's theory has a few properties. These include:
 \end{itemize}    
 
 This model readily lends itself to solving
-problems in both a high-level idea-oriented situation and a low-level detail-
-oriented situation, with the ability to change between the two.  Working on and
+problems in both a high-level idea-oriented situation and a low-level detail-oriented situation, with the ability to change between the two.  Working on and
 modifying long-term memory ``chunks'' in working memory allows for a useful
 instance-based memory component that can be used to focus on solving problems
-and understanding.  Each application of problem solving then modifies the long-
-term memory instance it had used.
+and understanding.  Each application of problem solving then modifies the long-term memory instance it had used.
 
-\section{Ericsson and Kintsch} 
+\subsection{Ericsson and Kintsch} 
 
 \begin{figure}[htp]     
 	\begin{center}
@@ -186,7 +189,7 @@ memories and their structure to change as new information is presented.  Encoded
 information is not only linked by a retrieval cue, but also has semantic links
 connecting the larger pieces of information to one another.
 
-\section{Additional Models} 
+\subsection{Additional Models} 
 
 In addition to the three well known theories
 mentioned above, one area of cognitive science that may benefit memory research,
@@ -196,7 +199,7 @@ asked by Greenwald, Klinger and Schuh \cite{SUBQUESTION}: ``How good is the mind
 at extracting meaning from stimuli of which one is not consciously aware?'' with
 answers ranging from: it is simplistic and dumb \cite{DUMBUNCONSCIOUS}, to, it
 is prevalent and strongly influences nearly all higher mental processes
-\cite{SMARTUNCONSCIOUS}. The effects of the unconscious has in its majority
+\cite{SMARTUNCONSCIOUS}. The effect of the unconscious has in its majority
 created the complex and intelligent design necessary for living things through
 adaption and natural selection \cite{UnconsciousMind}.  While the extent to
 which we rely on the unconscious region of our mind is debatable, the desire to
@@ -206,7 +209,7 @@ list. In an experiment, Bechara et al.\cite{Bechara2} were able to show that
 participants in a rigged game were able to decide upon the advantageous strategy
 well before they could consciously understand why the strategy was successful.
 This unconscious understanding, or implicit memory, is a relatively new area of
-research with almost all studies completed within the last twenty-five years.
+research, with almost all studies completed within the last twenty-five years.
 Current research suggests that this memory relies on an implicit, unconscious
 piece of knowledge previously learned and that the process and structure are not
 completely related to explicit memory \cite{ImplicitMem}. 
@@ -217,7 +220,7 @@ artificial intelligence, it seems like a natural fit.  The Baddeley and Hitch
 theory takes the importance of bio-feedback loops and applies them to long term
 and working memory, adding a unit that controls overall interaction.  This
 theory briefly mentions the importance of attention; however, the Cowan model
-expands on what attention and focus is and the importance of it to our memory.
+expands on what attention and focus are and their importance to our memory.
 The Cowan model also attempts to explain how our conscious mind and memory
 interact, whereby greater focus on an element provides more information to the
 preclusion of other memories. The Ericsson and Kintsch model adapts the memory
