@@ -5,7 +5,7 @@ This chapter discusses biological and psychological models and constructs that
 may have a positive impact on natural language processing and the word sense
 disambiguation problem.  This chapter outlines the current system, the design
 decisions required by the models, and the architecting required to make the
-systems work together.  This chapter attempts to show the number of design
+systems work together.  An attempt is made to show the number of design
 decisions that have to be made to balance the two accuracy goals of this thesis,
 the accuracy of the results and the accuracy of the model. Further details
 include what changes were required to get the models to work together, how the
@@ -110,9 +110,9 @@ solution. It would then pass the various components enough information to have
 them intelligently look for the answer.  Another ideal characteristic would be
 for the memory object to handle the parallel processes and synchronize
 information as it was found.  This would allow biases based on unconscious
-insight, or new information coming into focus to change the solution path,
-allowing a more elastic problem solving capability.  These enhancements would
-also bring the memory object more inline with Baddeley and Hitch's Central Executive.
+insight or new information coming into focus to change the solution path,
+allowing a more elastic problem-solving capability.  These enhancements would
+also bring the memory object more in line with Baddeley and Hitch's Central Executive.
 
 \subsection{Statistical component} 
 
@@ -176,7 +176,7 @@ In addition to the above functionality, the data structure itself allows for
 feedback from the working memory object.  This feedback currently allows nodes
 that were successfully/unsuccessfully used to find the solution to
 increase/decrease the edge weight between the selected node and target node.
-This is designed to effectively model the self imposed reward/penalty
+This is designed to effectively model the self-imposed reward/penalty
 (sureness/doubt) which comes with properly or improperly using information in
 forming a solution.
 
@@ -184,7 +184,7 @@ The expressiveness of a graph in modelling long term memory does allow for a
 natural correlation. While the form that long-term memory takes, how it is used in
 problem solving, and how it works with working memory is fairly ambiguous in any
 of the models, a number of improvements could be made to bring the memory more
-inline with the models:
+in line with the models:
 
 \begin{enumerate}     
 	\item dimensionality - Currently all items are mapped to one dimension, and the 
@@ -293,11 +293,11 @@ Ideally, just as in the model, this portion of the loop would iterate several
 times, strengthening the structural learning components. This process being slow
 in humans, who have the luxury of gathering it over many decades, it is also quite
 slow for the non-parallelized program (and, even then, work on handling
-simultaneous reads and writes would be required). Finally the guess loop uses the
+simultaneous reads and writes would be required). Finally, the guess loop uses the
 metrics gathered and the long-term and statistical information created in the
 optimize part to find the most likely solution to the query. Another aspect
 taken from the model is that of influence between components.  Where the
-Baddeley and Hitch model parallelized the input, and handled them in specific
+Baddeley and Hitch model parallelized the input, and handled it in specific
 memory objects, this project had a single point of input which was then
 transferred into two models of viewing it, with the memory component and
 unconscious mind component acting as the central executive.
@@ -341,7 +341,7 @@ instance, is done when the problem encountered requires a new memory container.
 This occurs when the word encountered has not been seen before and could be
 required to solve the current problem. The memory component is then used for the
 problem instance, and once the instance is completed and the component is found
-to be useful, the components state is added to the long-term store. The next
+to be useful, the component's state is added to the long-term store. The next
 state occurs while the memory component is at rest in the long-term store. When
 the memory component is not required for a problem, the component lies dormant
 in a long-term store. For the majority of the time, the component is in this
@@ -355,7 +355,7 @@ nodes that could contain required information, and hold useful statistics used
 in the problem solving algorithm.  During the problem instance, interactions
 useful to solving the problem are imprinted on the active memory nodes; 
 when the problem is completed, the active nodes are returned to the long-term
-store, with new problem solving statistics.
+store, with new problem-solving statistics.
 
 One of the limitations of the implementation, in regards to Cowan's model, is the
 statistical collection and memory types.  Cowan's model allows for varying
@@ -442,7 +442,7 @@ required. The unconscious mind became the basis for determining the best words
 in a sentence, the statistical memory component of the overall solution
 algorithm, and assisted in the meta-learning algorithm.  While no definitive
 models exist for what exactly the unconscious mind does, the Iowa gambling task
-\cite{Bechara1, Bechara2} mentioned in Blink \cite{BLINK} adds credibility to an
+\cite{Bechara1, Bechara2} mentioned in {\it Blink} \cite{BLINK} adds credibility to an
 unconscious component of the brain forming a reaction well before it enters
 conscious thought. It is assumed that some form of statistical analysis is
 performed and it is of great use in decision making.  The idea of the
@@ -452,7 +452,7 @@ knowledge, which allows one to articulate reasons for choices, and procedural
 knowledge, which allows repeated complex actions to be understood on an
 unconscious level.  Where declarative memory takes longer to recall, the mental
 processes that act on it allow more useful relative information to be made
-available.  On the other hand, procedural knowledge can, over time, move from a
+available.  On the other hand, procedural knowledge can, over time, move from an 
 unconscious understanding to a long-term reflexive understanding.  The person
 is able to know something or properly mimic an action but it is done at a level
 that requires little, if any, conscious thought.  Procedural knowledge is more
@@ -466,7 +466,7 @@ relies on a predefined collection of statistical information.  This information 
 then used in a number of predetermined algorithms; some, like the hypothesis
 testing algorithm, allow for flexible and adaptable use of information that most do
 not.  The ideal solution would allow for emergent behaviours in both determining
-what statistics to collect, and how to use the statistics to best solve the
+what statistics to collect and how to use the statistics to best solve the
 current and future problems.  Another issue that would allow for greater success
 is having the unconscious mind completely separate from the other components,
 collecting the information and statistics anonymously. This would allow for both
