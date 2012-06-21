@@ -49,7 +49,13 @@ designed and implemented.
 Figure \ref{fig:high_level_solution} gives a high level overview of the learning
 process.  The system begins by receiving a sentence and a target word to disambiguate. 
 It then preprocesses the sentence by removing stopwords, then normalizes and
-stems the remaining words.  After this, the sentence is run through a ``best word
+stems the remaining words. Stopwords are words that can be removed from processing as
+they add very little to the sentence. Normalizing is the removal of punctuation and case
+differences.  Stemming is the act of generalizing words to their root form. 
+In the sentence given in Figure \ref{fig:high_level_solution}, 
+``I enjoy bass, it tastes delicious!", an example of a stopword is ``it", and ``I". The
+remaining words would be transformed to lowercase and passed to stemmer. The output would
+be: ``enjoy bass tast delici".  After this, the sentence is run through a ``best word
 choice'' algorithm.  This algorithm attempts to determine which words are the
 most ``important'' and how many of the words should be used to determine the
 sense. After the words are chosen, they are then added to short term memory and
@@ -283,7 +289,7 @@ scheduling component was removed, as the need for dynamic execution was no
 longer required.
 
 The looping components of the model were reduced from the four
-components outlined in Section 2.1 into one main looping structure.  This looping structure
+components outlined in Section 2.2.1 into one main looping structure.  This looping structure
 consisted of the train, optimize and guess loop.  The training part initializes
 and loads the long-term memory component and the unconscious mind's statistics
 engine.  The optimize part simulates one cycle through the ``learning'' loop,
