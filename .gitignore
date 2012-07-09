@@ -14,4 +14,4 @@ UNBThesis2.blg
 UNBThesis2.lof
 figures/
 !UNBThesis2.pdf
-UNBThesis2.fdb_latexmk
+*.fdb_latexmk
