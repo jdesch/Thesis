@@ -62,13 +62,13 @@ the overall complexity of the graph-based memory component.
 
 \section{Setup}
 
-The data were set up using five-fold cross validation, in which four subsets of
+The data was set up using five-fold cross validation, in which four subsets of
 the dataset were used for training and the fifth was used for testing. This
 was then repeated five times, allowing each of the data sets to be the test
-data, and having every combination used for the training data.  This method
+data, and having every combination of sections used for the training data.  This method
 differed from the method used at the Senseval-2 competition, but allows for an
 acceptable comparison.  The Senseval-2 competition gave the researchers a full
-training set, but held back on releasing to them the data they would be testing.
+training set, but the testing data was withheld until after the competition was completed.   
 
 \section{Training}
 
@@ -79,91 +79,134 @@ the statistical component and the connective component. The connective component
 required its ``memory connections'' to be added.  This was the process of adding
 weighted edges between words that were found in the same sentence, where the
 edge weight was directly proportional to the frequency of occurrences between
-the two words.  The statistical component collected predefined information that
-was to be used later for decision making.  This first phase ran over the entire
-set of training data.
+the two words. Essentially this built the unoptimized long-term memory graph, with a
+simple estimate for the edge weight, the number of times the two words appeared together 
+in a sentence.  The statistical component collected word-based frequency information 
+that would be immediately relevant for problem solving.  This first phase ran over 
+the entire set of training data.
 
 Once this initial processing was done, a second pass of the training material
-was required.  This pass emphasized the learning process.  In this phase, the
-graph component set up in the previous phase was further adapted and trained to
-the dataset.  The statistical component was tested for accuracy and the meta-learning component began its initial setup and data collection on information
-from the accuracy of the two other components. This included having the meta-learning component query the statistical component to learn which words in the
-sentences were the best on which to disambiguate. This process attempted to eliminate
-noisy or unimportant words and select only those words with the best chance to
-properly disambiguate the target word.  Selecting the best words was done by
-using an algorithm that made use of the following three factors:
+was required.  This pass could be considered the learning phase and has the goal 
+of optimizing the edge weights of the memory graph, verifying the statistical 
+components accuracy, and balancing the weights behind the meta-learning components 
+decision making process.  To optimize the memory graph the training data was used 
+again. With the structure of the graph complete, the disambiguation was attempted 
+by using various paths through the graph.  If the paths were successful at disambiguating 
+the word, the edge weights were increased, otherwise they were decreased. The 
+statistical component was also checking its accuracy throughout the second pass of 
+the training data.  At the end of the second pass, both 
+components had an accuracy associated with them. These accuracies were then 
+passed into the meta-learning component, which used them to help determine how to 
+select the best outcome given the results of the statistical and graph-based components.  
+Further more using the statistical components word frequency information, the 
+meta-learning component could determine which words in a given sentence would most 
+likely end in a successful word-sense disambiguation. 
+
+Selecting the best words to be chosen from the sentence the following three factors based on both the 
+word in question, and the word to be disambiguated (target word) had to be considered: 
 
 \begin{itemize}
-	\item Completion rate: this was determined by how likely the
-word was to complete successfully. This could also be considered the
-relationship between the word and the successful selection of some word sense in
-both the statistical and connective algorithms.      
-	\item Accuracy: the probability the word would be accurately disambiguated.     
-	\item Rarity: the frequency with which a word occurs
+	\item Accuracy: the probability the target word would be accurately disambiguated.
+	\item Completion rate: the number of times the word has been involved in a 
+	successful disambiguation.  
+	\item Rarity: the frequency with which the word occurs.
 \end{itemize}
+
+in the end the algorithm used is:
+
+\IncMargin{1em}
+\begin{algorithm}
+\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+\SetKwFunction{accuracy}{accuracy}
+\DontPrintSemicolon
+\Input{The target word $T$, a word to compare to $W$}
+\Output{A value of how ``good'' $W$ is in relation to $T$}
+\BlankLine
+	$N \longleftarrow 0$\;
+	$D \longleftarrow 0$\;
+	\ForAll{$t$ a word-sense of $T$}{ 
+		$N \longleftarrow N$ + the number of times $t$ has been in a sentence with $W$\;
+		$D \longleftarrow D +$ total number of words $t$ has seen\;}
+	\Return $(N / D) *$ \accuracy{$W$}\;
+\caption{best word algorithm \label{ALG_BESTWORDS}}
+\end{algorithm}\DecMargin{1em}
 
 Finally, once the best words were known, the number of words to choose per
-sentence was then determined by the meta-learning system.
+sentence was decided by the trial and error method in the meta-learning component.
 
-Another important aspect of the training phase is the reporting method.  This is
-done through the use of a Learning Environment Data Structure (LEDS).  This data
-structure carries the information used to solve the problem, collects the
-statistics and computes the meta-data. This data structure is passed into both
-the statistical and connective guessing process; it collects their choices and
-other data required to be updated after the learning instance is completed.  It
-is then passed into the meta-learning phase; in this phase, it is used to help
-compute the final answer. Finally, after the algorithm has made its guess, it
-captures the correct disambiguation, and is used to update the long-term memory
-data structure with the changes noted in the learning instance phase.
+\subsection{Graph-based adaptation and query}
 
-\subsection{Graph-based adaptation}
+The method in which graph-based adaptation and query took place was through the use of
+collected meta-data and instance-based feedback.  In the initial graph
+setup, the words in each sentence were used as nodes. The number of times two words 
+were seen together was the initial value of the edges. During the second pass 
+of the training data, and the test phase the graph was used to discover the best 
+word-sense. It did this by begining a search on each node related to the chosen 
+best words of a sentence. The algorithm first looked to see if a disambiguation 
+of the target word existed in its neighbours in a edge weight descending order, 
+if one did not, it traversed the higest weighted edge, and looked at the new node 
+in a similar manner.  When the search ended, each node had a candidate 
+word-sense, and the word-sense with the greatest tally was returned.
 
-The method in which graph-based adaptation took place was through the use of
-collected meta-data and instance-based feedback.  With the initial graph
-setup, all words in each sentence were interconnected. Over the training data,
-this formed a very dense graph, with the value for each edge allowing for the
-most likely location for a given word sense to be found.  The idea behind the
-algorithm was that each word selected as important in a sentence would vote on which
-disambiguation was most likely; the word sense with the greatest number of votes
-would be determined as correct.  This technique not only determined the ``best''
-possibility, but gave an approximate confidence value in the chosen word sense. The
-search performed went through each of the selected starting words, and would
-look through its neighbours for the given word senses in decreasing edge weight
-order. If an occurrence was found, it was selected as its vote; otherwise it
-would pick the highest rated edge and perform the same search on its neighbours.
-If, after a certain number of neighbours were checked and no
-disambiguations were found, the selected word would not vote.  If in returning
-from the search there was a tie, the vote would be decided arbitrarily.
-Throughout this search, the path each word took and the disambiguation it voted
-for was tracked and kept, to be used to adapt the graph data structure.
+More formally the algorithm is:
 
-The graph adaptation algorithm was performed after the instance problem was
-completed and the answer was known.  During this phase a few outcomes were
-possible: 
+\IncMargin{1em}
+\begin{algorithm}
+\SetKwInOut{Input}{input}
+\SetKwInOut{Output}{output}
+\SetKwFunction{Dis}{disambiguationOf}
+\SetKwFunction{Sort}{sortedge}
+\SetKwFunction{Neighbour}{neighbour}
+\SetKwFunction{Break}{break}
+\SetKwFunction{GetLargestCardinalElement}{getlargestcardinalelement}
+\DontPrintSemicolon
+\Input{The target word $T$, a list of word nodes related to a sentence $L$, a max depth $X$}
+\Output{A word-sense of $T$}
+\BlankLine
+	List $Y$\;
+	\ForEach{$n$ in $L$}{
+		\If{$n$.count $ + 1 > X$}{
+			$Y \longleftarrow \emptyset$\;
+			\Break\;
+			}
+		\Sort{$n$, Descending}\;
+		\ForEach{neighbour $s$ of $n$}{
+			\If{\Dis($T$, $s$)}{
+				$Y \longleftarrow s$\;
+				\Break\;
+				}
+			}
+		$u \longleftarrow $ \Neighbour{$n$}\;
+		$u$.count $\longleftarrow u$.count $+ 1$\;
+		$L \longleftarrow u$\;
+		}
 
+	\Return \GetLargestCardinalElement{$L$}\;
+\caption{graph search\label{ALG_GRAPHSEARCH}}
+\end{algorithm}\DecMargin{1em}
+
+
+Algorithm \ref{ALG_GRAPHSEARCH} presents how the graph component is used to 
+disambiguate a word, the adaptation component requires a bit more background. 
+The adaptation phase is the process of modifying the edge weights of the graph 
+to better the outcome of subsequent graph queries or searches. The graph adaptation 
+algorithm is performed after the problem instance has completed and the correct 
+disambiguation known.  During this phase the outcomes are: 
+
+%Simplified this, adding the guessing cases seems like overkill, when all it essentially does is penalize
+%subjective components a bit more or less.
 \begin{itemize}      
-	\item The graph component correctly determined the word and each word 
-	completed its search.  In this case, each edge along the path each selected 
-	word took had its weight increased by a pre-determined amount.
-	\item The graph component incorrectly determined the word and each word 
-	completed its search. In this case, each edge along the path that led to the 
-	wrong outcome would have its edge weight value decreased by a 
-	pre-determined  amount. This amount was often significantly larger than the 
-	increase value, in an attempt to offset initial training imbalances. The 
-	remaining words, if any, would not have their values adjusted.     
-	\item The graph component correctly guessed the word, but the majority did 
-	not finish their search. In the case where confidence is low, the graph 
-	component would not submit a vote, but would keep its best guessed value to 
-	help determine feedback. In this case, each edge that completed with the 
-	correct value had the value of the edge weights along its path increased 
-	(usually by quite a bit more than a normal correct case). The edges that did 
-	not finish would have the edge weights along their edge decreased by a 
-	more significant amount.     
-	\item The graph component guessed incorrectly and the majority did not 
-	finish their search. In this case each of the values of the edge weights 
-	along all of the paths would be decreased, which 
-	in most cases was usually the largest reduction. 
+	\item The graph component correctly determines the word-sense. 
+	In this case, the edge weights along the path each selected 
+	word took has its value increased.
+	\item The graph component incorrectly determines the word-sense. 
+	In this case, each edge weight along the path that led to the 
+	wrong outcome would have its value decreased. This value was often significantly larger than the 
+	increased value for successful outcomes.      
 \end{itemize}
+
+In keeping with the human memory modeling, the values used to increase and decrease the edge 
+weights were set using the trial and error method in the meta-learning component.
 
 After completing the second run of the training dataset, the words were known and
 the edge weights of the graph had been trained enough for use.  Although it has
@@ -187,15 +230,12 @@ phase, the optimization component, attempted to select
 the correct disambiguation based on prior knowledge, and would again add the
 information to its statistical collection.  In the initial system design, the selection algorithm 
 used a wider range of variables to determine which word sense was most likely;
-this, however, proved to be a poor choice, as the standard selection algorithm
-(most frequently selected) worked much better.  This led to a revised version of the system, using the very simple
+this, however, proved to be a poor choice, as a simple most frequently selected heuristic worked much better.  
+This led to a revised version of the system, using the very simple
 ``most frequently selected'' algorithm.  This algorithm
-uses a frequency table to keep track of all of the different word senses of a
+uses a frequency table to keep track of all of the different word-senses of a
 single word; when asked to disambiguate a given word, the algorithm simply returned the
-word sense that has the highest number of occurrences.  As mentioned above, the
-statistical component is also used to select which words are the best words to
-use in a sentence to determine the disambiguation. This information is collected
-in both phases, but only used in the second phase.
+word-sense that has the highest number of occurrences.
 
 \subsection{Meta-data collection and adaptation}
 
