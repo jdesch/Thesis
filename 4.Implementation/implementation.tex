@@ -239,32 +239,36 @@ word-sense that has the highest number of occurrences.
 
 \subsection{Meta-data collection and adaptation}
 
-During the optimization component of the learning phase, the meta-data
-collection and adaptation are completed.  This phase consists of two important
+During the second run of the training phase, the meta-data collection 
+and adaptation are completed.  This phase consists of two important
 parts: 
 
 \begin{itemize}
-\item answer biasing- This phase adds a bias to using the answer provided by a 
-component in accordance with how accurate the component is.  This uses 
-information collected through the meta-data analysis of all previously answered 
-learning instances to give weights to each of the answering components 
-equivalent to their accuracy.     
-\item adaptive processing- This component monitors and tests the pre-defined 
-meta-values.  At each phase, a meta-value is randomly selected from the list of 
-all meta-values; it is incremented based on a pre-defined ``step'' value and 
-then is run for a number of instances. If, after the test run, the changed value 
-being tested performs better than average, it uses this new value as a baseline. 
-If it performs exceptionally, it attempts to retest the value with an even larger 
-value.  If the changed value performs worse, it reverts the value. If it performs 
-exceptionally worse, it attempts to retest the value with a negative ``step'', a 
-smaller value. 
+\item answer biasing- This phase adds a bias to the answers provided by the 
+two other components in accordance with past accuracy.  This uses information 
+collected in previously answered instances to add weights to each of the 
+answers provided by the components. It uses these weights and the confidence 
+each component has in their answer to choose the final word-sense.      
+\item adaptive processing- This component monitors, tests and adapts the 
+pre-defined meta-values.  After each problem instance, a check is done to 
+see if processing is required.  If processing is required, a meta-value is 
+chosen to go through a trial and error testing phase.  This phase involves 
+modifying the value by a pre-defined ``step'' value.  Training or testing 
+continues with this value set, after a number of instances, the processing 
+phase is triggered again. The results from this testing phase is compared 
+against the captured performance statistics. If the test returns a significant 
+improvement (greater than a standard deviation), the new value is set as 
+default and the meta-value is again selected for testing. If the test 
+returns a failure, the value is reset and another is randomly chosen. Finally, 
+if the value sees a moderate improvement the value is set, and a random 
+meta-value selected for testing.
 \end{itemize}
 
 The meta-variables on which these tests were performed consist of two groups. The
 first group is the ``desirably controlled quality'' group.  This group
 consists of values that are not directly related to accuracy, but that likely have an effect
 on the results.  The main reason these were added was to have the system
-optimize itself throughout the learning phase and into the more efficient phase.
+optimize itself throughout the learning phase.
 
 Desirably controlled quality:
 
@@ -278,22 +282,22 @@ accuracy, or when it should use fewer words and run faster without affecting
 accuracy.     
 
 \item iterations between considerations - This represents the number of test 
-instances between the meta-data phases. It was expected that this value would be
- the last value selected once the other values found an equilibrium, as any 
- results other than this would lower accuracy. Once the equilibrium was found, 
- this value would increase, optimizing the speed of the test.     
+instances between the meta-data processing phases. It was expected that this value would be 
+the last value selected once the other values found an equilibrium, as any 
+results other than this would lower accuracy. Once the equilibrium was found, 
+this value would increase, optimizing the speed of testing.
+
 \item graph depth - This is the maximum depth to which the graph algorithm would go before 
 guessing.  As with important words, it was thought that it would find the best 
 compromise for accuracy initially, and as the graph became more accurate, it 
-would be increased to allow for faster
-runtimes.
+would be increased to allow for faster runtimes.
 
 \end{itemize}
 
-The second group is the ``inflation limiting'' group.  This group consists of
-values that can directly affect accuracy, and that were added to the meta-variables
-specifically to counter inflation of edge weight values over time.  The hopes
-were that this would combat dataset biases.
+The second group is the ``learning optimization'' group.  This group consists of
+values that are too hard to set statically, and would likely have a moving optimal 
+target. The main reason these were added was to conform to human memory models, as well 
+as the inability to determine an optimal value.
 
 Inflation limiting: 
 \begin{itemize}     
@@ -304,8 +308,8 @@ determining an incorrect word sense disambiguation.
 \end{itemize}
 
 These groups and the meta-learning component allowed for a great chance to add
-accuracy in modelling the biological/cognitive aspect of memory and learning,
-with a great chance of increasing overall accuracy and efficiency. Along with
+accuracy in modelling the biological and cognitive aspect of memory and learning,
+with a likely increase of overall accuracy and efficiency. Along with
 this, there was also a number of possible benefits such as a scaling reward and
 punishment system, and an algorithm that was slower and more deliberate in its
 searching when its accuracy was suspect, and faster when the learning component
