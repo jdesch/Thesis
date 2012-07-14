@@ -46,9 +46,6 @@ designed and implemented.
 	\end{center}
 \end{figure}
 
-
-
-
 Figure \ref{fig:high_level_solution} gives a high level overview of the learning process.  
 The process starts by passing in a sentence and a target word within the sentence that requires 
 disambiguation. The sentence is then pre-processed in an effort to simplify data storage and 
@@ -63,23 +60,28 @@ The output would be: ``enjoy bass tast delici". This sentence is more compact th
 and still captures the essence of the sentence. The new sentence is then run through a 
 ``best word choice'' algorithm. The ``best word choice'' algorithm uses previously collected 
 statistical information to select the words in the sentence which have the greatest chance of 
-successfully completing the disambiguation. After the best words are selected, they are loaded 
-into a memory data structure. This data structure acts as working memory for the course of 
-solving the disambiguation, the changes to this structure to solve the problem are recorded with 
+successfully completing the disambiguation. This is done by determining the percentage each word 
+in the sentence has appeared with the target, multiplied by the number of correct disambiguations 
+the word has been apart of. After the best words are selected, they are loaded 
+into a memory data structure. This data structure acts as working memory, or a solution scratchpad
+for the problem instance. The memory paths used to solve the problem are recorded with 
 the goal of adding useful information to the long-term memory structure, to better future queries. 
-This working memory connects the current problem to existing problems, 
-allowing for information from previously captured disambiguations to be activated and used in
-problem-solving algorithms.  To determine the word-sense, two functions begin disambiguating the 
-sentence, identified by the two arrows pointing to ``Complete?''.  The memory component is used 
-by the search function, which simulates a cognitive thought process by searching through 
-working memory and activating the required long-term memory components until a result is found. 
-The other function is found in the statistics engine, and is a fast statistical algorithm used 
-as a best effort guess on the words chosen from the ``best word choice'' algorithm. Once these 
+The working memory connects the current problem to existing problems. The underlying structure is 
+a graph, where the nodes represent words, and the edges are weighted to promote the best path to 
+search the graph for a word-sense.  The working-memory graph consists of the current words, and 
+adds the path each word-node used to attempt to disambiguate the target word. This information 
+along with information from the statistics engine, and the outcome are used to incorporate the 
+working memory graph into the long-term memory graph.
+The memory search method for disambiguating the target word is paired with a fast statistical 
+algorithm and make up the two arrows in Figure \ref{fig:high_level_solution} pointing to 
+``Complete?''. The fast statistical algorithm uses a simple frequency analysis of target word  
+to word-sense, essentially returning the most commonly seen word-sense for a given word.
+This method for determing word-sense acts as the quick gut-check. When these two   
 functions have completed, they return a word-sense and an associated confidence score.
-These two sets of results are then passed to the ``return answer'' section which uses a 
-meta-component to determine which word-sense is to be the final answer and what of the 
+These two sets of results are then passed to the ``return answer'' section which uses the
+meta-component to determine which word-sense is to be the final answer and what aspects of the 
 collected working-memory, combined with the feedback from the answer given should be used to 
-update both the statistical component and the long-term memory data structure. After the 
+update the statistical and long-term memory component. After the 
 process is complete a check is done in the statistical engine to determine how well the 
 system is optimized, seen in the ``update Meta-AI?'', if the check determines changes should 
 be made, the system is modified and testing resumes.
@@ -159,8 +161,7 @@ The statistical component is responsible for the following functionality:
 	lead to a successful completion.  This determines the importance of each 
 	word based on how often the word has been seen in combination with the target,
 	and how often the word has lead to a successful disambiguation.     
-	\item a best effort guess method that given nothing but the target word, 
-	it returns the most likely disambiguation.
+	\item a fast method that given nothing but the target word, returns the most likely disambiguation based on the most commonly seen word-sense of the target word.
 \end{enumerate}
 
 While the model is currently simplistic, this is a necessity with the constraints of current computer
@@ -182,13 +183,14 @@ to decay, increasing the success rate of determining the deductive path.
 The connective component is responsible for the following functionality:
 
 \begin{enumerate}
-	\item a method to get or learn the various words.  This method activates each word from the problem set,
-	bringing its neighbours into working memory. If a word does not exist in long-term memory, a graph of its 
-	neighbours found in the problem set are loaded.  The word would be added through the memory object after 
-	the completion of the problem.  
-	\item a voting mechanism. This method votes on which is the correct word-sense by traversing the memory
-	graph. Each word in the problem set returns the first possible disambiguation of the target found. The disambiguation
-	found the most is voted as correct. 
+	\item a method to get or learn the various words.  This method activates, or loads the long-term
+	memory node of each word from the problem instance, bringing its neighbours into working memory. 
+	If a word does not exist in long-term memory, a graph of its neighbours found in the problem set
+	are loaded.  The word would be added through the memory object after the completion of the problem.  
+	\item a voting mechanism. This method votes on which is the correct word-sense by searching the memory
+	graph from each word-node. The search acts in a greedy manner, returning the first possible
+	disambiguation found of the target word. The word-sense returned with the most results is determined 
+	to be the correct word-sense.
 
 \end{enumerate}
 
@@ -283,7 +285,9 @@ In the initial implementation, the main component taken from Baddeley and
 Hitch's model was the central executive.  The central executive was responsible
 for scheduling tasks, coordinating the underlying systems, and making sense of
 the results from the sources.  In the final implementation, with the removal of
-parallelism, the tasks became more static.  The functions that made up the
+parallelism, the tasks became more static.  Although parallelism is essential to 
+modelling the brain and mind, using it to tackle only the one problem presented 
+had minimal gains for the amount of effort required. The functions that made up the
 original executive got moved into the memory workflow.  Methods that
 coordinated the system's tasks and handled the passing of values and components
 between the various memory components remained, but were simplified.  With the
