@@ -49,41 +49,41 @@ designed and implemented.
 Figure \ref{fig:high_level_solution} gives a high level overview of the learning process.  
 The process starts by passing in a sentence and a target word within the sentence that requires 
 disambiguation. The sentence is then pre-processed in an effort to simplify data storage and 
-lower algorithm run-times.  The process involves removing stopwords, then normalizing and stemming 
+to lower algorithm run-times.  The process involves removing stopwords, then normalizing and stemming 
 the remaining words. Stopwords are words that can be removed from processing as
 they add very little to the sentence. Normalizing is the removal of punctuation and case
 differences.  Stemming is the act of generalizing words to their root form. 
 In the sentence given in Figure \ref{fig:high_level_solution}, 
-``I enjoy bass, it tastes delicious!", an example of stopwords are ``it", and ``I". The
-remaining words would be transformed to lowercase, punctuation removed, and passed to the stemmer. 
-The output would be: ``enjoy bass tast delici". This sentence is more compact then the original 
+``I enjoy bass, it tastes delicious!", an example of stopwords are ``it" and ``I". The
+remaining words would be transformed to lowercase, punctuation would be removed, and the sentence would be passed to the stemmer. 
+The output would be: ``enjoy bass tast delici". This sentence is more compact than the original 
 and still captures the essence of the sentence. The new sentence is then run through a 
 ``best word choice'' algorithm. The ``best word choice'' algorithm uses previously collected 
-statistical information to select the words in the sentence which have the greatest chance of 
-successfully completing the disambiguation. This is done by determining the percentage each word 
+statistical information to select the words in the sentence that have the greatest chance of 
+successfully completing the disambiguation. This is done by determining the frequency with which each word 
 in the sentence has appeared with the target, multiplied by the number of correct disambiguations 
-the word has been apart of. After the best words are selected, they are loaded 
+the word has been a part of. After the best words are selected, they are loaded 
 into a memory data structure. This data structure acts as working memory, or a solution scratchpad
-for the problem instance. The memory paths used to solve the problem are recorded with 
+for the problem instance. The memory paths used to solve the problem are recorded, with 
 the goal of adding useful information to the long-term memory structure, to better future queries. 
 The working memory connects the current problem to existing problems. The underlying structure is 
 a graph, where the nodes represent words, and the edges are weighted to promote the best path to 
-search the graph for a word-sense.  The working-memory graph consists of the current words, and 
-adds the path each word-node used to attempt to disambiguate the target word. This information 
+search the graph for a word sense.  The working-memory graph consists of the current words, and 
+adds the path each word-node used to attempt to disambiguate the target word. This information, 
 along with information from the statistics engine, and the outcome are used to incorporate the 
 working memory graph into the long-term memory graph.
 The memory search method for disambiguating the target word is paired with a fast statistical 
 algorithm and make up the two arrows in Figure \ref{fig:high_level_solution} pointing to 
 ``Complete?''. The fast statistical algorithm uses a simple frequency analysis of target word  
-to word-sense, essentially returning the most commonly seen word-sense for a given word.
-This method for determing word-sense acts as the quick gut-check. When these two   
-functions have completed, they return a word-sense and an associated confidence score.
+to word sense, essentially returning the most commonly seen word sense for a given word.
+This method for determing word sense acts as the quick gut check. When these two   
+functions have completed, they return a word sense and an associated confidence score.
 These two sets of results are then passed to the ``return answer'' section which uses the
-meta-component to determine which word-sense is to be the final answer and what aspects of the 
-collected working-memory, combined with the feedback from the answer given should be used to 
+meta-component to determine which word sense is to be the final answer and what aspects of the 
+collected working memory, combined with the feedback from the answer given, should be used to 
 update the statistical and long-term memory component. After the 
-process is complete a check is done in the statistical engine to determine how well the 
-system is optimized, seen in the ``update Meta-AI?'', if the check determines changes should 
+process is complete, a check is done in the statistical engine to determine how well the 
+system is optimized, seen in the ``update Meta-AI?'' box.  If the check determines that changes should 
 be made, the system is modified and testing resumes.
 
 \section{Current Model}
@@ -108,8 +108,8 @@ provide access to the various ``executive'' building blocks.
 \subsection{Memory object} 
 
 The memory object could be considered the interface to learning. It is composed of the 
-``Learning Environment Data Structure''(LEDS), which is the per problem scratch pad or working memory, 
-and the interface which communicates with long-term memory and the statistical component. 
+``Learning Environment Data Structure''(LEDS), which is the per-problem scratch pad or working memory, 
+and the interface that communicates with long-term memory and with the statistical component. 
 Together they capture how the problem was solved, what was used to solve it, and in the end 
 how the information in the LEDS can be used for future problem solving.
 
@@ -127,7 +127,7 @@ The interface component contains methods that provide the following functionalit
 	to the question given.
 \end{enumerate}
 
-Ideally this object would dynamically
+Ideally this object would, dynamically
 and based on prior problem solving information, design the requirements for the
 solution. It would then pass the various components enough information to have
 them intelligently look for the answer.  Another ideal characteristic would be
@@ -160,8 +160,8 @@ The statistical component is responsible for the following functionality:
 	\item a method to determine which words in a sentence are most likely to 
 	lead to a successful completion.  This determines the importance of each 
 	word based on how often the word has been seen in combination with the target,
-	and how often the word has lead to a successful disambiguation.     
-	\item a fast method that given nothing but the target word, returns the most likely disambiguation based on the most commonly seen word-sense of the target word.
+	and how often the word has led to a successful disambiguation.     
+	\item a fast method that, given nothing but the target word, returns the most likely disambiguation based on the most commonly seen word-sense of the target word.
 \end{enumerate}
 
 While the model is currently simplistic, this is a necessity with the constraints of current computer
@@ -170,7 +170,7 @@ solution complexity.  Ideally, the statistical component or unconscious mind
 would collect and index every piece of statistical information it could find 
 and, using all non-busy resources, continually refine and apply new information
 to existing problems.  This would provide a much more dynamic best effort guess, which would almost
-certainly be a better generic problem solving method.
+certainly be a better generic problem-solving method.
 
 \subsection{Connective component} 
 
@@ -183,14 +183,14 @@ to decay, increasing the success rate of determining the deductive path.
 The connective component is responsible for the following functionality:
 
 \begin{enumerate}
-	\item a method to get or learn the various words.  This method activates, or loads the long-term
+	\item a method to get or learn the various words.  This method activates, or loads, the long-term
 	memory node of each word from the problem instance, bringing its neighbours into working memory. 
 	If a word does not exist in long-term memory, a graph of its neighbours found in the problem set
-	are loaded.  The word would be added through the memory object after the completion of the problem.  
-	\item a voting mechanism. This method votes on which is the correct word-sense by searching the memory
+	is loaded.  The word would be added through the memory object after the completion of the problem.  
+	\item a voting mechanism. This method votes on which is the correct word sense by searching the memory
 	graph from each word-node. The search acts in a greedy manner, returning the first possible
-	disambiguation found of the target word. The word-sense returned with the most results is determined 
-	to be the correct word-sense.
+	disambiguation found of the target word. The word sense returned with the most results is determined 
+	to be the correct word sense.
 
 \end{enumerate}
 
@@ -204,14 +204,14 @@ The expressiveness of a graph in modelling long term memory does allow for a
 natural correlation. While the form that long-term memory takes, how it is used in
 problem solving, and how it works with working memory is fairly ambiguous in any
 of the models, a number of improvements could be made to bring the memory more
-in line with the models:
+in line with the psychological models:
 
 \begin{enumerate}     
-	\item dimensionality - Currently the long-term memory object is setup to solve just the 
-	disambiguation problem, no other data outside this problem is collected 
+	\item dimensionality - Currently the long-term memory object is set up to solve just the 
+	disambiguation problem; no other data outside this problem are collected 
 	and no additional dimensions related to words are used to make better sense 
 	of a problem. Ideally, the neighbours of a word could pivot on information 
-	found in one of the additional dimension of data collected, allowing for better 
+	found in one of the additional dimensions of data collected, allowing for better 
 	accuracy.
 	\item unconscious access - As mentioned above, in a parallel environment 
 	similar to the brain's, ideally the unconscious working away would affect 
@@ -225,8 +225,8 @@ The meta-learning component is an attempt
 to bring some of the functionality of the central executive and methodology of
 problem solving to the current model. It is responsible for various meta-values
 that are added into the algorithms of the other components.  This attempts to 
-allow the current model to better learn how to learn. It adjusts how it problem 
-solves based on trial and error. The tracked values are values that can affect 
+allow the current model to better learn how to learn. It adjusts how it  
+solves problems based on trial and error. The tracked values are values that can affect 
 the outcome of a problem, without changing or modifying actual problem data.
 
 Currently tracked values include:
@@ -292,7 +292,7 @@ original executive got moved into the memory workflow.  Methods that
 coordinated the system's tasks and handled the passing of values and components
 between the various memory components remained, but were simplified.  With the
 reduced constraints due to the serialization of tasks and workflow, the
-scheduling component was removed, as the need for dynamic execution was no
+scheduling component was removed, as dynamic execution was no
 longer required.
 
 The looping components of the model were reduced from the four
