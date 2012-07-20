@@ -24,14 +24,14 @@ Language Tool Kit (NLTK), an open source python project for use in linguistics
 and natural language processing research and development.  The NLTK is used
 specifically for its symbolic and statistical natural language processing, which
 is a good fit for the topic of this thesis.  The main use of the NLTK was to
-provide the Senseval-2 contest dataset. The dataset is made up of manually
+provide the Senseval-2 contest data set. The data set is made up of manually
 tagged sentences made publicly available through the Senseval/Semeval workshops,
 a set of workshops put on by the Association for Computational Linguistics to
 promote the semantic analysis of text. These sentences are tagged in a
 reproducible manner. Each sentence was added with the rule that human taggers
 must agree on the sense of each word at least 90\% of the time, requiring at
 least two taggers to determine the validity of each word.  The Senseval-2
-dataset consists of 15225 sentences, containing an average of 27 components.  The
+data set consists of 15225 sentences, containing an average of 27 components.  The
 sentences were organized in a strict XML format, with each record containing the
 following elements:
 
@@ -55,7 +55,7 @@ following elements:
 	for its definition. 
 \end{itemize}
 
-In addition to the dataset, the NLTK also provided a mechanism for stemming and
+In addition to the data set, the NLTK also provided a mechanism for stemming and
 lemmatizing each word, as well as providing a list of commonly used stop words.
 This allows each sentence to be more compact and concise, which greatly reduced
 the overall complexity of the graph-based memory component.
@@ -63,7 +63,7 @@ the overall complexity of the graph-based memory component.
 \section{Setup}
 
 The data were set up using five-fold cross validation, in which four subsets of
-the dataset were used for training and the fifth was used for testing. This
+the data set were used for training and the fifth was used for testing. This
 was then repeated five times, allowing each of the data sets to be the test
 data, and having every combination of sections used for the training data.  This method
 differed from the method used at the Senseval-2 competition, but allows for an
@@ -124,19 +124,22 @@ In the end, the algorithm used is:
 \BlankLine
 	$N \longleftarrow 0$\;
 	$D \longleftarrow 0$\;
-	\ForAll{$t$, a word sense of $T$,}{ 
+	\ForEach{$t$, a word sense of $T$,}{ 
 		$N \longleftarrow N$ + number of times $t$ has been in a sentence with $W$\;
 		$D \longleftarrow D +$ total number of words $t$ has seen\;}
 	\Return $(N / D) *$ \accuracy{$W$}\;
 \caption{best word algorithm \label{ALG_BESTWORDS}}
 \end{algorithm}\DecMargin{1em}
 
+Where the accuracy function is defined as the number of successful disambiguations $W$ has 
+been involved in.
+
 Finally, once the best words were known, the number of words to choose per
 sentence was decided by the trial and error method in the meta-learning component.
 
 \subsection{Graph-based adaptation and query}
 
-The method by which graph-based adaptation and query took place was through the use of
+The method by which graph-based adaptation and queries took place was through the use of
 collected meta-data and instance-based feedback.  In the initial graph
 setup, the words in each sentence were used as nodes. The number of times two words 
 were seen together was the initial weight of the edge between them. During the second pass 
@@ -208,7 +211,7 @@ disambiguation is known.  During this phase, the outcomes are:
 In keeping with the human memory modeling, the values used to increase and decrease the edge 
 weights were set using the trial and error method in the meta-learning component.
 
-After completing the second run of the training dataset, the words were known and
+After completing the second run of the training data set, the words were known and
 the edge weights of the graph had been trained enough for use.  Although it has
 not been confirmed if additional runs of the graph adaptation phase would be
 beneficial, the length of time this phase takes and the increased likelihood
