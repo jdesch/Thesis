@@ -112,7 +112,8 @@ word in question and the word to be disambiguated (target word), had to be consi
 	\item Rarity: the frequency with which the word occurs.
 \end{itemize}
 
-In the end, the algorithm used is:
+In the end, the algorithm used is shown below, where the accuracy function is defined as the number of
+successful disambiguations in which $W$ has been involved.
 
 \IncMargin{1em}
 \begin{algorithm}
@@ -130,9 +131,6 @@ In the end, the algorithm used is:
 	\Return $(N / D) *$ \accuracy{$W$}\;
 \caption{best word algorithm \label{ALG_BESTWORDS}}
 \end{algorithm}\DecMargin{1em}
-
-Where the accuracy function is defined as the number of successful disambiguations $W$ has 
-been involved in.
 
 Finally, once the best words were known, the number of words to choose per
 sentence was decided by the trial and error method in the meta-learning component.
