@@ -1,17 +1,17 @@
 %%-----------------Chapter 4--------------------------- 
 \chapter{Implementation}
 
-This chapter deals with the implementation details of the system and the
-algorithms that make it up. This includes specifics on the structure of the
+This chapter deals with the implementation details of the system and related 
+algorithms. This includes specifics on the structure of the
 input data, the training setup and procedures, the learning and adaptation
-specifics, and how the testing was performed. Whereas the last chapter brought
-up the design decisions and the reasons behind them, this chapter deals with how
+specifics, and how the testing was performed. Whereas the last chapter discussed 
+design decisions, this chapter deals with how
 the ideas were implemented in the system. This chapter also discusses the outcomes of
 the various implementation choices and attempts to further justify the design
 decisions.
 
-Before jumping into the specifics of the test implementation, a quick reminder
-of the problem domain is in order.  Given a sentence and a target ambiguous word in
+With this section presenting specifics of the test implementation, a restatement of
+the problem domain is in order.  Given a sentence and a target ambiguous word in
 the sentence, can a system properly disambiguate the word, providing the correct
 word sense?  Therefore, we are trying to disambiguate a word with multiple word
 senses in a given sentence, where disambiguation is the action of determining
@@ -21,7 +21,7 @@ which word sense is correct in the given situation.
 
 The input data to the test were taken from the Natural
 Language Tool Kit (NLTK), an open source python project for use in linguistics
-and natural language processing research and development.  The NLTK is used
+and natural language processing research and development\cite{NLTK}.  The NLTK is used
 specifically for its symbolic and statistical natural language processing, which
 is a good fit for the topic of this thesis.  The main use of the NLTK was to
 provide the Senseval-2 contest data set. The data set is made up of manually
@@ -199,7 +199,7 @@ disambiguation is known.  During this phase, the outcomes are:
 \begin{itemize}      
 	\item The graph component correctly determines the word sense. 
 	In this case, the edge weights along the path each selected 
-	word took has its value increased.
+	word has its value increased.
 	\item The graph component incorrectly determines the word sense. 
 	In this case, each edge weight along the path that led to the 
 	wrong outcome would have its value decreased. This value was often significantly larger than the 
@@ -314,5 +314,5 @@ with a likely increase in overall accuracy and efficiency. Along with
 this, there was also a number of possible benefits such as a scaling reward and
 punishment system, and an algorithm that was slower and more deliberate in its
 searching when its accuracy was suspect, and faster when the learning component
-was in the ``zone''.  It also had the added effect of eliminating the guess work
+was performing efficiently. It also had the added effect of eliminating the guess work
 in initial assignment of these values.
