@@ -31,14 +31,15 @@ promote the semantic analysis of text. These sentences are tagged in a
 reproducible manner. Each sentence was added with the rule that human taggers
 must agree on the sense of each word at least 90\% of the time, requiring at
 least two taggers to determine the validity of each word.  The Senseval-2
-data set consists of 15225 sentences, containing an average of 27 components.  The
-sentences were organized in a strict XML format, with each record containing the
-following elements:
+data set consists of 15225 sentences, containing an average of 27 components. The
+sentences were organized in a strict XML format, with each record of both the 
+training and testing dataset containing the following elements:
 
 \begin{itemize}     
 	\item word- the targeted word and its abbreviated part of speech. In the 
 	Senseval-2 data set there are 4 words to be disambiguated: ``hard'', 
-	``interest'', ``line'' and ``serve''. An example of this category is simply
+	``interest'', ``line'' and ``serve''. with each word averaging NAN 
+    word senses. An example of this category is simply
 	``Hard-a'', with the ``-a'' being representative of its part of speech (in 
 	this case, an adverb)
 	\item context- the sentence in which the targeted word is found. This consists of 
@@ -147,9 +148,8 @@ best words of a sentence. The algorithm first looked to see if a disambiguation
 of the target word existed in its neighbours in an edge-weight-descending order. 
 If one did not, it traversed the most highly-weighted edge and looked at the new node 
 in a similar manner.  When the search ended, each node had a candidate 
-word sense, and the word sense with the greatest tally was returned.
-
-More formally the algorithm is:
+word sense, and the word sense with the greatest tally was returned. The algorithm is 
+more formally presented at Algorithm \ref{ALG_GRAPHSEARCH}.
 
 \IncMargin{1em}
 \begin{algorithm}
