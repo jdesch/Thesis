@@ -39,7 +39,9 @@ reasons why, and adding insight into potential issues.
 The quantitative results focus on accuracy, or the percentage of the time in which
 the correct word sense is being chosen.
 In Table \ref{table:RESULTS}, we see the results of each of the 5-fold cross
-validation test instances run on the current system.  With an overall average of
+validation test instances run on the current system. With each test instance attempting
+to disambiguate one of four possible words, with each word containing at most six unique senses.
+With an overall average of
 59.7\% this test fell just within a standard deviation of the baseline result of
 56.9\%. The baseline algorithm for the Senseval-2 contest performs surprisingly
 well given that it simply chooses the word sense that occurs the most frequently. Table \ref{table:SENSEVAL2RESULTS} presents all competitors in the senseval 2 
