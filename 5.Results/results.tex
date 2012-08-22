@@ -39,8 +39,8 @@ reasons why, and adding insight into potential issues.
 The quantitative results focus on accuracy, or the percentage of the time in which
 the correct word sense is being chosen.
 In Table \ref{table:RESULTS}, we see the results of each of the 5-fold cross
-validation test instances run on the current system. With each test instance attempting
-to disambiguate one of four possible words, with each word containing at most six unique senses.
+validation test instances run on the current system, with each test instance attempting
+to disambiguate one of four possible words, and with each word containing at most six unique senses.
 With an overall average of
 59.7\% this test fell just within a standard deviation of the baseline result of
 56.9\%. The baseline algorithm for the Senseval-2 contest performs surprisingly
@@ -110,7 +110,7 @@ can be attributed to the connective component, as it is still being optimized.
 While the meta-learning changes are cumulative over the whole graph, the nearly 
 5\% increase in accuracy over the course of a single fold's graph can be credited 
 to the training of the connective component. Furthermore, as the accuracy 
-increase over the entire test at a steady rate related to the meta-learning changes, and the rate of
+increases over the entire test at a steady rate related to the meta-learning changes, and the rate of
 improvement during a test fold is more accelerated, it can be seen that both
 components independently improve accuracy.  From these assumptions, we can then 
 posit that accuracy within one fold is improved in the majority by 
