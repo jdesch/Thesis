@@ -39,7 +39,7 @@ training and testing dataset containing the following elements:
 	\item word- the targeted word and its abbreviated part of speech. In the 
 	Senseval-2 data set there are 4 words to be disambiguated: ``hard'', 
 	``interest'', ``line'' and ``serve''.  Each word contains a possible ten to thirty-six 
-    word senses, the dataset took from this four to six word senses per word. 
+    word senses; of these, the dataset included four to six candidate word senses per word. 
     An example of this category is simply
 	``Hard-a'', with the ``-a'' being representative of its part of speech (in 
 	this case, an adverb)
@@ -200,7 +200,7 @@ disambiguation is known.  During this phase, the outcomes are:
 \begin{itemize}      
 	\item The graph component correctly determines the word sense. 
 	In this case, the edge weights along the path each selected 
-	word has its value increased.
+	word traversed has its value increased.
 	\item The graph component incorrectly determines the word sense. 
 	In this case, each edge weight along the path that led to the 
 	wrong outcome would have its value decreased. This value was often significantly larger than the 
