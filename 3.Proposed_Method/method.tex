@@ -113,8 +113,9 @@ Seen in Figure \ref{fig:Component}, the memory object could be considered the in
 and the interface that communicates with activated long-term memory and the statistical component. 
 Working with each of the components, it captures how the problem was solved and what was used to solve it.  
 The information in the LEDS is then used by the meta-learning component to transfer knowledge gained 
-in the instance to long-term memory.
+in the instance to long-term memory. 
 
+The interface component contains methods that provide the following functionality:
 \begin{enumerate}     
 	\item a way to load and save the state of the mind. This way, the learning
 	environment can be stored for further refinement against 
@@ -362,7 +363,7 @@ in a long-term store. For the majority of the time, the component is in this
 state.  In this state, it can be written to a file, serialized, and
 compressed, mimicking the storage condition of the human brain. Finally, in the
 third state, the stored memory components are required for a problem instance.
-The components that gain focus are activated out of the long-term store and are
+The components that gain focus are activated in the long-term store and are
 brought into the current problem instance with the information of past
 experiences available. In the active state, they provide connection to other
 nodes that could contain required information, and hold useful statistics used
@@ -379,7 +380,7 @@ components can be seen.  With the first degree of focus, only approximately
 seven elements are ``loaded'' into memory, but with this, the amount of
 information and statistics on each of the seven elements are much greater.
 While the implementation attempted to do this, the information chosen for
-collection was hand-selected and focused on what was ``thought'' to be more
+collection was hand-selected and focused on what was thought to be more
 useful, and was stored at every level (but not necessarily used).  In order for
 this to be more useful, an automated method for statistical collection would have
 to be used and analyzed by the unconscious mind.  It is only then that focusing
