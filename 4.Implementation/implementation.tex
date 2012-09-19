@@ -68,7 +68,8 @@ The data were set up using five-fold cross validation, in which four subsets of
 the data set were used for training and the fifth was used for testing. This
 was then repeated five times, allowing each of the data sets to be the test
 data, and having every combination of sections used for the training data.  This method
-differed from the method used at the Senseval-2 competition, but allows for an
+differed from the method used at the Senseval-2 competition, which only supplied training
+data and kept the testing data hidden, but allows for an
 acceptable comparison.  The Senseval-2 competition gave the researchers a full
 training set, but the testing data were withheld until after the competition was completed.   
 
@@ -111,7 +112,7 @@ word in question and the word to be disambiguated (target word), had to be consi
 	\item Accuracy: the probability the target word would be accurately disambiguated.
 	\item Completion rate: the number of times the word has been involved in a 
 	successful disambiguation.  
-	\item Rarity: the frequency with which the word occurs.
+	\item Rarity: the frequency with which the word occurs in the training.
 \end{itemize}
 
 In the end, the algorithm used is shown below, where the accuracy function is defined as the number of
@@ -220,7 +221,7 @@ of overtraining were the deciding factors in using one run.
 
 In keeping with the unconscious mind, the statistical method was designed
 specifically to be a quick, relatively simple calculation with decent results.
-The best method for this, and one that seemed directly related to the actual
+a good approach for this, and one that could be related to the actual
 process, was Bayesian statistics.  After each learning instance, the statistical
 information contained therein was added to the previously collected
 information.  This information was immediately available for use in calculating
@@ -259,7 +260,7 @@ modifying the value by a pre-defined ``step'' value.  Training or testing
 continues with this value set; after a number of instances, the processing 
 phase is triggered again. The results from this testing phase are compared 
 against the captured performance statistics. If the test returns a significant 
-improvement (greater than a standard deviation), the new value is set as 
+improvement, the new value is set as 
 default and the meta-value is again selected for testing. If the test 
 returns a failure, the value is reset and another is randomly chosen. Finally, 
 if the value sees a moderate improvement, the value is set and a random 

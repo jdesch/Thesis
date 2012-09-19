@@ -44,11 +44,20 @@ to disambiguate one of four possible words, and with each word containing at mos
 With an overall average of
 59.7\% this test fell just within a standard deviation of the baseline result of
 56.9\%. The baseline algorithm for the Senseval-2 contest performs surprisingly
-well given that it simply chooses the word sense that occurs the most frequently. Table \ref{table:SENSEVAL2RESULTS} presents all competitors in the senseval 2 
-competition.  It is sorted by recall where recall indicates the percentage of 
+well given that it simply chooses the word sense that occurs the most frequently. Table \ref{table:SENSEVAL2RESULTS} 
+presents all competitors in the Senseval-2 competition as it relates to the word sense disambiguation problem. 
+While none of the other models use a human-like memory approach, they did use a range of artificial intelligence 
+techniques including: memory-based learning
+\cite{GAMBL, PARAM_OPT, MEM-BASED}, instance based learning
+\cite{INSTANCE_LEARN}, decision lists \cite{YarrowskyDL}, ensemble methods
+\cite{ENSEMBLE}, kernelization \cite{KERNEL}, as well as various knowledge
+hybrid methods \cite{HAWKWSD}. The results are sorted by recall where recall indicates the percentage of 
 positive cases that were correctly identified and precision is the percentage 
 of positive predictions that were correct.  The table also shows how well the 
-baseline did in  relation to other systems. Added to the table (in bold) are the results from the current learning method and a self-created implementation of the baseline test. The self-created implementation of the baseline test falls within 0.4\% of the competition's baseline test, validating both the data sets and the testing
+baseline did in  relation to other systems. Added to the table (in bold) are 
+the results from the current learning method and a self-created implementation 
+of the baseline test. The self-created implementation of the baseline test falls 
+within 0.4\% of the competition's baseline test, validating both the data sets and the testing
 approach used.
 
 \begin{table}[htp]
@@ -246,10 +255,10 @@ between the training and testing results is due to the differences in learning
 behaviour.  The training results allow the connective data and the meta-learning
 component to modify its learning behaviour per instance, whereas the testing
 results have both of these locked in.  Quicker feedback results in better
-accuracy, and was done to simulate human testing feedback. However, to follow
-the rules of the Senseval 2 test, this mechanism was not used during the testing
-data.  This trait appears to positively affect the connective component's
-accuracy, but has very little effect on the meta-learning component.
+accuracy, and was done to simulate human testing feedback. However, to act as a Senseval-2 
+test entry, this mechanism was not used during the testing, as none of the other systems 
+had access to immediate feedback.  This trait appears to positively effect the connective 
+component's accuracy, but has very little effect on the meta-learning component.
 
 \begin{table}[htp]
     \centering 
@@ -298,14 +307,16 @@ accuracy, but has very little effect on the meta-learning component.
 \section{Discussion}
 
 The results are competitive with systems from the Senseval 2 test; the system
-performs respectfully if a little low given the 10 years that have passed.
+performs respectfully if a little low given the 10 years that have passed since Senseval 2
 However, the novel approach of applying a human-like memory model to this test
 has given some insight into its potential as a learning algorithm, the
 challenges this method faces, and some of the understanding required to improve
 its likeness to human memory and overall accuracy.
 
-The outcome and results show a successful interpretation of the human memory
-models discussed in earlier chapters. In Table \ref{table:ALLACCURACY}, we see in
+The outcome and results present a plausible system which uses many features of the human memory
+models discussed in earlier chapters. Despite an error related to bias, the central executive, or 
+meta-learning component performed particularily well, adding accuracy through a better understanding 
+of how the meta-variables interacted.  In Table \ref{table:ALLACCURACY}, we see in
 the training results the connective component grow from 55\% to 65\% accuracy
 over the course of the five training runs. The test results are not as extreme
 but a steady increase in accuracy is seen.  The ability to use a guess or gut
@@ -313,9 +324,11 @@ feeling (the statistical component) to have a decent chance at being correct,
 while learning some more of the deeper connections over time between words used
 and disambiguations, is very human-like.  When required to give an answer, the
 system used the most seen candidate, while the more complex cases and patterns
-were being learned by the ``long term'' memory component.  Although the meta-learning component did not allow the two components to be completely successful,
+were being learned by the ``long term'' memory component.  Although the meta-learning 
+component did not allow the two components to be completely successful,
 as it was overly biased and flawed in its decision making, it did do some things
-well. It improved or better optimized the system's ability to learn, by meta-optimizing the learning parameters. Like a human, repeated problem solving
+well. It improved or better optimized the system's ability to learn, by meta-optimizing 
+the learning parameters. Like a human, repeated problem solving
 approaches will not only improve the area being solved, it will also sharpen the
 problem solving toolset. This optimization system had the meta-learning
 component make a hypothesis on what would work well, test its hypothesis over a

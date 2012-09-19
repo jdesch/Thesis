@@ -4,7 +4,8 @@
 This chapter discusses biological and psychological models and constructs that
 may have a positive impact on natural language processing and the word sense
 disambiguation problem.  This chapter outlines the current system, the design
-decisions required by the models, and the architecting required to make the
+decisions required by the models, and the architectural decisions required to 
+make the
 systems work together.  An attempt is made to show the number of design
 decisions that have to be made to balance the two accuracy goals of this thesis,
 the accuracy of the results and the accuracy of the model. Further details
@@ -80,7 +81,7 @@ This method for determing word sense acts as the quick gut check. When these two
 functions have completed, they return a word sense and an associated confidence score.
 These two sets of results are then passed to the ``return answer'' section which uses the
 meta-component to determine which word sense is to be the final answer and what aspects of the 
-collected working memory, combined with the feedback from the answer given, should be used to 
+contents of working memory, combined with the feedback from the answer given, should be used to 
 update the statistical and long-term memory component. After the 
 process is complete, a check is done in the statistical engine to determine how well the 
 system is optimized, seen in the ``update Meta-AI?'' box.  If the check determines that changes should 
@@ -95,9 +96,9 @@ were made, and how the system differs from the ideal solution.
 \begin{figure}[htp]     
 	\begin{center}
 		\includegraphics[width=0.93\linewidth]{figures/models/Component}
-		\caption{Component Overview}     
+		\caption{Component Overview
+			\label{fig:Component}}     
 	\end{center}     
-	\label{fig:Component}
 \end{figure}
 
 The current model consists of three functional components and a higher level
@@ -107,13 +108,12 @@ provide access to the various ``executive'' building blocks.
 
 \subsection{Memory object} 
 
-The memory object could be considered the interface to learning. It is composed of the 
+Seen in Figure \ref{fig:Component} the memory object could be considered the interface to learning. It is composed of the 
 ``Learning Environment Data Structure''(LEDS), which is the per-problem scratch pad or working memory, 
-and the interface that communicates with long-term memory and with the statistical component. 
-Together they capture how the problem was solved, what was used to solve it, and in the end 
-how the information in the LEDS can be used for future problem solving.
-
-The interface component contains methods that provide the following functionality:
+and the interface that communicates with activated long-term memory and the statistical component. 
+Working with each of the components, it captures how the problem was solved and what was used to solve it.  
+The information in the LEDS is then used by the meta-learning component to transfer knowledge gained 
+in the instance to long-term memory.
 
 \begin{enumerate}     
 	\item a way to load and save the state of the mind. This way, the learning
@@ -161,7 +161,8 @@ The statistical component is responsible for the following functionality:
 	lead to a successful completion.  This determines the importance of each 
 	word based on how often the word has been seen in combination with the target,
 	and how often the word has led to a successful disambiguation.     
-	\item a fast method that, given nothing but the target word, returns the most likely disambiguation based on the most commonly seen word-sense of the target word.
+	\item a fast method that, given nothing but the target word, returns the most 
+	likely disambiguation based on the most commonly seen word-sense of the target word.
 \end{enumerate}
 
 While the model is currently simplistic, this is a necessity with the constraints of current computer
@@ -232,7 +233,7 @@ the outcome of a problem, without changing or modifying actual problem data.
 Currently tracked values include:
 
 \begin{enumerate}     
-	\item important words - the number of words to keep when evaluating a given 
+	\item important words - the number of words to use when evaluating a given 
 	sentence for importance     
 	\item graph depth - the maximum depth to which the voting algorithm should go when 
 	attempting to vote using a word 
@@ -339,8 +340,8 @@ have a powerful effect of truly understanding the words, the characters and the
 scene. With the three acting in concert together, information gained in any of
 the sections is available to the mind as a whole, thus compounding the learning
 ability and increasing the likelihood of making long-term and unconscious
-connections.  With Baddeley and Hitch specifically stating that these components
-work in parallel with one another, with any information passing or issues
+connections.  Baddeley and Hitch specifically stated that these components
+work in parallel with one another, so with any information passing or issues
 handled by the central executive, the learning and understanding potential is
 much more powerful than the serialized one-track solution designed.
 
@@ -371,7 +372,7 @@ when the problem is completed, the active nodes are returned to the long-term
 store, with new problem-solving statistics.
 
 One of the limitations of the implementation, in regards to Cowan's model, is the
-statistical collection and memory types.  Cowan's model allows for varying
+statistical collection of memory types.  Cowan's model allows for varying
 degrees of detail as required by the degree of focus.  In the long-term store,
 each component holds little information, but the connection of all of the
 components can be seen.  With the first degree of focus, only approximately
@@ -394,7 +395,8 @@ suffers from a convoluted word space and unsolvable disambiguations.
 \subsection{Ericsson and Kintsch}
 
 The important idea in Ericsson and Kintsch's work is the idea of memory linking.
-The idea is that, in working memory, we are able to hold cues or links to long-term memory components.  This allows us to understand complex memories through
+The idea is that, in working memory, we are able to hold cues or links to long-term 
+memory components.  This allows us to understand complex memories through
 the use of holding important short-term concepts which can quickly bring the
 more abundant long-term memories into focus.  This model works very well in
 practice.  In the working model, each memory component that is loaded into short
@@ -407,7 +409,8 @@ problems, each component is analyzed, and if during the process of solving the
 problem, any of the cues seem overly relevant, the more strongly related
 neighbours are loaded into memory.  This allows the relationship of the memory
 components seen during the initial look at the problem to be the starting point.
-Then, using the complex collected relationships of each memory component's long-term links, it begins traversing the set of both nodes looking for similarities.
+Then, using the complex collected relationships of each memory component's long-term 
+links, it begins traversing the set of both nodes looking for similarities.
 When the perceived strongest relationship links to a disambiguation that matches
 the word in question, the connective component's search for an answer is
 considered complete.
@@ -460,9 +463,9 @@ unconscious component of the brain forming a reaction well before it enters
 conscious thought. It is assumed that some form of statistical analysis is
 performed and it is of great use in decision making.  The idea of the
 unconscious as a statistical solution engine guided the design.  The studies on
-the use of unconscious mind emphasized the difference between declarative
+the use of unconscious processes emphasized the difference between declarative
 knowledge, which allows one to articulate reasons for choices, and procedural
-knowledge, which allows repeated complex actions to be understood on an
+knowledge, which allows repeated complex actions to be performed at an
 unconscious level.  Where declarative memory takes longer to recall, the mental
 processes that act on it allow more useful relative information to be made
 available.  On the other hand, procedural knowledge can, over time, move from an 
@@ -492,13 +495,13 @@ The statistical engine in its current state tracks a number of useful properties
 including: 
 
 \begin{itemize}
-	\item the number of times a word has been seen
+	\item the number of times a word has been seen;
 	\item the number of times the word has been in a successfully disambiguated
-	sentence
+	sentence;
 	\item the number of times the word has been used successfully in the 
-	statistical and connective algorithms
+	statistical and connective algorithms;
 	\item a list of each word that has been seen by a disambiguation, and the 
-	number of times it has been seen. 
+	number of times it has been seen; and 
 	\item a list of each disambiguation that a word has seen, and the number of 
 	times it has been seen. 
 \end{itemize}
