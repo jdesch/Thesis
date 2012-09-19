@@ -17,7 +17,7 @@ reasons why, and adding insight into potential issues.
 
 \section{Quantitative results}
 
-\begin{table}[htp]
+\begin{table}[htpb]
 	\begin{center}
 		\begin{tabular}{|l|l|l|}
 			\hline
@@ -60,7 +60,7 @@ of the baseline test. The self-created implementation of the baseline test falls
 within 0.4\% of the competition's baseline test, validating both the data sets and the testing
 approach used.
 
-\begin{table}[htp]
+\begin{table}[htpb]
 	\centering 
 	\begin{tabular}{|l|l|l|l|}
 		\hline
@@ -155,14 +155,14 @@ p-values of all the variables are less then the remainder confidence percentage,
 which indicates that the results shown are non-random and that the variables have an 
 effect on the data set.
 
-\begin{figure}[htp]
+\begin{figure}[htpb]
 	\begin{center}
 		\includegraphics[width=0.90\linewidth]{figures/charts/results_regression_analysis.pdf}
 		\caption{Regression analysis of training accuracy (x Instances x1000, y Accuracy) \label{fig:OVERALLTRAININGACCURACY}}
 	\end{center}
 \end{figure}
 
-\begin{table}[htp]
+\begin{table}[htpb]
 	\begin{tabular}{|l|l|l|l|l|}
 		\hline \multicolumn{5}{|c|}{\bf Regression analysis statistics (entire training) } \\ \hline
 			{\bf model} & \multicolumn{4}{|c|}{$y = \alpha + \beta x + \epsilon$ where y is accuracy and x is instances} \\ \hline
@@ -174,14 +174,14 @@ effect on the data set.
 		\label{table:STATENTIRE}       
 \end{table}
 
-\begin{figure}[htp]
+\begin{figure}[htpb]
 	\begin{center}
 		\includegraphics[width=0.90\linewidth]{figures/charts/one_fold_regression.pdf}
 		\caption{Regression analysis of training accuracy over one fold (x Instances, y Accuracy) \label{fig:ONEFOLDACCURACY}}
 	\end{center}
 \end{figure}
 
-\begin{table}[htp]
+\begin{table}[htpb]
 	\centering 
 	\begin{tabular}{|l|l|l|l|l|}
 		\hline \multicolumn{5}{|c|}{\bf Regression analysis statistics (one training fold) } \\ \hline
@@ -209,7 +209,7 @@ there is a large overlap between the accuracy of the two components; however,
 even from Table \ref{table:TRAININGRESULTS}, we can make out that the statistical
 component does not dominate the graph component.
 
-\begin{table}[htp]
+\begin{table}[htpb]
 	\centering 
 	\begin{tabular}{|l|l|l|l|l|}
 		\hline
@@ -260,7 +260,7 @@ test entry, this mechanism was not used during the testing, as none of the other
 had access to immediate feedback.  This trait appears to positively affect the connective 
 component's accuracy, but has very little effect on the meta-learning component.
 
-\begin{table}[htp]
+\begin{table}[htpb]
     \centering 
 	\begin{tabular}{|l|l|l|l|l|l|}
 		\hline
@@ -282,7 +282,7 @@ component's accuracy, but has very little effect on the meta-learning component.
 	\caption{Various accuracy comparisons between components \label{table:ALLACCURACY}}
 \end{table}
 
-\begin{table}[htp]
+\begin{table}[htpb]
 	\centering 
 	\begin{tabular}{|l|l|l|l|}
 		\hline
