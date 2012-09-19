@@ -51,7 +51,7 @@ techniques including: memory-based learning
 \cite{GAMBL, PARAM_OPT, MEM-BASED}, instance based learning
 \cite{INSTANCE_LEARN}, decision lists \cite{YarrowskyDL}, ensemble methods
 \cite{ENSEMBLE}, kernelization \cite{KERNEL}, as well as various knowledge
-hybrid methods \cite{HAWKWSD}. The results are sorted by recall where recall indicates the percentage of 
+hybrid methods \cite{HAWKWSD}. The results are sorted by recall, where recall indicates the percentage of 
 positive cases that were correctly identified and precision is the percentage 
 of positive predictions that were correct.  The table also shows how well the 
 baseline did in  relation to other systems. Added to the table (in bold) are 
@@ -231,7 +231,7 @@ components every time a correct value was presented. This table and the
 information presented earlier clearly show four things: 
 \begin{itemize}
 	\item Both the statistical and connective components can add value to the 
-	outcome. That is to say, the two components can come to a higher accuracy 
+	outcome. That is to say, the two components can produce a higher accuracy 
 	together than they could by themselves.     
 	\item The meta-learning component is unfairly biased towards the statistical
 	component.     
@@ -257,7 +257,7 @@ component to modify its learning behaviour per instance, whereas the testing
 results have both of these locked in.  Quicker feedback results in better
 accuracy, and was done to simulate human testing feedback. However, to act as a Senseval-2 
 test entry, this mechanism was not used during the testing, as none of the other systems 
-had access to immediate feedback.  This trait appears to positively effect the connective 
+had access to immediate feedback.  This trait appears to positively affect the connective 
 component's accuracy, but has very little effect on the meta-learning component.
 
 \begin{table}[htp]
@@ -307,15 +307,15 @@ component's accuracy, but has very little effect on the meta-learning component.
 \section{Discussion}
 
 The results are competitive with systems from the Senseval 2 test; the system
-performs respectfully if a little low given the 10 years that have passed since Senseval 2
+performs respectfully if a little low given the 10 years that have passed since Senseval 2. 
 However, the novel approach of applying a human-like memory model to this test
 has given some insight into its potential as a learning algorithm, the
 challenges this method faces, and some of the understanding required to improve
 its likeness to human memory and overall accuracy.
 
 The outcome and results present a plausible system which uses many features of the human memory
-models discussed in earlier chapters. Despite an error related to bias, the central executive, or 
-meta-learning component performed particularily well, adding accuracy through a better understanding 
+models discussed in earlier chapters. Despite an error related to bias, the central executive (or 
+meta-learning component) performed particularly well, adding accuracy through a better understanding 
 of how the meta-variables interacted.  In Table \ref{table:ALLACCURACY}, we see in
 the training results the connective component grow from 55\% to 65\% accuracy
 over the course of the five training runs. The test results are not as extreme
